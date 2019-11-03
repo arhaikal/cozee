@@ -15,7 +15,7 @@ const LoginSchema = Yup.object().shape({
 
 const instance = axios.create({
   baseURL: 'https://api.cozee.ee',
-  headers: {'Content-Type:': 'application/json'}
+  headers: {'Content-Type': 'application/json'}
 });
 
 export default class IndexPage extends React.Component {
@@ -25,9 +25,11 @@ export default class IndexPage extends React.Component {
         initialValues={{ appartmentSize: "", postcode: "" }}
         validationSchema={LoginSchema}
         onSubmit={(values, { setSubmitting }) => {
-          axios.post('/bookings', {
-            duration: values.appartmentSize,
-            zip_code: values.postcode
+          instance.post('/bookings', {
+            'booking': {
+              'duration': values.appartmentSize,
+              'zip_code': values.postcode
+            }
           })
           .then(function (response) {
             console.log(response.data);
