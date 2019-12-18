@@ -5,6 +5,7 @@ import LandingForm from "../components/landing_form"
 import Image from "../components/image"
 import SEO from "../components/seo"
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { BookingProvider } from "../context/BookingContext";
 
 
 const IndexPage = () => (
@@ -18,7 +19,9 @@ const IndexPage = () => (
               <h4 style={{ marginBottom: `0px`, color: `#767676`}}>Happy to be home</h4>
               <h1>Cleaning made simple!</h1>
             </div>
-            <LandingForm />
+            <BookingProvider>
+              <LandingForm />
+            </BookingProvider>
         </div>
       </div>
     </div>
