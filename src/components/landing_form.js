@@ -47,7 +47,7 @@ const IndexPage = () => {
         onChange={updateAppartmentSize}
         >
           {TIME_SPACE.map((obj, key) =>
-            <option value={obj.hours} disabled="">{obj.apprtmentSize}</option>
+            <option value={obj.hours} disabled="">{obj.appartmentSize}</option>
           )}
         </select>
       </div>

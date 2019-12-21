@@ -18,54 +18,54 @@ export const FREQUENCIES = [
 export const TIME_SPACE= [
   {
     hours: '2',
-    apprtmentSize: '< 40m²',
+    appartmentSize: '< 40m²',
   },
   {
     hours: '2.5',
-    apprtmentSize: '40 - 49m²',
+    appartmentSize: '40 - 49m²',
   },
   {
     hours: '3',
-    apprtmentSize: '40 - 49m²',
+    appartmentSize: '40 - 49m²',
   },
   {
     hours: '3.5',
-    apprtmentSize: '50 - 59m²',
+    appartmentSize: '50 - 59m²',
   },
   {
     hours: '4',
-    apprtmentSize: '60 - 69m²',
+    appartmentSize: '60 - 69m²',
   },
   {
     hours: '4.5',
-    apprtmentSize: '70 - 79m²',
+    appartmentSize: '70 - 79m²',
   },
   {
     hours: '5',
-    apprtmentSize: '80 - 49m²',
+    appartmentSize: '80 - 49m²',
   },
   {
     hours: '5.5',
-    apprtmentSize: '90 - 49m²',
+    appartmentSize: '90 - 49m²',
   },
   {
     hours: '6',
-    apprtmentSize: '40 - 49m²',
+    appartmentSize: '40 - 49m²',
   },
   {
     hours: '6.5',
-    apprtmentSize: '40 - 49m²',
+    appartmentSize: '40 - 49m²',
   },
   {
     hours: '7',
-    apprtmentSize: '40 - 49m²',
+    appartmentSize: '40 - 49m²',
   },
   {
     hours: '7.5',
-    apprtmentSize: '40 - 49m²',
+    appartmentSize: '40 - 49m²',
   },
   {
     hours: '8',
-    apprtmentSize: '> 190m²',
+    appartmentSize: '> 190m²',
   },
 ];
