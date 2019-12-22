@@ -10,19 +10,20 @@ const instance = axios.create({
   headers: {'Content-Type': 'application/json'}
 });
 
-const IndexPage = () => {
+const LandingForm = () => {
     const [appartmentSize, setAppartmentSize] = useState('');
     const [booking, setBooking] = useContext(BookingContext);
     const [postcode, setPostcode] = useState('');
   
+    console.log(booking)
     const handleSubmit = (e) => {
       e.preventDefault();
       setBooking(prevBooking => ({
-          booking: {                   
-              ...prevBooking.booking,   
-              appartmentSize: appartmentSize, 
-              postcode: postcode     
-          }
+          ...prevBooking.booking,   
+          appartmentSize: appartmentSize, 
+          postcode: postcode,
+          land: false,
+          book: true     
         })
       )
   }
@@ -47,7 +48,7 @@ const IndexPage = () => {
         onChange={updateAppartmentSize}
         >
           {TIME_SPACE.map((obj, key) =>
-            <option value={obj.hours} disabled="">{obj.appartmentSize}</option>
+            <option value={obj.hours} disabled="" key={key}>{obj.appartmentSize}</option>
           )}
         </select>
       </div>
@@ -76,4 +77,4 @@ const IndexPage = () => {
     );
 }
 
-export default IndexPage
+export default LandingForm

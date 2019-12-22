@@ -4,12 +4,12 @@ export const BookingContext = createContext();
 
 export const BookingProvider = props => {
   const [booking, setBooking] = useState({
-    booking: {
-      appartmentSize: "", 
-      postcode: "",
-      frequency: "",
-      address:""
-    }
+    appartmentSize: "2", 
+    postcode: "22",
+    frequency: "",
+    address:"",
+    land: true,
+    book: false
   });
 
   return(
