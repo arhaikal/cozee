@@ -1,15 +1,28 @@
 module.exports = {
-  globals: {
-    __PATH_PREFIX__: true,
+  env: {
+    browser: true,
+    es6: true,
   },
-  extends: `react-app`,
-  "plugins": [
-    // ...
-    "react-hooks"
+  extends: [
+    'plugin:react/recommended',
+    'airbnb',
   ],
-  "rules": {
-    // ...
-    "react-hooks/rules-of-hooks": "error", // Checks rules of Hooks
-    "react-hooks/exhaustive-deps": "warn" // Checks effect dependencies
-  }
-}
+  globals: {
+    Atomics: 'readonly',
+    SharedArrayBuffer: 'readonly',
+  },
+  parserOptions: {
+    ecmaFeatures: {
+      jsx: true,
+    },
+    ecmaVersion: 2018,
+    sourceType: 'module',
+  },
+  plugins: [
+    'react',
+    'jsx-a11y',
+    'import',
+  ],
+  rules: {
+  },
+};

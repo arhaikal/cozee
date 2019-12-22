@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 export const FREQUENCIES = [
   {
@@ -15,57 +15,57 @@ export const FREQUENCIES = [
   },
 ];
 
-export const TIME_SPACE= [
+export const TIME_SPACE = [
   {
     hours: '2',
-    appartmentSize: '< 40m²',
+    size: '< 40m²',
   },
   {
     hours: '2.5',
-    appartmentSize: '40 - 49m²',
+    size: '40 - 49m²',
   },
   {
     hours: '3',
-    appartmentSize: '40 - 49m²',
+    size: '40 - 49m²',
   },
   {
     hours: '3.5',
-    appartmentSize: '50 - 59m²',
+    size: '50 - 59m²',
   },
   {
     hours: '4',
-    appartmentSize: '60 - 69m²',
+    size: '60 - 69m²',
   },
   {
     hours: '4.5',
-    appartmentSize: '70 - 79m²',
+    size: '70 - 79m²',
   },
   {
     hours: '5',
-    appartmentSize: '80 - 49m²',
+    size: '80 - 49m²',
   },
   {
     hours: '5.5',
-    appartmentSize: '90 - 49m²',
+    size: '90 - 49m²',
   },
   {
     hours: '6',
-    appartmentSize: '40 - 49m²',
+    size: '40 - 49m²',
   },
   {
     hours: '6.5',
-    appartmentSize: '40 - 49m²',
+    size: '40 - 49m²',
   },
   {
     hours: '7',
-    appartmentSize: '40 - 49m²',
+    size: '40 - 49m²',
   },
   {
     hours: '7.5',
-    appartmentSize: '40 - 49m²',
+    size: '40 - 49m²',
   },
   {
     hours: '8',
-    appartmentSize: '> 190m²',
+    size: '> 190m²',
   },
 ];
