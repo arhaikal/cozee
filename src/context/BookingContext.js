@@ -8,13 +8,11 @@ export const BookingProvider = (props) => {
     postcode: '22',
     frequency: '',
     address: '',
-    land: true,
-    book: false,
   });
 
   return (
     <BookingContext.Provider value={[booking, setBooking]}>
-      { props.children }
+      {props.children}
     </BookingContext.Provider>
   );
 };

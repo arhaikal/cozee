@@ -1,10 +1,14 @@
 import axios from 'axios';
-import { Redirect } from '@reach/router';
+import { navigate } from "gatsby"
 import 'bootstrap/dist/css/bootstrap.min.css';
 import React, { useState, useContext } from 'react';
 import { FREQUENCIES, TIME_SPACE } from './data';
 import { BookingContext } from '../context/BookingContext';
 
+const instance = axios.create({
+  baseURL: 'https://api.cozee.ee/bookings',
+  headers: { 'Content-Type': 'application/json' },
+});
 
 const BookingForm = () => {
   const [appartmentSize, setAppartmentSize] = useState('');
@@ -13,13 +17,21 @@ const BookingForm = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setBooking((prevBooking) => ({
-      ...prevBooking.booking,
-      appartmentSize,
-      postcode,
-      land: true,
-      book: false,
-    }));
+    const apiResponse = instance.post('', {
+      booking: {
+        duration: appartmentSize.hours,
+        area: appartmentSize.size,
+        zip_code: postcode,
+      },
+    });
+    const zip = apiResponse.then((response) => {
+      console.log(response.data.zip_code);
+      setBooking((prevBooking) => ({
+        ...prevBooking,
+        ...response.data,
+      }));
+    });
+    navigate("/")
   };
 
   const updateAppartmentSize = (e) => {
@@ -34,7 +46,7 @@ const BookingForm = () => {
       <select
         onChange={updateAppartmentSize}
       >
-        {TIME_SPACE.map((obj, key) => <option value="5" disabled="" key={key}>{obj.appartmentSize}</option>)}
+        {TIME_SPACE.map((obj, key) => <option value="5" disabled="" key={key}>{obj.size}</option>)}
       </select>
       <div
         className="col"
@@ -45,7 +57,7 @@ const BookingForm = () => {
           name="postcode"
           placeholder="Enter postcode"
           onChange={updatePostcode}
-          value={booking.postcode}
+          defaultValue="222"
         />
       </div>
       <input type="submit" value="add" />
