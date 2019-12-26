@@ -1,2 +1,106 @@
-
-{"booking":{"id":1404593,"service_id":1,"address":{"id":669437,"street_address":"","postcode":"00150","city":"","countrycode":"FI","area":"60-69","notes":"","pets_info":"","has_dogs":false,"has_cats":false,"has_other_pets":false},"access_attributes":{"door_code":""},"person":{"id":667420,"firstname":null,"lastname":null,"email":null,"phonenumber":null,"ssn":null,"sms_marketing_permission":false,"email_marketing_permission":false,"up_front_tax_deduction":false,"customer_credit":null},"selected_additional_services":[],"frequency":null,"duration":4,"receipt":{"id":null,"paid":false,"coupon_redemptions":[],"coupons":[],"currency":null,"customer_credit_payable_amount":0,"discounts_total_amount":0,"gift_cards_payable_amount":0,"official_id":null,"payments":[],"receipt_lines":[],"recurring_receipt":null,"total_amount":0,"total_after_tax_deduction_amount":0,"total_vat_amount":0,"unpaid_amount_for3rd_party_processor":0,"up_front_tax_deduction_amount":0},"comments":null,"start_time":null,"end_time":null,"up_front_tax_deduction":false,"up_front_tax_deduction_active":false}}
+Request URL: https://api.freska.net/v1/bookings/1404593
+Request Method: PUT
+Status Code: 200 
+Remote Address: 35.190.89.70:443
+Referrer Policy: no-referrer-when-downgrade
+access-control-allow-headers: Authorization,access-token,client,Cache-Control,Content-Type,expiry,token-type,uid,x-fr-region,x-booking-token
+access-control-allow-methods: GET, HEAD, POST, PUT, PATCH, DELETE, OPTIONS
+access-control-allow-methods: GET, POST, PUT, OPTIONS, DELETE
+access-control-allow-origin: https://tilaus.freska.fi
+access-control-expose-headers: access-token,client,expiry,token-type,uid,x-fr-region,x-booking-token,x-giftcardorder-token
+access-control-max-age: 7200
+access-control-max-age: 1728000
+alt-svc: clear
+cache-control: max-age=0, private, must-revalidate
+content-encoding: gzip
+content-type: application/json; charset=utf-8
+date: Thu, 26 Dec 2019 18:31:58 GMT
+etag: W/"c51489634107668db891ca1197941a74"
+server: nginx/1.13.3
+status: 200
+status: 200 OK
+vary: Origin
+via: kong/0.11.2, 1.1 google
+x-content-type-options: nosniff
+x-frame-options: SAMEORIGIN
+x-kong-proxy-latency: 13
+x-kong-upstream-latency: 139
+x-request-id: 20aa3676-6a7a-49ab-a8ab-a3853a71be34
+x-runtime: 0.129852
+x-xss-protection: 1; mode=block
+:authority: api.freska.net
+:method: PUT
+:path: /v1/bookings/1404593
+:scheme: https
+accept: application/json
+accept-encoding: gzip, deflate, br
+accept-language: en-US,en;q=0.9,ar-LB;q=0.8,ar;q=0.7,ru-RU;q=0.6,ru;q=0.5,es-US;q=0.4,es;q=0.3,fi-FI;q=0.2,fi;q=0.1,pt;q=0.1
+content-length: 1079
+content-type: application/json;charset=UTF-8
+origin: https://tilaus.freska.fi
+referer: https://tilaus.freska.fi/service
+sec-fetch-mode: cors
+sec-fetch-site: cross-site
+user-agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.88 Safari/537.36
+x-booking-token: uXH4B6XVaYzasCqZD4d94giQB4Mj9owU
+{
+    "booking": {
+        "id": 1404593,
+        "service_id": 1,
+        "address": {
+            "id": 669437,
+            "street_address": "",
+            "postcode": "00150",
+            "city": "",
+            "countrycode": "FI",
+            "area": "60-69",
+            "notes": "",
+            "pets_info": "",
+            "has_dogs": false,
+            "has_cats": false,
+            "has_other_pets": false
+        },
+        "access_attributes": {
+            "door_code": ""
+        },
+        "person": {
+            "id": 667420,
+            "firstname": null,
+            "lastname": null,
+            "email": null,
+            "phonenumber": null,
+            "ssn": null,
+            "sms_marketing_permission": false,
+            "email_marketing_permission": false,
+            "up_front_tax_deduction": false,
+            "customer_credit": null
+        },
+        "selected_additional_services": [],
+        "frequency": null,
+        "duration": 4,
+        "receipt": {
+            "id": null,
+            "paid": false,
+            "coupon_redemptions": [],
+            "coupons": [],
+            "currency": null,
+            "customer_credit_payable_amount": 0,
+            "discounts_total_amount": 0,
+            "gift_cards_payable_amount": 0,
+            "official_id": null,
+            "payments": [],
+            "receipt_lines": [],
+            "recurring_receipt": null,
+            "total_amount": 0,
+            "total_after_tax_deduction_amount": 0,
+            "total_vat_amount": 0,
+            "unpaid_amount_for3rd_party_processor": 0,
+            "up_front_tax_deduction_amount": 0
+        },
+        "comments": null,
+        "start_time": null,
+        "end_time": null,
+        "up_front_tax_deduction": false,
+        "up_front_tax_deduction_active": false
+    }
+}

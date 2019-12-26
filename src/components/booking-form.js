@@ -42,12 +42,6 @@ const BookingForm = () => {
   };
   return (
     <form onSubmit={handleSubmit}>
-      <label>Appartment Size:</label>
-      <select
-        onChange={updateAppartmentSize}
-      >
-        {TIME_SPACE.map((obj, key) => <option value="5" disabled="" key={key}>{obj.size}</option>)}
-      </select>
       <div
         className="col"
         style={{ paddingRight: '0px' }}

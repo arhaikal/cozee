@@ -11,6 +11,6 @@ export async function patchBooking(id) {
 }
 
 export async function postBooking(id) {
-  const response = await cozeeApi.post(id);
+  const response = await cozeeApi.post();
   return response.data;
 }
