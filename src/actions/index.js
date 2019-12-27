@@ -1,8 +1,9 @@
-import { UPDATE_BOOKINGS } from './types';
+import { UPDATE_BOOKING } from './types';
 
-export function updateBookings(data) {
+export const updateBooking = (data) => {
+  console.log(data)
   return {
-    type: UPDATE_BOOKINGS,
+    type: UPDATE_BOOKING,
     payload: data
   };
 }

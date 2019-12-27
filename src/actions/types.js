@@ -1,1 +1,1 @@
-export const UPDATE_BOOKINGS = 'UPDATE_BOOKINGS';
+export const UPDATE_BOOKING = 'UPDATE_BOOKING';

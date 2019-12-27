@@ -16,7 +16,6 @@ const LandingForm = () => {
 
   const updateAppartmentSize = (e) => {
     setAppartmentSize(e.target.value);
-    console.log(appartmentSize)
   };
   const updatePostcode = (e) => {
     setPostcode(e.target.value);

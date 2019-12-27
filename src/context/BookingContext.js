@@ -1,17 +1,16 @@
-import React, { useState, createContext } from 'react';
+import React, { useReducer, createContext } from 'react';
+import { initialState, bookingReducer } from '../reducers/booking'
 
 export const BookingContext = createContext();
 
 export const BookingProvider = (props) => {
-  const [booking, setBooking] = useState({
-    appartmentSize: '2',
-    postcode: '22',
-    frequency: '',
-    address: '',
-  });
+  const [state, dispatch] = useReducer(
+    bookingReducer,
+    initialState
+  );
 
   return (
-    <BookingContext.Provider value={[booking, setBooking]}>
+    <BookingContext.Provider value={[state, dispatch]}>
       {props.children}
     </BookingContext.Provider>
   );
