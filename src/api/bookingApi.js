@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const cozeeApi = axios.create({
+export const cozeeApi = axios.create({
   baseURL: 'https://api.cozee.ee/bookings/',
   timeout: 10000,
   headers: {

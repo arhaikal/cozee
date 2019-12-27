@@ -12,13 +12,17 @@ const BookingForm = () => {
   const [zipcode, setZipcode] = useState('');
   const [state, dispatch] = useContext(BookingContext);
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    async function postBooking(data) {
+
+  const postBooking = async (data) => {
+    if (state.booking) {
+      console.log(state.booking.identifier)
+      const response = await cozeeApi.patch('' + state.booking.identifier, data);
+      dispatch(updateBooking(response.data))
+    } else {
+      console.log("nop")
       const response = await cozeeApi.post('', data);
       dispatch(updateBooking(response.data))
     }
-    postBooking({ zip_code: zipcode })
   };
 
   const updateAppartmentSize = (e) => {
@@ -26,6 +30,11 @@ const BookingForm = () => {
   };
   const updateZipcode = (e) => {
     setZipcode(e.target.value);
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    postBooking({ zip_code: zipcode })
   };
 
   return (
@@ -39,7 +48,6 @@ const BookingForm = () => {
           name="zipcode"
           placeholder="Enter zipcode"
           onChange={updateZipcode}
-          defaultValue={state.booking.zip_code}
         />
       </div>
       <input type="submit" value="add" />
