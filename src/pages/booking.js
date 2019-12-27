@@ -19,7 +19,6 @@ const IndexPage = () => {
             </div>
             <BookingForm />
             <nav>
-              <Link to="/">Home</Link>
             </nav>
             <Router>
               <IndexPage path="/" />

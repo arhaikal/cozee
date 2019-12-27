@@ -15,57 +15,86 @@ export const FREQUENCIES = [
   },
 ];
 
-export const TIME_SPACE = [
+export const TIME = [
   {
     hours: '2',
-    size: '< 40m²',
   },
   {
     hours: '2.5',
-    size: '40 - 49m²',
   },
   {
     hours: '3',
-    size: '40 - 49m²',
   },
   {
     hours: '3.5',
-    size: '50 - 59m²',
   },
   {
     hours: '4',
-    size: '60 - 69m²',
   },
   {
     hours: '4.5',
-    size: '70 - 79m²',
   },
   {
     hours: '5',
-    size: '80 - 49m²',
   },
   {
     hours: '5.5',
-    size: '90 - 49m²',
   },
   {
     hours: '6',
-    size: '40 - 49m²',
   },
   {
     hours: '6.5',
-    size: '40 - 49m²',
   },
   {
     hours: '7',
-    size: '40 - 49m²',
   },
   {
     hours: '7.5',
-    size: '40 - 49m²',
   },
   {
     hours: '8',
-    size: '> 190m²',
+  },
+];
+
+export const AREA = [
+  {
+    size: '< 40m²',
+  },
+  {
+    size: '40 - 49m²',
+  },
+  {
+    size: '40 - 49m²',
+  },
+  {
+    size: '50 - 59m²',
+  },
+  {
+    size: '60 - 69m²',
+  },
+  {
+    size: '70 - 79m²',
+  },
+  {
+    size: '80 - 89m²',
+  },
+  {
+    size: '90 - 99m²',
+  },
+  {
+    size: '100 - 120m²',
+  },
+  {
+    size: '120 - 139m²',
+  },
+  {
+    size: '140 - 149m²',
+  },
+  {
+    size: '150 - 169m²',
+  },
+  {
+    size: '> 180m²',
   },
 ];

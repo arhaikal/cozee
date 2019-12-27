@@ -1,24 +1,18 @@
 import axios from 'axios';
 import React, { useState, useContext } from 'react';
-import { FREQUENCIES, TIME_SPACE } from './data';
+import { FREQUENCIES, AREA } from './data';
 import { BookingContext } from '../context/BookingContext';
 import { Redirect } from 'react-router-dom';
 
 const LandingForm = () => {
-  const [appartmentSize, setAppartmentSize] = useState('');
-  const [booking, setBooking] = useContext(BookingContext);
-  const [postcode, setPostcode] = useState('');
+  const [state, dispatch] = useContext(BookingContext);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    window.location.assign("booking?size=" + appartmentSize)
   };
 
-  const updateAppartmentSize = (e) => {
-    setAppartmentSize(e.target.value);
-  };
-  const updatePostcode = (e) => {
-    setPostcode(e.target.value);
+  const updateArea = (e) => {
+    console.log(e.target.value)
   };
 
   return (
@@ -32,22 +26,11 @@ const LandingForm = () => {
             component="select"
             className="form-control"
             name="appartmentSize"
-            onChange={updateAppartmentSize}
+            onChange={updateArea}
+            value={state.booking.area}
           >
-            {TIME_SPACE.map((obj, key) => <option value={obj.hours} disabled="" key={key}>{obj.size}</option>)}
+            {AREA.map((obj, key) => <option value={obj.size} disabled="" key={key}>{obj.size}</option>)}
           </select>
-        </div>
-        <div
-          className="col"
-          style={{ paddingRight: '0px' }}
-        >
-          <input
-            type="postcode"
-            name="postcode"
-            placeholder="Enter postcode"
-            onChange={updatePostcode}
-            defaultValue={booking.zip_code}
-          />
         </div>
 
         <button

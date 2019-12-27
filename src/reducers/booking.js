@@ -13,6 +13,25 @@ export const bookingReducer = (state = initialState, action) => {
   }
 }
 
-export const initialState = {}
+export const initialState = {
+  booking: {
+    "additional_details": "",
+    "address": "",
+    "area": "",
+    "currency": "EUR",
+    "duration": "0.0",
+    "ends_at": null,
+    "frequency": "once",
+    "hourly_rates": {
+      "weekly": "17.0",
+      "biweekly": "18.0",
+      "monthly": "19.0",
+      "once": "20.0"
+    },
+    "starts_at": null,
+    "total_cost": "0.0",
+    "zip_code": ""
+  }
+}
 
 export default bookingReducer
