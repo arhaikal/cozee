@@ -2,10 +2,13 @@ import axios from 'axios';
 import { navigate } from "gatsby"
 import 'bootstrap/dist/css/bootstrap.min.css';
 import React, { useState, useContext } from 'react';
-import { FREQUENCIES, AREA } from './data';
+import { FREQUENCIES, AREA, TIME } from './data';
 import { BookingContext } from '../context/BookingContext';
 import { updateBooking } from '../actions/index'
 import { cozeeApi } from '../api/bookingApi'
+import { Form, Modal } from 'react-bootstrap';
+import { FrequencySelector } from './frequency-selector'
+
 
 const BookingForm = () => {
   const [state, dispatch] = useContext(BookingContext);
@@ -14,7 +17,7 @@ const BookingForm = () => {
   const postBooking = async (data) => {
     if (state.booking.identifier) {
       console.log(state.booking.identifier)
-      const response = await cozeeApi.patch('' + state.booking.identifier, data);
+      const response = await cozeeApi.patch(`${state.booking.identifier}`, data);
       dispatch(updateBooking(response.data))
     } else {
       console.log("nop")
@@ -26,10 +29,14 @@ const BookingForm = () => {
   const updateArea = (e) => {
     console.log(e.target.value)
     postBooking({ "area": e.target.value })
-    navigate("/")
   };
 
   const updateZipcode = (e) => {
+  };
+
+  const updateDuration = (e) => {
+    console.log(e.target.value)
+    postBooking({ "duration": e.target.value })
   };
 
   const handleSubmit = (e) => {
@@ -37,36 +44,30 @@ const BookingForm = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <div
-        className="col"
-        style={{ paddingLeft: '0px' }}
-      >
-        <input
-          type="zipcode"
-          name="zipcode"
-          placeholder="Enter zipcode"
-          onChange={updateZipcode}
-          defaultValue={state.booking.zip_code}
-        />
-      </div>
-
-      <div
-        className="col"
-        style={{ paddingLeft: '0px' }}
-      >
-        <select
-          component="select"
-          className="form-control"
+    <Form onSubmit={handleSubmit}>
+      <Form.Group controlId="exampleForm.ControlSelect1">
+        <Form.Label>How big is your Home?</Form.Label>
+        <Form.Control
+          as="select"
           name="area"
           onChange={updateArea}
-          value={state.booking.area}
-        >
+          value={state.booking.area}>
           {AREA.map((obj, key) => <option value={obj.size} disabled="" key={key}>{obj.size}</option>)}
-        </select>
-      </div>
+        </Form.Control>
+      </Form.Group>
+      <Form.Group>
+        <Form.Label>How many hours should we clean?</Form.Label>
+        <Form.Control
+          as="select"
+          name="duration"
+          onChange={updateDuration}
+          defaultValue={state.booking.duration} >
+          {TIME.map((obj, key) => <option value={obj.hours} disabled="" key={key}>{`${obj.hours} hours`}</option>)}
+        </Form.Control>
+      </Form.Group>
+      <FrequencySelector />
       <input type="submit" value="add" />
-    </form >
+    </Form >
   );
 };
 
