@@ -25,16 +25,22 @@ const Layout = ({ children }) => {
 
   return (
     <>
-      <Header siteTitle={data.site.siteMetadata.title} />
-      <div
-        style={{
-          margin: '0 auto',
-          padding: '0px',
-          paddingTop: 0,
-        }}
-      >
-        <main>{children}</main>
+    <Header siteTitle={data.site.siteMetadata.title} />
+    <div
+      style={{
+        margin: '0 auto',
+        padding: '0px',
+        paddingTop: 0,
+      }}
+    >
+      <div className="container mt-5">
+        <div className="row">
+          <div className="col-lg-8" >
+            <main>{children}</main>
+          </div>
+        </div>
       </div>
+    </div>
     </>
   );
 };
