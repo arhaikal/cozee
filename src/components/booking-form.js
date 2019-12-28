@@ -8,7 +8,6 @@ import { updateBooking } from '../actions/index'
 import { cozeeApi } from '../api/bookingApi'
 import { Form, Modal, Button, Card } from 'react-bootstrap';
 import { FrequencySelector } from './frequency-selector'
-import "../styles/general.scss";
 
 
 const BookingForm = () => {
@@ -46,7 +45,7 @@ const BookingForm = () => {
 
   return (
     <Form onSubmit={handleSubmit}>
-      <Card class="card card-big">
+      <Card className={"card-big"}>
         <Card.Body>
           <Card.Title>How big is your Home?</Card.Title>
           <Form.Group controlId="exampleForm.ControlSelect1">
@@ -60,7 +59,7 @@ const BookingForm = () => {
           </Form.Group>
         </Card.Body>
       </Card>
-      <Card class="card card-big">
+      <Card className={"card-big"}>
         <Card.Body>
           <Card.Title>How many hours should we clean?</Card.Title>
           <Form.Group>
@@ -74,8 +73,9 @@ const BookingForm = () => {
           </Form.Group>
         </Card.Body>
       </Card>
-      <Card class="card card-big">
+      <Card className={"card-big"}>
         <Card.Body>
+          <Card.Title>How often do you want us to clean?</Card.Title>
           <FrequencySelector />
         </Card.Body>
       </Card>
