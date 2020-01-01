@@ -10,8 +10,12 @@ export const cozeeApi = axios.create({
 });
 
 
-export async function postBooking(data, dispatch) {
-  console.log('api call')
+export async function postBooking(data) {
   const response = await cozeeApi.post('', data);
-  dispatch(response);
+  return response.data
+}
+
+export async function patchBooking(id, data) {
+  const response = await cozeeApi.patch(`${id}`, data);
+  return response.data
 }

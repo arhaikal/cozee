@@ -1,10 +1,8 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import Layout from '../components/layout';
 import BookingForm from '../components/booking-form';
-import Image from '../components/image';
-import SEO from '../components/seo';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Link, Router } from '@reach/router'
+import { Router } from '@reach/router'
 
 
 const IndexPage = () => {

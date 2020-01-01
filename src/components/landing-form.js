@@ -1,8 +1,6 @@
-import axios from 'axios';
-import React, { useState, useContext } from 'react';
-import { FREQUENCIES, AREA } from './data';
+import React, { useContext } from 'react';
+import { AREA } from './data';
 import { BookingContext } from '../context/BookingContext';
-import { Redirect } from 'react-router-dom';
 
 const LandingForm = () => {
   const [state, dispatch] = useContext(BookingContext);

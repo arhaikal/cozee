@@ -1,16 +1,16 @@
 
-import 'bootstrap/dist/css/bootstrap.min.css';
 import React, { useState, useContext } from 'react';
 import { BookingContext } from '../context/BookingContext';
 import { updateBooking } from '../actions/index'
 import { Card } from 'react-bootstrap';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
-export const FrequencySelector = () => {
+export const Address = () => {
   const [state, dispatch] = useContext(BookingContext);
   const handleClick = (key) => {
-    dispatch(updateBooking({ "frequency": key }, state, dispatch))
+    console.log(key)
+    dispatch(updateBooking({ "frequency": key }))
   }
-  const hourlyRates = state.booking.hourly_rates
 
   return (
     <div>
