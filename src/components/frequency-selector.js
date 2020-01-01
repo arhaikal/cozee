@@ -13,21 +13,24 @@ export const FrequencySelector = () => {
   const hourlyRates = state.booking.hourly_rates
 
   return (
-    <div>
-      {Object.keys(hourlyRates).map((key, index) => {
-        const selected = state.booking.frequency === key
-        const border = selected ? 'primary' : 'light-border'
-        return (
-          <Card
-            className={`card-list`}
-            border={border}
-            onClick={() => handleClick(key)}
-            key={index}
-          >
-            <Card.Body>{key}</Card.Body>
-          </Card>
-        );
-      })}
-    </div>
+    <Card className={"card-big"}>
+      <Card.Body>
+        <Card.Title>How often do you want us to clean?</Card.Title>
+        {Object.keys(hourlyRates).map((key, index) => {
+          const selected = state.booking.frequency === key
+          const border = selected ? 'primary' : 'light-border'
+          return (
+            <Card
+              className={`card-list`}
+              border={border}
+              onClick={() => handleClick(key)}
+              key={index}
+            >
+              <Card.Body>{key}</Card.Body>
+            </Card>
+          );
+        })}
+      </Card.Body>
+    </Card>
   );
 }
