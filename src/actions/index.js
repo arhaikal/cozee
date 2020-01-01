@@ -17,23 +17,15 @@ const fetchUpdatedBookingFailure = (error) => {
 }
 
 export const updateBooking = async (data, state, dispatch) => {
-  if (state.booking.identifier) {
-
-    try {
+  try {
+    if (state.booking.identifier) {
       const values = await patchBooking(state.booking.identifier, data);
       dispatch(fetchUpdatedBookingSuccess(values));
-    } catch (error) {
-      dispatch(fetchUpdatedBookingFailure(error));
-    }
-
-  } else {
-
-    try {
+    } else {
       const values = await postBooking(data);
       dispatch(fetchUpdatedBookingSuccess(values));
-    } catch (error) {
-      dispatch(fetchUpdatedBookingFailure(error));
     }
-
+  } catch (error) {
+    dispatch(fetchUpdatedBookingFailure(error));
   }
 }
