@@ -8,6 +8,7 @@ import { FrequencySelector } from './frequency-selector'
 import { DurationSelector } from './duration-selector'
 import { AreaSelector } from './area-selector'
 import { Address } from './address'
+import { Person } from './person'
 
 
 const BookingForm = () => {
@@ -18,16 +19,13 @@ const BookingForm = () => {
   };
 
   return (
-    <Form onSubmit={handleSubmit}>
+    <div>
       <AreaSelector />
       <DurationSelector />
       <FrequencySelector />
       <Address />
-
-      <Button variant="primary" size="xxl" type="submit" value="add">
-        Submit
-      </Button>
-    </Form >
+      <Person />
+    </div>
   );
 };
 
