@@ -15,10 +15,11 @@ export const Address = () => {
     dispatch(
       updateBooking(
         {
-          "address": address,
+          "address_query": `${address}, ${zipcode}`,
           "zip_code": zipcode
         }
-        , state, dispatch)
+        , state, dispatch
+      )
     )
   }
 
@@ -30,17 +31,29 @@ export const Address = () => {
             <Col xs={8}>
               <Form.Group>
                 <Form.Label>Address</Form.Label>
-                <Form.Control onChange={(e) => setAddress(e.target.value)} type="text" placeholder="Kesklinn 1, Tallinn" />
+                <Form.Control
+                  onChange={(e) => setAddress(e.target.value)}
+                  type="text"
+                  placeholder="Kesklinn 1, Tallinn"
+                />
               </Form.Group>
             </Col>
             <Col>
               <Form.Group>
                 <Form.Label>Zip Code</Form.Label>
-                <Form.Control onChange={(e) => setZipcode(e.target.value)} type="text" placeholder="24141" />
+                <Form.Control
+                  onChange={(e) => setZipcode(e.target.value)}
+                  type="text"
+                  placeholder="24141"
+                />
               </Form.Group>
             </Col>
           </Row>
-          <Button variant="primary" type="submit" disabled={!address || !zipcode}>
+          <Button
+            variant="primary"
+            type="submit"
+            disabled={!address || !zipcode}
+          >
             Validate Address
           </Button>
         </Form>

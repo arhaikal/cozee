@@ -36,7 +36,7 @@ const Layout = ({ children }) => {
     >
       <div className="container mt-5">
         <div className="row">
-          <div className="col-lg-8" >
+          <div className="col-lg-12" >
             <main>{children}</main>
           </div>
         </div>
