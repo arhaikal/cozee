@@ -8,7 +8,7 @@ import { FrequencySelector } from './frequency-selector'
 import { DurationSelector } from './duration-selector'
 import { AreaSelector } from './area-selector'
 import { Address } from './address'
-import { Person } from './person'
+import { Client } from './client'
 
 
 const BookingForm = () => {
@@ -24,7 +24,7 @@ const BookingForm = () => {
       <DurationSelector />
       <FrequencySelector />
       <Address />
-      <Person />
+      <Client />
     </div>
   );
 };

@@ -1,16 +1,17 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { AREA } from './data';
 import { BookingContext } from '../context/BookingContext';
+import { updateBooking } from '../actions/index'
+import { navigate } from "gatsby"
 
 const LandingForm = () => {
   const [state, dispatch] = useContext(BookingContext);
+  const [area, setArea] = useState('');
 
   const handleSubmit = (e) => {
     e.preventDefault();
-  };
-
-  const updateArea = (e) => {
-    console.log(e.target.value)
+    dispatch(updateBooking({ "area": area }, state, dispatch))
+    navigate("/booking/")
   };
 
   return (
@@ -24,8 +25,7 @@ const LandingForm = () => {
             component="select"
             className="form-control"
             name="appartmentSize"
-            onChange={updateArea}
-            value={state.booking.area}
+            onChange={(e) => setArea(e.target.value)}
           >
             {AREA.map((obj, key) => <option value={obj.size} disabled="" key={key}>{obj.size}</option>)}
           </select>

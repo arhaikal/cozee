@@ -5,12 +5,11 @@ import { updateBooking } from '../actions/index'
 import { Card, Form, Button, Row, Col } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-export const Person = () => {
+export const Client = () => {
   const [state, dispatch] = useContext(BookingContext);
   const handleUpdate = (e) => {
-    console.log(e.target.name)
-    console.log(e.target.value)
-  }
+    dispatch(updateBooking({ "client": { "first_name": e.target.value } }, state, dispatch))
+  };
 
   return (
     <Card className={"card-big"}>
