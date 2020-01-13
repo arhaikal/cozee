@@ -13,7 +13,7 @@ export const BookingSummary = () => {
         <p>Appartment Size: <b>{state.booking.area} m2</b></p>
         <p>Cleaning Hours: <b>{state.booking.duration} h</b></p>
         <p>How often<b> {state.booking.frequency}</b></p>
-        <p>Address:<b> {state.booking.address}</b></p>
+        <p>Address:<b> {state.booking.address && state.booking.address.formatted_address}</b></p>
       </Card.Body>
     </Card>
   );

@@ -7,8 +7,20 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 export const Client = () => {
   const [state, dispatch] = useContext(BookingContext);
-  const handleUpdate = (e) => {
-    dispatch(updateBooking({ "client": { "first_name": e.target.value } }, state, dispatch))
+  const handleFirstNameChange = (e) => {
+    dispatch(updateBooking({ first_name: e.target.value }, state, dispatch))
+  };
+
+  const handleLastNameChange = (e) => {
+    dispatch(updateBooking({ last_name: e.target.value }, state, dispatch))
+  };
+
+  const handleEmailChange = (e) => {
+    dispatch(updateBooking({ email: e.target.value }, state, dispatch))
+  };
+
+  const handlePhoneChange = (e) => {
+    dispatch(updateBooking({ phone_number: e.target.value }, state, dispatch))
   };
 
   return (
@@ -19,13 +31,13 @@ export const Client = () => {
             <Col>
               <Form.Group>
                 <Form.Label>First Name</Form.Label>
-                <Form.Control name="first_name" onBlur={handleUpdate} type="text" placeholder="Kersti" />
+                <Form.Control name="first_name" onBlur={handleFirstNameChange} type="text" placeholder="Kersti" />
               </Form.Group>
             </Col>
             <Col>
               <Form.Group>
                 <Form.Label>Last Name</Form.Label>
-                <Form.Control name="last_name" onBlur={handleUpdate} type="text" placeholder="Kaljulaid" />
+                <Form.Control name="last_name" onBlur={handleLastNameChange} type="text" placeholder="Kaljulaid" />
               </Form.Group>
             </Col>
           </Row>
@@ -33,13 +45,13 @@ export const Client = () => {
             <Col>
               <Form.Group>
                 <Form.Label>Email</Form.Label>
-                <Form.Control name="email" onBlur={handleUpdate} type="email" placeholder="Kersti@email.com" />
+                <Form.Control name="email" onBlur={handleEmailChange} type="email" placeholder="Kersti@email.com" />
               </Form.Group>
             </Col>
             <Col>
               <Form.Group>
                 <Form.Label>Phone Number</Form.Label>
-                <Form.Control name="phone_number" onBlur={handleUpdate} type="tel" placeholder="+372 82194129" />
+                <Form.Control name="phone_number" onBlur={handlePhoneChange} type="tel" placeholder="+372 82194129" />
               </Form.Group>
             </Col>
           </Row>

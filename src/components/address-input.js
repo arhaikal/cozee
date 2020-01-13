@@ -6,7 +6,7 @@ import { Card, Form, Button, Row, Col } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 
-export const Address = () => {
+export const AddressInput = () => {
   const [address, setAddress] = useState('');
   const [zipcode, setZipcode] = useState('');
   const [state, dispatch] = useContext(BookingContext);
