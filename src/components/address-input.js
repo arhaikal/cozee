@@ -16,8 +16,8 @@ export const AddressInput = () => {
     dispatch(
       updateBooking(
         {
-          "address_query": `${address}, ${zipcode}`,
-          "zip_code": zipcode
+          address_query: `${address}, ${zipcode}`,
+          zip_code: zipcode
         }
         , state, dispatch
       )

@@ -20,7 +20,7 @@ export const Client = () => {
   };
 
   const handlePhoneChange = (e) => {
-    dispatch(updateBooking({ phone_number: e.target.value }, state, dispatch))
+    dispatch(updateBooking({ phone: e.target.value }, state, dispatch))
   };
 
   return (
@@ -31,13 +31,13 @@ export const Client = () => {
             <Col>
               <Form.Group>
                 <Form.Label>First Name</Form.Label>
-                <Form.Control name="first_name" onBlur={handleFirstNameChange} type="text" placeholder="Kersti" />
+                <Form.Control name="first_name" onChange={handleFirstNameChange} type="text" placeholder="Kersti" />
               </Form.Group>
             </Col>
             <Col>
               <Form.Group>
                 <Form.Label>Last Name</Form.Label>
-                <Form.Control name="last_name" onBlur={handleLastNameChange} type="text" placeholder="Kaljulaid" />
+                <Form.Control name="last_name" onChange={handleLastNameChange} type="text" placeholder="Kaljulaid" />
               </Form.Group>
             </Col>
           </Row>
@@ -45,13 +45,13 @@ export const Client = () => {
             <Col>
               <Form.Group>
                 <Form.Label>Email</Form.Label>
-                <Form.Control name="email" onBlur={handleEmailChange} type="email" placeholder="Kersti@email.com" />
+                <Form.Control name="email" onChange={handleEmailChange} type="email" placeholder="Kersti@email.com" />
               </Form.Group>
             </Col>
             <Col>
               <Form.Group>
                 <Form.Label>Phone Number</Form.Label>
-                <Form.Control name="phone_number" onBlur={handlePhoneChange} type="tel" placeholder="+372 82194129" />
+                <Form.Control name="phone" onChange={handlePhoneChange} type="tel" placeholder="+372 82194129" />
               </Form.Group>
             </Col>
           </Row>

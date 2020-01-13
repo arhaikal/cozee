@@ -9,7 +9,7 @@ import { AREA } from './data';
 export const AreaSelector = () => {
   const [state, dispatch] = useContext(BookingContext);
   const updateArea = (e) => {
-    dispatch(updateBooking({ "area": e.target.value }, state, dispatch))
+    dispatch(updateBooking({ area: e.target.value }, state, dispatch))
   };
 
   return (

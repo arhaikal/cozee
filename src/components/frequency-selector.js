@@ -8,7 +8,7 @@ import { Card } from 'react-bootstrap';
 export const FrequencySelector = () => {
   const [state, dispatch] = useContext(BookingContext);
   const handleClick = (key) => {
-    dispatch(updateBooking({ "frequency": key }, state, dispatch))
+    dispatch(updateBooking({ frequency: key }, state, dispatch))
   }
   const hourlyRates = state.booking.hourly_rates
 

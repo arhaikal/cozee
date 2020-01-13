@@ -9,7 +9,7 @@ import { TIME } from './data';
 export const DurationSelector = () => {
   const [state, dispatch] = useContext(BookingContext);
   const updateDuration = (e) => {
-    dispatch(updateBooking({ "duration": e.target.value }, state, dispatch))
+    dispatch(updateBooking({ duration: e.target.value }, state, dispatch))
   };
 
   return (
