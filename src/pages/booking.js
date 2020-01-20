@@ -1,10 +1,10 @@
 import React from 'react';
 import Layout from '../components/layout';
-import BookingForm from '../components/booking-form';
+import BookingForm from '../components/BookingForm';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Router } from '@reach/router'
 import { Row, Col } from 'react-bootstrap';
-import { BookingSummary } from '../components/booking-summary'
+import { BookingSummary } from '../components/BookingSummary'
 
 
 const IndexPage = () => {

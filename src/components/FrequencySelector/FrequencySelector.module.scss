@@ -1,0 +1,16 @@
+.cardBig {
+  margin-top: 32px;
+  border-radius: 20px;
+  padding: 32px 47px 40px;
+}
+
+.cardList {
+  margin-top: 10px;
+  cursor: pointer;
+  :active {
+    background-color: rgb(232, 235, 235);
+  }
+  :hover{
+    background-color: rgb(232, 235, 235);
+  }
+}
