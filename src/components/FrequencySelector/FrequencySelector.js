@@ -1,9 +1,8 @@
 
-import 'bootstrap/dist/css/bootstrap.min.css';
 import React, { useState, useContext } from 'react';
 import { BookingContext } from '../../context/BookingContext';
 import { updateBooking } from '../../actions/index'
-import { Box, Text, PseudoBox } from '@chakra-ui/core'
+import { Box, Text, Button, Heading } from '@chakra-ui/core'
 import styles from './FrequencySelector.module.scss';
 
 const FrequencySelector = () => {
@@ -14,30 +13,27 @@ const FrequencySelector = () => {
   const hourlyRates = state.booking.hourly_rates
 
   return (
-    <Box witdh="100%" border="1px solid" rounded="lg" className={styles.cardBig}>
+    <Box witdh="100%" border="1px solid teal" rounded="lg" className="card-big">
       <Box>
-        <Text fontSize="2xl">How often do you want us to clean?</Text>
+        <Heading as="h3" size="lg" mb="5">How often do you want us to clean?</Heading>
         {Object.keys(hourlyRates).map((key, index) => {
           const selected = state.booking.frequency === key
-          const border = selected ? 'primary' : 'light-border'
+          const border = selected ? 'solid' : 'outline'
           return (
-            <PseudoBox
-              mt="2"
-              as="button"
+            <Button
+              mt="6"
               width="100%"
-              alignItems="center"
-              borderWidth="1px"
-              rounded="lg"
-              onClick={() => handleClick(key)}
+              size="lg"
+              variantColor="teal" variant={border}
               key={index}
-              _hover={{ borderColor: "gray.200", bg: "gray.200" }}
+              onClick={() => handleClick(key)}
             >
-              <Text width="100%" textAlign={'center'}>{key}</Text>
-            </PseudoBox>
+              <Text width="100%" textAlign={'center'} fontSize="lg">{key}</Text>
+            </Button>
           );
         })}
       </Box>
-    </Box>
+    </Box >
   );
 }
 

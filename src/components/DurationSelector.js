@@ -5,6 +5,7 @@ import { BookingContext } from '../context/BookingContext';
 import { updateBooking } from '../actions/index'
 import { Form, Card } from 'react-bootstrap';
 import { TIME } from './data';
+import { Select, Text } from '@chakra-ui/core';
 
 export const DurationSelector = () => {
   const [state, dispatch] = useContext(BookingContext);
@@ -15,16 +16,15 @@ export const DurationSelector = () => {
   return (
     <Card className={"card-big"}>
       <Card.Body>
-        <Card.Title>How many hours should we clean?</Card.Title>
-        <Form.Group>
-          <Form.Control
-            as="select"
-            name="duration"
-            onChange={updateDuration}
-            defaultValue={state.booking.duration} >
-            {TIME.map((obj, key) => <option value={obj.hours} disabled="" key={key}>{`${obj.hours} hours`}</option>)}
-          </Form.Control>
-        </Form.Group>
+        <Text fontSize="2xl">How many hours should we clean?</Text>
+        <Select placeholder="Select option"
+          as="select"
+          name="duration"
+          onChange={updateDuration}
+          defaultValue={state.booking.duration} >
+          {TIME.map((obj, key) => <option value={obj.hours} disabled="" key={key}>{`${obj.hours} hours`}</option>)}
+          >
+        </Select>
       </Card.Body>
     </Card>
   );

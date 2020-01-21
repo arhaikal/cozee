@@ -2,8 +2,7 @@
 import React, { useState, useContext } from 'react';
 import { BookingContext } from '../context/BookingContext';
 import { updateBooking } from '../actions/index'
-import { Card, Form, Button, Row, Col } from 'react-bootstrap';
-import 'bootstrap/dist/css/bootstrap.min.css';
+import { Box, FormControl, Input, Heading, FormLabel, SimpleGrid } from '@chakra-ui/core'
 
 export const Client = () => {
   const [state, dispatch] = useContext(BookingContext);
@@ -24,39 +23,43 @@ export const Client = () => {
   };
 
   return (
-    <Card className={"card-big"}>
-      <Card.Body>
-        <Form>
-          <Row>
-            <Col>
-              <Form.Group>
-                <Form.Label>First Name</Form.Label>
-                <Form.Control name="first_name" onChange={handleFirstNameChange} type="text" placeholder="Kersti" />
-              </Form.Group>
-            </Col>
-            <Col>
-              <Form.Group>
-                <Form.Label>Last Name</Form.Label>
-                <Form.Control name="last_name" onChange={handleLastNameChange} type="text" placeholder="Kaljulaid" />
-              </Form.Group>
-            </Col>
-          </Row>
-          <Row>
-            <Col>
-              <Form.Group>
-                <Form.Label>Email</Form.Label>
-                <Form.Control name="email" onChange={handleEmailChange} type="email" placeholder="Kersti@email.com" />
-              </Form.Group>
-            </Col>
-            <Col>
-              <Form.Group>
-                <Form.Label>Phone Number</Form.Label>
-                <Form.Control name="phone" onChange={handlePhoneChange} type="tel" placeholder="+372 82194129" />
-              </Form.Group>
-            </Col>
-          </Row>
-        </Form>
-      </Card.Body>
-    </Card>
+    <Box witdh="100%" border="1px solid teal" rounded="lg" className="card-big">
+      <Heading as="h3" size="lg" mb="5">How big is your Home?</Heading>
+      <SimpleGrid columns={2} spacing={10}>
+
+        <FormControl >
+          <FormLabel htmlFor="name">First name</FormLabel>
+          <Input
+            name="first_name"
+            onChange={handleFirstNameChange}
+            type="text" placeholder="Kersti"
+          />
+        </FormControl>
+        <FormControl >
+          <FormLabel htmlFor="name">Last name</FormLabel>
+          <Input
+            name="last_name"
+            onChange={handleLastNameChange}
+            type="text" placeholder="Kaljulaid"
+          />
+        </FormControl>
+        <FormControl >
+          <FormLabel htmlFor="email">Email</FormLabel>
+          <Input
+            name="email"
+            onChange={handleEmailChange}
+            type="email" placeholder="Kersti@email.com"
+          />
+        </FormControl>
+        <FormControl >
+          <FormLabel htmlFor="tel">Phone Number</FormLabel>
+          <Input
+            name="phone"
+            onChange={handlePhoneChange}
+            type="tel" placeholder="+372 82194129"
+          />
+        </FormControl>
+      </SimpleGrid>
+    </Box>
   );
 }

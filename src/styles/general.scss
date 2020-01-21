@@ -117,3 +117,6 @@ small {
   padding: 0.6rem 1.5rem;
 }
 
+button:focus {
+  outline: 0 !important;
+}
