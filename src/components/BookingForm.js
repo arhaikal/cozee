@@ -1,8 +1,6 @@
-import { navigate } from "gatsby"
 import React, { useState, useContext } from 'react';
 import { BookingContext } from '../context/BookingContext';
 import { updateBooking } from '../actions/index'
-import { Form, Button } from 'react-bootstrap';
 import FrequencySelector from './FrequencySelector'
 import { DurationSelector } from './DurationSelector'
 import { AreaSelector } from './AreaSelector'

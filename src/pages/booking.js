@@ -2,7 +2,6 @@ import React from 'react';
 import Layout from '../components/layout';
 import BookingForm from '../components/BookingForm';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Router } from '@reach/router'
 import { Row, Col } from 'react-bootstrap';
 import { BookingSummary } from '../components/BookingSummary'
 import { Heading, Text } from '@chakra-ui/core';

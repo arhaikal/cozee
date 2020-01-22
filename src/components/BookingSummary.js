@@ -1,7 +1,7 @@
 
 import React, { useContext } from 'react';
 import { BookingContext } from '../context/BookingContext';
-import { Card, Row, Col } from 'react-bootstrap';
+import { Card } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 export const BookingSummary = () => {
