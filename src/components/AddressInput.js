@@ -24,7 +24,7 @@ export const AddressInput = () => {
   }
 
   return (
-    <Box witdh="100%" border="1px solid teal" rounded="lg" className="card-big">
+    <Box witdh="100%" rounded="lg" className="card-big">
       <form onSubmit={handleSubmit}>
         <Grid templateColumns="2fr 1fr" gap={2} gridRowGap={6}>
           <FormControl >

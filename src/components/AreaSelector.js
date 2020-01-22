@@ -12,7 +12,7 @@ export const AreaSelector = () => {
   };
 
   return (
-    <Box witdh="100%" border="1px solid teal" rounded="lg" className="card-big">
+    <Box witdh="100%" rounded="lg" className="card-big">
       <Box>
         <Heading as="h3" size="lg" mb="5">How big is your Home?</Heading>
         <Select

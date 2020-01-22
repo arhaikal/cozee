@@ -13,7 +13,7 @@ const FrequencySelector = () => {
   const hourlyRates = state.booking.hourly_rates
 
   return (
-    <Box witdh="100%" border="1px solid teal" rounded="lg" className="card-big">
+    <Box witdh="100%" rounded="lg" className="card-big">
       <Box>
         <Heading as="h3" size="lg" mb="5">How often do you want us to clean?</Heading>
         {Object.keys(hourlyRates).map((key, index) => {

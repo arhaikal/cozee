@@ -23,7 +23,7 @@ export const Client = () => {
   };
 
   return (
-    <Box witdh="100%" border="1px solid teal" rounded="lg" className="card-big">
+    <Box witdh="100%" rounded="lg" className="card-big">
       <SimpleGrid columns={2} spacing={10}>
 
         <FormControl >

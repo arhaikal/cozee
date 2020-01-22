@@ -13,10 +13,8 @@ const IndexPage = () => {
     <Layout>
       <Row>
         <Col>
-          <div>
-            <Heading as="h3" size="lg">Cleaning made simple!</Heading>
-            <Text fontSize="xl">Happy to be home</Text>
-          </div>
+          <Heading as="h3" size="lg">Cleaning made simple!</Heading>
+          <Text fontSize="xl">Happy to be home</Text>
         </Col>
       </Row>
       <Row>
