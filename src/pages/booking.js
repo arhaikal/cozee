@@ -5,6 +5,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { Router } from '@reach/router'
 import { Row, Col } from 'react-bootstrap';
 import { BookingSummary } from '../components/BookingSummary'
+import { Heading, Text } from '@chakra-ui/core';
 
 
 const IndexPage = () => {
@@ -13,8 +14,8 @@ const IndexPage = () => {
       <Row>
         <Col>
           <div>
-            <h1>Cleaning made simple!</h1>
-            <p>Happy to be home</p>
+            <Heading as="h3" size="lg">Cleaning made simple!</Heading>
+            <Text fontSize="xl">Happy to be home</Text>
           </div>
         </Col>
       </Row>

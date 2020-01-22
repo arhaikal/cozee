@@ -2,9 +2,7 @@
 import React, { useState, useContext } from 'react';
 import { BookingContext } from '../context/BookingContext';
 import { updateBooking } from '../actions/index'
-import { Card, Form, Row, Col } from 'react-bootstrap';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import { Button } from "@chakra-ui/core";
+import { Button, Box, Input, Grid, FormControl, FormLabel } from "@chakra-ui/core";
 
 
 export const AddressInput = () => {
@@ -26,40 +24,35 @@ export const AddressInput = () => {
   }
 
   return (
-    <Card className={"card-big"}>
-      <Card.Body>
-        <Form onSubmit={handleSubmit}>
-          <Row>
-            <Col xs={8}>
-              <Form.Group>
-                <Form.Label>Address</Form.Label>
-                <Form.Control
-                  onChange={(e) => setAddress(e.target.value)}
-                  type="text"
-                  placeholder="Kesklinn 1, Tallinn"
-                />
-              </Form.Group>
-            </Col>
-            <Col>
-              <Form.Group>
-                <Form.Label>Zip Code</Form.Label>
-                <Form.Control
-                  onChange={(e) => setZipcode(e.target.value)}
-                  type="text"
-                  placeholder="24141"
-                />
-              </Form.Group>
-            </Col>
-          </Row>
+    <Box witdh="100%" border="1px solid teal" rounded="lg" className="card-big">
+      <form onSubmit={handleSubmit}>
+        <Grid templateColumns="2fr 1fr" gap={2} gridRowGap={6}>
+          <FormControl >
+            <FormLabel htmlFor="name">Address</FormLabel>
+            <Input
+              onChange={(e) => setAddress(e.target.value)}
+              type="text"
+              placeholder="Kesklinn 1, Tallinn"
+            />
+          </FormControl>
+          <FormControl >
+            <FormLabel htmlFor="name">Zip Code</FormLabel>
+            <Input
+              onChange={(e) => setZipcode(e.target.value)}
+              type="text"
+              placeholder="24141"
+            />
+          </FormControl>
           <Button
-            variant="primary"
             type="submit"
+            variantColor="teal" size="md"
             disabled={!address || !zipcode}
+            width="150px"
           >
             Validate Address
           </Button>
-        </Form>
-      </Card.Body>
-    </Card>
+        </Grid>
+      </form>
+    </Box>
   );
 }

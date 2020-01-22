@@ -10,6 +10,8 @@
 
 body {
   font-size: var(--font-size-body);
+  background-color: #EBF8FF !important;
+
 }
 
 h1 {
@@ -90,6 +92,7 @@ small {
   margin-top: 32px;
   border-radius: 20px;
   padding: 32px 47px 40px;
+  background-color: white;
 }
 
 .card-list {

@@ -24,6 +24,6 @@ export const AreaSelector = () => {
           >
         </Select>
       </Box>
-    </Box >
+    </Box>
   );
 }
