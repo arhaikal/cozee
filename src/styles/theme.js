@@ -1,6 +1,6 @@
 import { theme } from "@chakra-ui/core";
 
-export const customTheme = {
+export const cozeeTheme = {
   ...theme,
   colors: {
     ...theme.colors,
