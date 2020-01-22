@@ -1,12 +1,11 @@
 import React, { useState, useContext } from 'react';
 import { BookingContext } from '../context/BookingContext';
 import { updateBooking } from '../actions/index'
-import FrequencySelector from './FrequencySelector'
-import { DurationSelector } from './DurationSelector'
-import { AreaSelector } from './AreaSelector'
-import { AddressInput } from './AddressInput'
-import { Client } from './Client'
-import { Calendar } from './Calendar'
+import FrequencySelector from './frequency-selector'
+import { DurationSelector } from './duration-selector'
+import { AreaSelector } from './area-selector'
+import { AddressInput } from './address-input'
+import { Client } from './client'
 
 
 const BookingForm = () => {
@@ -18,7 +17,6 @@ const BookingForm = () => {
 
   return (
     <div>
-      <Calendar />
       <AreaSelector />
       <DurationSelector />
       <FrequencySelector />

@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { UPDATE_BOOKING, FETCH_UPDATED_BOOKING_SUCCESS, FETCH_UPDATED_BOOKING_FAILURE } from './types';
-import { postBooking, patchBooking } from '../api/bookingApi'
+import { postBooking, patchBooking } from '../api/booking-api'
 
 const fetchUpdatedBookingSuccess = (response) => {
   return {
