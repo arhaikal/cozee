@@ -6,6 +6,7 @@ import { DurationSelector } from './duration-selector'
 import { AreaSelector } from './area-selector'
 import { AddressInput } from './address-input'
 import { Client } from './client'
+import { Calendar } from './calendar';
 
 
 const BookingForm = () => {
@@ -21,6 +22,7 @@ const BookingForm = () => {
       <DurationSelector />
       <FrequencySelector />
       <AddressInput />
+      <Calendar />
       <Client />
     </div>
   );
