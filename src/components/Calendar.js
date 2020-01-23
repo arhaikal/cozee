@@ -27,8 +27,8 @@ export const Calendar = () => {
           height='80px'
         >
           <Flex justify="space-between" direction='column'>
-            <Heading as="h5" size="sm">Saturday 22 February</Heading>
-            <Text fontSize="lg">at 14:00</Text>
+            <Heading as="h5" size="sm">Thursday 19 February</Heading>
+            <Text fontSize="lg">at 15:00</Text>
           </Flex>
         </Button>
         <Button
@@ -51,8 +51,8 @@ export const Calendar = () => {
           height='80px'
         >
           <Flex justify="space-between" direction='column'>
-            <Heading as="h5" size="sm">Saturday 22 February</Heading>
-            <Text fontSize="lg">at 14:00</Text>
+            <Heading as="h5" size="sm">Friday 23 February</Heading>
+            <Text fontSize="lg">at 17:00</Text>
           </Flex>
         </Button>
 
