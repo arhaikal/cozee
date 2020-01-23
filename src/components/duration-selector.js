@@ -5,7 +5,7 @@ import { BookingContext } from '../context/BookingContext';
 import { updateBooking } from '../actions/index'
 import { TIME } from './data';
 import { Select, Heading, Box, RadioButtonGroup, SimpleGrid } from '@chakra-ui/core';
-import { CustomRadio } from './radio-button';
+import { CustomRadio } from './custom-radio';
 
 export const DurationSelector = () => {
   const [state, dispatch] = useContext(BookingContext);
