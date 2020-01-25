@@ -1,6 +1,12 @@
 import axios from 'axios';
-import { UPDATE_BOOKING, FETCH_UPDATED_BOOKING_SUCCESS, FETCH_UPDATED_BOOKING_FAILURE } from './types';
-import { postBooking, patchBooking } from '../api/booking-api'
+import {
+  FETCH_UPDATED_BOOKING_SUCCESS,
+  FETCH_UPDATED_BOOKING_FAILURE,
+  FETCH_BOOKING_TIMES_SUCCESS,
+  FETCH_BOOKING_TIMES_FAILURE
+} from './types';
+import { postBooking, patchBooking } from '../api/booking'
+import { getAvailableTimes } from '../api/available-times'
 
 const fetchUpdatedBookingSuccess = (response) => {
   return {
@@ -16,6 +22,20 @@ const fetchUpdatedBookingFailure = (error) => {
   }
 }
 
+const fetchBookingTimesSuccess = (response) => {
+  return {
+    type: FETCH_BOOKING_TIMES_SUCCESS,
+    payload: response
+  }
+}
+
+const fetchBookingTimesFailure = (error) => {
+  return {
+    type: FETCH_BOOKING_TIMES_FAILURE,
+    payload: error
+  }
+}
+
 export const updateBooking = async (data, state, dispatch) => {
   try {
     if (state.booking.identifier) {
@@ -27,5 +47,14 @@ export const updateBooking = async (data, state, dispatch) => {
     }
   } catch (error) {
     dispatch(fetchUpdatedBookingFailure(error));
+  }
+}
+
+export const getBookingTimes = async (data, state, dispatch) => {
+  try {
+    const values = await getAvailableTimes(data);
+    dispatch(fetchBookingTimesSuccess(values));
+  } catch (error) {
+    dispatch(fetchBookingTimesFailure(error));
   }
 }

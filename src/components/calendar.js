@@ -1,21 +1,45 @@
 
-import React from 'react'
+import React, { useState, useContext } from 'react'
 import { Box, Flex, Text, Button, Heading } from '@chakra-ui/core'
 import { CustomRadio } from './custom-radio';
+import dayjs from 'dayjs'
+import weekOfYear from 'dayjs/plugin/weekOfYear'
+
+dayjs.extend(weekOfYear)
 
 export const Calendar = () => {
+
+  console.log(dayjs().format());
+  const [calendar, setCalendar] = useState(
+    {
+      currentWeek: dayjs().week(),
+      selectedWeek: dayjs().week(),
+    }
+  )
+
+  const nextWeek = () => {
+    setCalendar({ ...calendar, selectedWeek: calendar.selectedWeek + 1 })
+  }
+
+  const prevWeek = () => {
+    setCalendar({ ...calendar, selectedWeek: calendar.selectedWeek - 1 })
+  }
+
+
+  const currentWeek = () => {
+  }
   return (
-    <Box witdh="100%" rounded="lg" className="card-big" >
-      <Heading as="h3" size="lg" mb="5">When can we clean?</Heading>
+    <Box witdh="100%" rounded="lg" className="card-big" alignItems="center" >
+      <Heading as="h3" size="lg" mb="5" alignItems="center">When can we clean?</Heading>
       <Flex justify="space-between">
-        <Button leftIcon="arrow-back" variantColor="teal" variant="ghost">
-          Previous Week
+        <Button leftIcon="arrow-back" variantColor="teal" variant="ghost" onClick={getTimes} disabled={calendar.selectedWeek <= calendar.currentWeek}>
+          Week {calendar.selectedWeek - 1}
         </Button>
         <Text textAlign="center" fontSize="lg">
-          Week 22
+          Week {calendar.selectedWeek}
         </Text>
-        <Button rightIcon="arrow-forward" variantColor="teal" variant="ghost">
-          Next Week
+        <Button rightIcon="arrow-forward" variantColor="teal" variant="ghost" onClick={nextWeek} disabled={calendar.selectedWeek > calendar.currentWeek + 6}>
+          Week {calendar.selectedWeek + 1}
         </Button>
       </Flex>
 
