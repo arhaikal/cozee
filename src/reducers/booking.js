@@ -1,9 +1,12 @@
-import { FETCH_UPDATED_BOOKING_SUCCESS, FETCH_UPDATED_BOOKING_FAILURE } from '../actions/types';
+import {
+  FETCH_UPDATED_BOOKING_SUCCESS,
+  FETCH_UPDATED_BOOKING_FAILURE,
+} from '../actions/types';
 
 export const bookingReducer = (state = initialState, action) => {
   switch (action.type) {
     case FETCH_UPDATED_BOOKING_SUCCESS:
-      console.log(action.payload)
+      console.log(state)
       return {
         ...state,
         booking: action.payload,

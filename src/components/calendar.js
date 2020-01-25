@@ -1,15 +1,23 @@
 
 import React, { useState, useContext } from 'react'
-import { Box, Flex, Text, Button, Heading } from '@chakra-ui/core'
+import { Box, Flex, Text, Button, Heading } from '@chakra-ui/core';
 import { CustomRadio } from './custom-radio';
-import dayjs from 'dayjs'
+import dayjs from 'dayjs';
 import weekOfYear from 'dayjs/plugin/weekOfYear'
+import { AvailableBookingTimesContext } from '../context/AvailableBookingTimesContext';
+import { BookingContext } from '../context/BookingContext';
+import { getBookingTimes } from '../actions/index';
 
 dayjs.extend(weekOfYear)
 
 export const Calendar = () => {
+  const [state, dispatch] = useContext(AvailableBookingTimesContext);
+  const [bookingState, bookingDispatch] = useContext(BookingContext);
 
-  console.log(dayjs().format());
+  const getTimes = (e) => {
+    dispatch(getBookingTimes({ from: '2020/01/20', to: '2020/01/26', duration: '2.5' }, state, dispatch))
+  };
+
   const [calendar, setCalendar] = useState(
     {
       currentWeek: dayjs().week(),
@@ -32,7 +40,7 @@ export const Calendar = () => {
     <Box witdh="100%" rounded="lg" className="card-big" alignItems="center" >
       <Heading as="h3" size="lg" mb="5" alignItems="center">When can we clean?</Heading>
       <Flex justify="space-between">
-        <Button leftIcon="arrow-back" variantColor="teal" variant="ghost" onClick={getTimes} disabled={calendar.selectedWeek <= calendar.currentWeek}>
+        <Button leftIcon="arrow-back" variantColor="teal" variant="ghost" onClick={prevWeek} disabled={calendar.selectedWeek <= calendar.currentWeek}>
           Week {calendar.selectedWeek - 1}
         </Button>
         <Text textAlign="center" fontSize="lg">
