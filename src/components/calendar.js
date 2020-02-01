@@ -1,38 +1,107 @@
 
 import React, { useState, useContext } from 'react'
-import { Box, Flex, Text, Button, Heading } from '@chakra-ui/core';
+import { Box, Flex, Text, Button, Heading, RadioButtonGroup } from '@chakra-ui/core';
 import { CustomRadio } from './custom-radio';
-import dayjs from 'dayjs';
-import weekOfYear from 'dayjs/plugin/weekOfYear'
+import moment from 'moment-with-locales-es6';
 import { AvailableBookingTimesContext } from '../context/AvailableBookingTimesContext';
 import { BookingContext } from '../context/BookingContext';
 import { getBookingTimes } from '../actions/index';
+import { calendarDate } from '../calendar-data';
 
-dayjs.extend(weekOfYear)
 
 export const Calendar = () => {
-  const [state, dispatch] = useContext(AvailableBookingTimesContext);
+  const [availableTimesState, availableTimesDispatch] = useContext(AvailableBookingTimesContext);
   const [bookingState, bookingDispatch] = useContext(BookingContext);
-
-  const getTimes = (e) => {
-    dispatch(getBookingTimes({ from: '2020/01/20', to: '2020/01/26', duration: '2.5' }, state, dispatch))
+  const updateCleaningTime = (e) => {
+    console.log(e)
   };
+
+  const getTimes = () => {
+    availableTimesDispatch(getBookingTimes({ from: '2020/01/27', to: '2020/02/01', duration: bookingState.booking.duration }, availableTimesState, availableTimesDispatch))
+  };
+  getTimes();
 
   const [calendar, setCalendar] = useState(
     {
-      currentWeek: dayjs().week(),
-      selectedWeek: dayjs().week(),
+      currentWeek: moment().week(),
+      selectedWeek: moment().week(),
+      weekStartDate: moment().startOf('isoWeek').format('YYYY/MM/DD'),
+      weekEndDate: moment().endOf('isoWeek').format('YYYY/MM/DD'),
     }
   )
 
   const nextWeek = () => {
-    setCalendar({ ...calendar, selectedWeek: calendar.selectedWeek + 1 })
+    const addWeek = calendar.selectedWeek + 1
+    setCalendar(
+      {
+        ...calendar,
+        selectedWeek: addWeek,
+        weekStartDate: moment().week(addWeek).startOf('isoWeek').format('YYYY/MM/DD'),
+        weekEndDate: moment().week(addWeek).endOf('isoWeek').format('YYYY/MM/DD'),
+      })
   }
 
   const prevWeek = () => {
-    setCalendar({ ...calendar, selectedWeek: calendar.selectedWeek - 1 })
+    const subtractWeek = calendar.selectedWeek - 1
+    setCalendar(
+      {
+        ...calendar,
+        selectedWeek: subtractWeek,
+        weekStartDate: moment().week(subtractWeek).startOf('isoWeek').format('YYYY/MM/DD'),
+        weekEndDate: moment().week(subtractWeek).endOf('isoWeek').format('YYYY/MM/DD'),
+      })
   }
 
+  const getDayAvailability = (day) => {
+    return calendarDate.filter((date) => {
+      let queriedMoment = moment(date["start_time"]).format('YYYY/MM/DD')
+      let weekDay = moment(day).format('YYYY/MM/DD')
+      return queriedMoment === weekDay
+    })
+  }
+
+
+  const weekArray = moment.weekdaysShort(true)
+  weekArray.shift();
+
+  const formatDayOfWeek = (week, day) => moment().isoWeek(week).day(`${day}`).format('MMM DD YYYY')
+
+
+
+  const dayTimes = (weekDay) => {
+    return getDayAvailability(weekDay).map(day => {
+      return (
+        <Flex direction='column' justify="space-between">
+          <CustomRadio mt={3} key={day['id']} value={moment(day["start_time"]).format('h:mm a')}>
+            {moment(day["start_time"]).format('h:mm a')}
+          </CustomRadio>
+        </Flex>
+      );
+    });
+  }
+
+  const daysOfWeek = weekArray.map(day => {
+    return (
+      <RadioButtonGroup
+        name="time"
+        onChange={updateCleaningTime}
+      >
+        <Flex justify="space-between" mt={8} direction="column">
+          <Box key={day}>
+            <Heading as="h6" size="xs">
+              {day}
+            </Heading>
+            <Text fontSize="sm">
+              {formatDayOfWeek(calendar.selectedWeek, day)}
+            </Text>
+          </Box>
+          <Box>
+            {dayTimes(formatDayOfWeek(calendar.selectedWeek, day))}
+          </Box>
+        </Flex>
+      </RadioButtonGroup>
+    );
+  });
 
   const currentWeek = () => {
   }
@@ -64,155 +133,10 @@ export const Calendar = () => {
             <Text fontSize="lg">at 15:00</Text>
           </Flex>
         </Button>
-        <Button
-          mt="6"
-          width="100%"
-          size="lg"
-          variantColor="teal" variant='outline'
-          height='80px'
-        >
-          <Flex justify="space-between" direction='column'>
-            <Heading as="h5" size="sm">Saturday 22 February</Heading>
-            <Text fontSize="lg">at 14:00</Text>
-          </Flex>
-        </Button>
-        <Button
-          mt="6"
-          width="100%"
-          size="lg"
-          variantColor="teal" variant='outline'
-          height='80px'
-        >
-          <Flex justify="space-between" direction='column'>
-            <Heading as="h5" size="sm">Friday 23 February</Heading>
-            <Text fontSize="lg">at 17:00</Text>
-          </Flex>
-        </Button>
       </Flex>
+
       <Flex justify="space-between" mt={8}>
-        <Box>
-          <Box>
-            <Heading as="h6" size="xs">
-              Monday
-          </Heading>
-            <Text fontSize="sm">
-              23. feb
-          </Text>
-          </Box>
-          <Box>
-            <Flex direction='column' justify="space-between">
-              <CustomRadio mt={4}>
-                14:00
-            </CustomRadio>
-              <CustomRadio mt={2}>
-                15:00
-            </CustomRadio>
-            </Flex>
-          </Box>
-        </Box>
-        <Box>
-          <Heading as="h6" size="xs">
-            Tuesday
-          </Heading>
-          <Text fontSize="sm">
-            24. feb
-          </Text>
-          <Box>
-            <Flex direction='column' justify="space-between">
-              <CustomRadio mt={4}>
-                7:00
-              </CustomRadio>
-              <CustomRadio mt={2}>
-                9:00
-              </CustomRadio>
-              <CustomRadio mt={2}>
-                13:00
-              </CustomRadio>
-              <CustomRadio mt={2}>
-                17:00
-              </CustomRadio>
-            </Flex>
-          </Box>
-        </Box>
-        <Box>
-          <Heading as="h6" size="xs">
-            Wednesday
-          </Heading>
-          <Text fontSize="sm">
-            25. feb
-          </Text>
-          <Box>
-            <Flex direction='column' justify="space-between">
-              <CustomRadio mt={4}>
-                7:00
-              </CustomRadio>
-            </Flex>
-          </Box>
-        </Box>
-        <Box>
-          <Heading as="h6" size="xs">
-            Thursday
-          </Heading>
-          <Text fontSize="sm">
-            26. feb
-          </Text>
-          <Box>
-            <Flex direction='column' justify="space-between">
-              <CustomRadio mt={4}>
-                7:00
-              </CustomRadio>
-              <CustomRadio mt={2}>
-                9:00
-              </CustomRadio>
-              <CustomRadio mt={2}>
-                13:00
-              </CustomRadio>
-            </Flex>
-          </Box>
-        </Box>
-        <Box>
-          <Heading as="h6" size="xs">
-            Friday
-          </Heading>
-          <Text fontSize="sm">
-            27. feb
-          </Text>
-        </Box>
-        <Box>
-          <Heading as="h6" size="xs">
-            Saturday
-          </Heading>
-          <Text fontSize="sm">
-            28. feb
-          </Text>
-          <Box>
-            <Flex direction='column' justify="space-between">
-              <CustomRadio mt={4}>
-                7:00
-              </CustomRadio>
-              <CustomRadio mt={2}>
-                9:00
-              </CustomRadio>
-              <CustomRadio mt={2}>
-                13:00
-              </CustomRadio>
-              <CustomRadio mt={2}>
-                17:00
-              </CustomRadio>
-              <CustomRadio mt={2}>
-                19:00
-              </CustomRadio>
-            </Flex>
-          </Box>
-        </Box>
-        <Box>
-          <Heading as="h6" size="xs">
-            Sunday
-          </Heading>
-          <Text fontSize="sm">
-            29. feb
-          </Text>
-        </Box>
+        {daysOfWeek}
       </Flex>
     </Box>
   );
