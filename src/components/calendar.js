@@ -1,5 +1,5 @@
 
-import React, { useState, useContext } from 'react'
+import React, { useState, useContext, useEffect } from 'react'
 import { Box, Flex, Text, Button, Heading, RadioButtonGroup } from '@chakra-ui/core';
 import { CustomRadio } from './custom-radio';
 import moment from 'moment-with-locales-es6';
@@ -12,15 +12,6 @@ import { calendarDate } from '../calendar-data';
 export const Calendar = () => {
   const [availableTimesState, availableTimesDispatch] = useContext(AvailableBookingTimesContext);
   const [bookingState, bookingDispatch] = useContext(BookingContext);
-  const updateCleaningTime = (e) => {
-    console.log(e)
-  };
-
-  const getTimes = () => {
-    availableTimesDispatch(getBookingTimes({ from: '2020/01/27', to: '2020/02/01', duration: bookingState.booking.duration }, availableTimesState, availableTimesDispatch))
-  };
-  getTimes();
-
   const [calendar, setCalendar] = useState(
     {
       currentWeek: moment().week(),
@@ -29,6 +20,16 @@ export const Calendar = () => {
       weekEndDate: moment().endOf('isoWeek').format('YYYY/MM/DD'),
     }
   )
+  const updateCleaningTime = (e) => {
+    console.log(e)
+  };
+
+  const getTimes = () => {
+    availableTimesDispatch(getBookingTimes({ from: calendar.weekStartDate, to: calendar.weekEndDate, duration: bookingState.booking.duration }, availableTimesState, availableTimesDispatch))
+  };
+
+
+  useEffect(() => { getTimes() }, [calendar.selectedWeek]);
 
   const nextWeek = () => {
     const addWeek = calendar.selectedWeek + 1
@@ -53,8 +54,8 @@ export const Calendar = () => {
   }
 
   const getDayAvailability = (day) => {
-    return calendarDate.filter((date) => {
-      let queriedMoment = moment(date["start_time"]).format('YYYY/MM/DD')
+    return availableTimesState.available_times.filter((date) => {
+      let queriedMoment = moment(date["from"]).format('YYYY/MM/DD')
       let weekDay = moment(day).format('YYYY/MM/DD')
       return queriedMoment === weekDay
     })
@@ -73,7 +74,7 @@ export const Calendar = () => {
       return (
         <Flex direction='column' justify="space-between">
           <CustomRadio mt={3} key={day['id']} value={moment(day["start_time"]).format('h:mm a')}>
-            {moment(day["start_time"]).format('h:mm a')}
+            {moment(day["from"]).format('HH:mm')}
           </CustomRadio>
         </Flex>
       );

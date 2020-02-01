@@ -18,6 +18,5 @@ export const availableTimesReducer = (state = initialState, action) => {
 }
 
 export const initialState = {
-  available_times: {
-  }
+  available_times: []
 }
