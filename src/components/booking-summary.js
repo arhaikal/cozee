@@ -18,6 +18,9 @@ export const BookingSummary = () => {
         <p><b>{state.booking.first_name} {state.booking.last_name} </b></p>
         <p><b>{state.booking.email} </b></p>
         <p><b>{state.booking.phone}</b></p>
+        <p>Time</p>
+        <p><b>{state.booking.starts_at} </b></p>
+        <p><b>{state.booking.ends_at} </b></p>
       </Card.Body>
     </Card>
   );

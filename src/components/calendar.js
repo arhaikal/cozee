@@ -5,7 +5,7 @@ import { CustomRadio } from './custom-radio';
 import moment from 'moment-with-locales-es6';
 import { AvailableBookingTimesContext } from '../context/AvailableBookingTimesContext';
 import { BookingContext } from '../context/BookingContext';
-import { getBookingTimes } from '../actions/index';
+import { getBookingTimes, updateBooking } from '../actions/index';
 import { calendarDate } from '../calendar-data';
 
 
@@ -20,8 +20,8 @@ export const Calendar = () => {
       weekEndDate: moment().endOf('isoWeek').format('YYYY/MM/DD'),
     }
   )
-  const updateCleaningTime = (e) => {
-    console.log(e)
+  const updateBookingTime = (e) => {
+    bookingDispatch(updateBooking({ starts_at: e.from, ends_at: e.to }, bookingState, bookingDispatch))
   };
 
   const getTimes = () => {
@@ -61,6 +61,43 @@ export const Calendar = () => {
     })
   }
 
+  function getRandom(arr, n) {
+    var result = new Array(n),
+      len = arr.length,
+      taken = new Array(len);
+    if (n > len)
+      throw new RangeError("getRandom: more elements taken than available");
+    while (n--) {
+      var x = Math.floor(Math.random() * len);
+      result[n] = arr[x in taken ? taken[x] : x];
+      taken[x] = --len in taken ? taken[len] : len;
+    }
+    return result;
+  }
+
+  const getRandomSlots = () => {
+    if (availableTimesState.available_times.length != 0) {
+      return getRandom(availableTimesState.available_times, 3).map((day) => {
+        return (
+          <>
+            <Button
+              mt="6"
+              width="100%"
+              size="lg"
+              variantColor="teal" variant='outline'
+              height='80px'
+            >
+              <Flex justify="space-between" direction='column'>
+                <Heading as="h5" size="sm">{moment(day["from"]).format('MMMM DD, YYYY')}</Heading>
+                <Text fontSize="lg">at {moment(day["from"]).format('HH:mm')}</Text>
+              </Flex>
+            </Button >
+          </>
+        );
+      });
+    }
+  }
+
 
   const weekArray = moment.weekdaysShort(true)
   weekArray.shift();
@@ -71,11 +108,18 @@ export const Calendar = () => {
 
   const dayTimes = (weekDay) => {
     return getDayAvailability(weekDay).map(day => {
+      const selected = bookingState.booking.starts_at == day["from"]
+      const border = selected ? 'solid' : 'outline'
       return (
         <Flex direction='column' justify="space-between">
-          <CustomRadio mt={3} key={day['id']} value={moment(day["start_time"]).format('h:mm a')}>
+          <Button
+            variantColor="teal" variant={border}
+            onClick={() => updateBookingTime(day)}
+            variantColor="teal"
+            mt={3} key={day['id']} value={moment(day["from"]).format('h:mm a')}
+          >
             {moment(day["from"]).format('HH:mm')}
-          </CustomRadio>
+          </Button>
         </Flex>
       );
     });
@@ -83,24 +127,20 @@ export const Calendar = () => {
 
   const daysOfWeek = weekArray.map(day => {
     return (
-      <RadioButtonGroup
-        name="time"
-        onChange={updateCleaningTime}
-      >
-        <Flex justify="space-between" mt={8} direction="column">
-          <Box key={day}>
-            <Heading as="h6" size="xs">
-              {day}
-            </Heading>
-            <Text fontSize="sm">
-              {formatDayOfWeek(calendar.selectedWeek, day)}
-            </Text>
-          </Box>
-          <Box>
-            {dayTimes(formatDayOfWeek(calendar.selectedWeek, day))}
-          </Box>
-        </Flex>
-      </RadioButtonGroup>
+
+      <Flex justify="space-between" mt={8} direction="column">
+        <Box key={day}>
+          <Heading as="h6" size="xs">
+            {day}
+          </Heading>
+          <Text fontSize="sm">
+            {formatDayOfWeek(calendar.selectedWeek, day)}
+          </Text>
+        </Box>
+        <Box>
+          {dayTimes(formatDayOfWeek(calendar.selectedWeek, day))}
+        </Box>
+      </Flex>
     );
   });
 
@@ -122,18 +162,7 @@ export const Calendar = () => {
       </Flex>
 
       <Flex justify="space-between" direction='column'>
-        <Button
-          mt="6"
-          width="100%"
-          size="lg"
-          variantColor="teal" variant='outline'
-          height='80px'
-        >
-          <Flex justify="space-between" direction='column'>
-            <Heading as="h5" size="sm">Thursday 19 February</Heading>
-            <Text fontSize="lg">at 15:00</Text>
-          </Flex>
-        </Button>
+        {getRandomSlots()}
       </Flex>
 
       <Flex justify="space-between" mt={8}>
