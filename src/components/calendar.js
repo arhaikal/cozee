@@ -10,14 +10,20 @@ import { calendarDate } from '../calendar-data';
 
 
 export const Calendar = () => {
+  moment.locale('en', {
+    week: {
+      dow: 6
+    }
+  });
+  moment.locale('en');
   const [availableTimesState, availableTimesDispatch] = useContext(AvailableBookingTimesContext);
   const [bookingState, bookingDispatch] = useContext(BookingContext);
   const [calendar, setCalendar] = useState(
     {
       currentWeek: moment().week(),
       selectedWeek: moment().week(),
-      weekStartDate: moment().startOf('isoWeek').format('YYYY/MM/DD'),
-      weekEndDate: moment().endOf('isoWeek').format('YYYY/MM/DD'),
+      weekStartDate: moment().startOf('week').format('YYYY/MM/DD'),
+      weekEndDate: moment().endOf('week').format('YYYY/MM/DD'),
     }
   )
   const updateBookingTime = (e) => {
@@ -37,8 +43,8 @@ export const Calendar = () => {
       {
         ...calendar,
         selectedWeek: addWeek,
-        weekStartDate: moment().week(addWeek).startOf('isoWeek').format('YYYY/MM/DD'),
-        weekEndDate: moment().week(addWeek).endOf('isoWeek').format('YYYY/MM/DD'),
+        weekStartDate: moment().week(addWeek).startOf('week').format('YYYY/MM/DD'),
+        weekEndDate: moment().week(addWeek).endOf('week').format('YYYY/MM/DD'),
       })
   }
 
@@ -48,8 +54,8 @@ export const Calendar = () => {
       {
         ...calendar,
         selectedWeek: subtractWeek,
-        weekStartDate: moment().week(subtractWeek).startOf('isoWeek').format('YYYY/MM/DD'),
-        weekEndDate: moment().week(subtractWeek).endOf('isoWeek').format('YYYY/MM/DD'),
+        weekStartDate: moment().week(subtractWeek).startOf('week').format('YYYY/MM/DD'),
+        weekEndDate: moment().week(subtractWeek).endOf('week').format('YYYY/MM/DD'),
       })
   }
 
@@ -99,10 +105,8 @@ export const Calendar = () => {
   }
 
 
-  const weekArray = moment.weekdaysShort(true)
-  weekArray.shift();
-
-  const formatDayOfWeek = (week, day) => moment().isoWeek(week).day(`${day}`).format('MMM DD YYYY')
+  const weekArray = [1, 2, 3, 4, 5]
+  const formatDayOfWeek = (week, day) => moment().week(week).day(`${day}`).format('MMM DD YYYY')
 
 
 
@@ -131,7 +135,7 @@ export const Calendar = () => {
       <Flex justify="space-between" mt={8} direction="column">
         <Box key={day}>
           <Heading as="h6" size="xs">
-            {day}
+            {moment().isoWeekday(day).format('ddd')}
           </Heading>
           <Text fontSize="sm">
             {formatDayOfWeek(calendar.selectedWeek, day)}
