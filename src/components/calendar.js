@@ -8,7 +8,6 @@ import { getBookingTimes, updateBooking } from '../actions/index';
 import { calendarDate } from '../calendar-data';
 import { format, getWeek, endOfWeek, startOfWeek, addWeeks, subWeeks, eachDayOfInterval } from 'date-fns'
 
-
 export const Calendar = () => {
   const [availableTimesState, availableTimesDispatch] = useContext(AvailableBookingTimesContext);
   const [bookingState, bookingDispatch] = useContext(BookingContext);
@@ -33,12 +32,13 @@ export const Calendar = () => {
 
   const nextWeek = () => {
     const addWeek = calendar.selectedWeek + 1
+    console.log(calendar.weekStartDate)
     setCalendar(
       {
         ...calendar,
         selectedWeek: addWeek,
-        weekStartDate: format(startOfWeek(addWeeks(new Date(calendar.weekStartDate), 1)), 'yyyy/MM/dd'),
-        weekEndDate: format(endOfWeek(addWeeks(new Date(calendar.weekEndDate), 1)), 'yyyy/MM/dd'),
+        weekStartDate: format(addWeeks(new Date(calendar.weekStartDate), 1), 'yyyy/MM/dd'),
+        weekEndDate: format(addWeeks(new Date(calendar.weekEndDate), 1), 'yyyy/MM/dd'),
       })
   }
 
@@ -48,8 +48,8 @@ export const Calendar = () => {
       {
         ...calendar,
         selectedWeek: subtractWeek,
-        weekStartDate: format(startOfWeek(subWeeks(new Date(calendar.weekStartDate), 1)), 'yyyy/MM/dd'),
-        weekEndDate: format(endOfWeek(subWeeks(new Date(calendar.weekEndDate), 1)), 'yyyy/MM/dd'),
+        weekStartDate: format(subWeeks(new Date(calendar.weekStartDate), 1), 'yyyy/MM/dd'),
+        weekEndDate: format(subWeeks(new Date(calendar.weekEndDate), 1), 'yyyy/MM/dd'),
       })
   }
 
