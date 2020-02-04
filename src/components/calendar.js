@@ -2,28 +2,22 @@
 import React, { useState, useContext, useEffect } from 'react'
 import { Box, Flex, Text, Button, Heading, RadioButtonGroup } from '@chakra-ui/core';
 import { CustomRadio } from './custom-radio';
-import moment from 'moment-with-locales-es6';
 import { AvailableBookingTimesContext } from '../context/AvailableBookingTimesContext';
 import { BookingContext } from '../context/BookingContext';
 import { getBookingTimes, updateBooking } from '../actions/index';
 import { calendarDate } from '../calendar-data';
+import { format, getWeek, endOfWeek, startOfWeek, addWeeks, subWeeks, eachDayOfInterval } from 'date-fns'
 
 
 export const Calendar = () => {
-  moment.locale('en', {
-    week: {
-      dow: 6
-    }
-  });
-  moment.locale('en');
   const [availableTimesState, availableTimesDispatch] = useContext(AvailableBookingTimesContext);
   const [bookingState, bookingDispatch] = useContext(BookingContext);
   const [calendar, setCalendar] = useState(
     {
-      currentWeek: moment().week(),
-      selectedWeek: moment().week(),
-      weekStartDate: moment().startOf('week').format('YYYY/MM/DD'),
-      weekEndDate: moment().endOf('week').format('YYYY/MM/DD'),
+      currentWeek: getWeek(new Date()),
+      selectedWeek: getWeek(new Date()),
+      weekStartDate: format(startOfWeek(new Date(), { weekStartsOn: 1 }), 'yyyy/MM/dd'),
+      weekEndDate: format(endOfWeek(new Date(), { weekStartsOn: 1 }), 'yyyy/MM/dd'),
     }
   )
   const updateBookingTime = (e) => {
@@ -43,8 +37,8 @@ export const Calendar = () => {
       {
         ...calendar,
         selectedWeek: addWeek,
-        weekStartDate: moment().week(addWeek).startOf('week').format('YYYY/MM/DD'),
-        weekEndDate: moment().week(addWeek).endOf('week').format('YYYY/MM/DD'),
+        weekStartDate: format(startOfWeek(addWeeks(new Date(calendar.weekStartDate), 1)), 'yyyy/MM/dd'),
+        weekEndDate: format(endOfWeek(addWeeks(new Date(calendar.weekEndDate), 1)), 'yyyy/MM/dd'),
       })
   }
 
@@ -54,16 +48,16 @@ export const Calendar = () => {
       {
         ...calendar,
         selectedWeek: subtractWeek,
-        weekStartDate: moment().week(subtractWeek).startOf('week').format('YYYY/MM/DD'),
-        weekEndDate: moment().week(subtractWeek).endOf('week').format('YYYY/MM/DD'),
+        weekStartDate: format(startOfWeek(subWeeks(new Date(calendar.weekStartDate), 1)), 'yyyy/MM/dd'),
+        weekEndDate: format(endOfWeek(subWeeks(new Date(calendar.weekEndDate), 1)), 'yyyy/MM/dd'),
       })
   }
 
   const getDayAvailability = (day) => {
     return availableTimesState.available_times.filter((date) => {
-      let queriedMoment = moment(date["from"]).format('YYYY/MM/DD')
-      let weekDay = moment(day).format('YYYY/MM/DD')
-      return queriedMoment === weekDay
+      let queriedDate = format(new Date(date["from"]), 'yyyy/MM/dd')
+      let weekDay = format(new Date(day), 'yyyy/MM/dd')
+      return queriedDate === weekDay
     })
   }
 
@@ -94,8 +88,8 @@ export const Calendar = () => {
               height='80px'
             >
               <Flex justify="space-between" direction='column'>
-                <Heading as="h5" size="sm">{moment(day["from"]).format('MMMM DD, YYYY')}</Heading>
-                <Text fontSize="lg">at {moment(day["from"]).format('HH:mm')}</Text>
+                <Heading as="h5" size="sm">{format(new Date(day['from']), 'MMMM dd, yyyy')}</Heading>
+                <Text fontSize="lg">at {format(new Date(day['from']), 'HH:mm')}</Text>
               </Flex>
             </Button >
           </>
@@ -105,10 +99,10 @@ export const Calendar = () => {
   }
 
 
-  const weekArray = [1, 2, 3, 4, 5]
-  const formatDayOfWeek = (week, day) => moment().week(week).day(`${day}`).format('MMM DD YYYY')
-
-
+  const weekDates = eachDayOfInterval({
+    start: new Date(calendar.weekStartDate),
+    end: new Date(calendar.weekEndDate)
+  })
 
   const dayTimes = (weekDay) => {
     return getDayAvailability(weekDay).map(day => {
@@ -120,29 +114,28 @@ export const Calendar = () => {
             variantColor="teal" variant={border}
             onClick={() => updateBookingTime(day)}
             variantColor="teal"
-            mt={3} key={day['id']} value={moment(day["from"]).format('h:mm a')}
+            mt={3} key={day['id']} value={format(new Date(day['from']), 'HH:mm')}
           >
-            {moment(day["from"]).format('HH:mm')}
+            {format(new Date(day['from']), 'HH:mm')}
           </Button>
         </Flex>
       );
     });
   }
 
-  const daysOfWeek = weekArray.map(day => {
+  const daysOfWeek = weekDates.map(date => {
     return (
-
       <Flex justify="space-between" mt={8} direction="column">
-        <Box key={day}>
+        <Box key={date}>
           <Heading as="h6" size="xs">
-            {moment().isoWeekday(day).format('ddd')}
+            {format(new Date(date), 'EEEEEE')}
           </Heading>
           <Text fontSize="sm">
-            {formatDayOfWeek(calendar.selectedWeek, day)}
+            {format(new Date(date), 'LLL dd')}
           </Text>
         </Box>
         <Box>
-          {dayTimes(formatDayOfWeek(calendar.selectedWeek, day))}
+          {dayTimes(date)}
         </Box>
       </Flex>
     );
