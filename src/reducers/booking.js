@@ -6,7 +6,6 @@ import {
 export const bookingReducer = (state = initialState, action) => {
   switch (action.type) {
     case FETCH_UPDATED_BOOKING_SUCCESS:
-      console.log(state)
       return {
         ...state,
         booking: action.payload,

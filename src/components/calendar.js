@@ -1,24 +1,25 @@
 
 import React, { useState, useContext, useEffect } from 'react'
 import { Box, Flex, Text, Button, Heading, RadioButtonGroup } from '@chakra-ui/core';
-import { CustomRadio } from './custom-radio';
 import { AvailableBookingTimesContext } from '../context/AvailableBookingTimesContext';
 import { BookingContext } from '../context/BookingContext';
 import { getBookingTimes, updateBooking } from '../actions/index';
-import { calendarDate } from '../calendar-data';
-import { format, getWeek, endOfWeek, startOfWeek, addWeeks, subWeeks, eachDayOfInterval } from 'date-fns'
+import { format, getWeek, endOfWeek, startOfWeek, addWeeks, subWeeks, eachDayOfInterval } from 'date-fns';
+import { utcToZonedTime } from 'date-fns-tz';
 
 export const Calendar = () => {
+  const estZone = 'Europe/Tallinn';
   const [availableTimesState, availableTimesDispatch] = useContext(AvailableBookingTimesContext);
   const [bookingState, bookingDispatch] = useContext(BookingContext);
   const [calendar, setCalendar] = useState(
     {
       currentWeek: getWeek(new Date()),
       selectedWeek: getWeek(new Date()),
-      weekStartDate: format(startOfWeek(new Date(), { weekStartsOn: 1 }), 'yyyy/MM/dd'),
-      weekEndDate: format(endOfWeek(new Date(), { weekStartsOn: 1 }), 'yyyy/MM/dd'),
+      weekStartDate: utcToZonedTime(startOfWeek(new Date(), { weekStartsOn: 1 }), estZone),
+      weekEndDate: utcToZonedTime(endOfWeek(new Date(), { weekStartsOn: 1 }), estZone),
     }
   )
+
   const updateBookingTime = (e) => {
     bookingDispatch(updateBooking({ starts_at: e.from, ends_at: e.to }, bookingState, bookingDispatch))
   };
@@ -32,13 +33,12 @@ export const Calendar = () => {
 
   const nextWeek = () => {
     const addWeek = calendar.selectedWeek + 1
-    console.log(calendar.weekStartDate)
     setCalendar(
       {
         ...calendar,
         selectedWeek: addWeek,
-        weekStartDate: format(addWeeks(new Date(calendar.weekStartDate), 1), 'yyyy/MM/dd'),
-        weekEndDate: format(addWeeks(new Date(calendar.weekEndDate), 1), 'yyyy/MM/dd'),
+        weekStartDate: addWeeks(utcToZonedTime(new Date(calendar.weekStartDate), estZone), 1),
+        weekEndDate: addWeeks(utcToZonedTime(new Date(calendar.weekEndDate), estZone), 1),
       })
   }
 
@@ -48,15 +48,15 @@ export const Calendar = () => {
       {
         ...calendar,
         selectedWeek: subtractWeek,
-        weekStartDate: format(subWeeks(new Date(calendar.weekStartDate), 1), 'yyyy/MM/dd'),
-        weekEndDate: format(subWeeks(new Date(calendar.weekEndDate), 1), 'yyyy/MM/dd'),
+        weekStartDate: subWeeks(utcToZonedTime(new Date(calendar.weekStartDate), estZone), 1),
+        weekEndDate: subWeeks(utcToZonedTime(new Date(calendar.weekEndDate), estZone), 1),
       })
   }
 
   const getDayAvailability = (day) => {
     return availableTimesState.available_times.filter((date) => {
-      let queriedDate = format(new Date(date["from"]), 'yyyy/MM/dd')
-      let weekDay = format(new Date(day), 'yyyy/MM/dd')
+      let queriedDate = format(utcToZonedTime(new Date(date["from"]), estZone), 'yyyy/MM/dd')
+      let weekDay = format(utcToZonedTime(new Date(day), estZone), 'yyyy/MM/dd')
       return queriedDate === weekDay
     })
   }
@@ -86,10 +86,11 @@ export const Calendar = () => {
               size="lg"
               variantColor="teal" variant='outline'
               height='80px'
+              onClick={() => updateBookingTime(day)}
             >
               <Flex justify="space-between" direction='column'>
-                <Heading as="h5" size="sm">{format(new Date(day['from']), 'MMMM dd, yyyy')}</Heading>
-                <Text fontSize="lg">at {format(new Date(day['from']), 'HH:mm')}</Text>
+                <Heading as="h5" size="sm">{format(utcToZonedTime(new Date(day['from']), estZone), 'MMMM dd, yyyy')}</Heading>
+                <Text fontSize="lg">at {format(utcToZonedTime(new Date(day['from']), estZone), 'HH:mm')}</Text>
               </Flex>
             </Button >
           </>
@@ -100,23 +101,24 @@ export const Calendar = () => {
 
 
   const weekDates = eachDayOfInterval({
-    start: new Date(calendar.weekStartDate),
-    end: new Date(calendar.weekEndDate)
+    start: utcToZonedTime(new Date(calendar.weekStartDate), estZone),
+    end: utcToZonedTime(new Date(calendar.weekEndDate), estZone)
   })
 
   const dayTimes = (weekDay) => {
     return getDayAvailability(weekDay).map(day => {
       const selected = bookingState.booking.starts_at == day["from"]
       const border = selected ? 'solid' : 'outline'
+      console.log(day["from"])
       return (
         <Flex direction='column' justify="space-between">
           <Button
             variantColor="teal" variant={border}
             onClick={() => updateBookingTime(day)}
             variantColor="teal"
-            mt={3} key={day['id']} value={format(new Date(day['from']), 'HH:mm')}
+            mt={3} key={day['id']} value={format(utcToZonedTime(new Date(day['from']), estZone), 'HH:mm')}
           >
-            {format(new Date(day['from']), 'HH:mm')}
+            {format(utcToZonedTime(new Date(day['from']), estZone), 'HH:mm')}
           </Button>
         </Flex>
       );
@@ -128,10 +130,10 @@ export const Calendar = () => {
       <Flex justify="space-between" mt={8} direction="column">
         <Box key={date}>
           <Heading as="h6" size="xs">
-            {format(new Date(date), 'EEEEEE')}
+            {format(utcToZonedTime(new Date(date), estZone), 'EEEEEE')}
           </Heading>
           <Text fontSize="sm">
-            {format(new Date(date), 'LLL dd')}
+            {format(utcToZonedTime(new Date(date), estZone), 'LLL dd')}
           </Text>
         </Box>
         <Box>

@@ -10,7 +10,12 @@ const FrequencySelector = () => {
   const handleClick = (key) => {
     dispatch(updateBooking({ frequency: key }, state, dispatch))
   }
-  const hourlyRates = state.booking.hourly_rates
+  const hourlyRates = {
+    "weekly": "17.0",
+    "biweekly": "18.0",
+    "monthly": "19.0",
+    "once": "20.0"
+  }
 
   return (
     <Box witdh="100%" rounded="lg" className="card-big">

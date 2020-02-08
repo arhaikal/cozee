@@ -12,6 +12,7 @@
     "bootstrap": "^4.4.1",
     "classnames": "^2.2.6",
     "date-fns": "^2.9.0",
+    "date-fns-tz": "^1.0.9",
     "emotion-theming": "^10.0.27",
     "formik": "^2.0.6",
     "gatsby": "^2.18.7",
