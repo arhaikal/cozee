@@ -3,7 +3,7 @@ import { BookingStepContext } from '../context/BookingStepContext';
 import FrequencySelector from './frequency-selector'
 import { DurationSelector } from './duration-selector'
 import { AreaSelector } from './area-selector'
-import { Button } from "@chakra-ui/core";
+import { Button, Flex } from "@chakra-ui/core";
 
 
 const BookingStep1 = () => {
@@ -21,7 +21,9 @@ const BookingStep1 = () => {
       <AreaSelector />
       <DurationSelector />
       <FrequencySelector />
-      <Button onClick={handleNextClick}>Next</Button>
+      <Flex align="center" justify="flex-end" mt={6} mb={6}>
+        <Button rightIcon="arrow-forward" variantColor="teal" variant="solid" onClick={handleNextClick}>Next</Button>
+      </Flex>
     </div>
   );
 };

@@ -15,8 +15,8 @@ const BookingStep3 = () => {
   }
   return (
     <div>
-      <h1>Hello</h1>
-      <Button onClick={handlePrevClick}>Previous</Button>
+      <h1>payment page</h1>
+      <Button leftIcon="arrow-back" variantColor="teal" variant="solid" onClick={handlePrevClick}>Back</Button>
     </div>
   );
 };
