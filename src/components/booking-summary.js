@@ -3,6 +3,7 @@ import React, { useContext } from 'react';
 import { BookingContext } from '../context/BookingContext';
 import { Card } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { format } from 'date-fns';
 
 export const BookingSummary = () => {
   const [state, _] = useContext(BookingContext);
@@ -19,8 +20,8 @@ export const BookingSummary = () => {
         <p><b>{state.booking.email} </b></p>
         <p><b>{state.booking.phone}</b></p>
         <p>Time</p>
-        <p><b>{state.booking.starts_at} </b></p>
-        <p><b>{state.booking.ends_at} </b></p>
+        <p><b>{state.booking.starts_at && format(new Date(state.booking.starts_at), 'EEEE LLL dd HH:mm')} </b></p>
+        <p><b>{state.booking.ends_at && format(new Date(state.booking.ends_at), 'EEEE LLL dd HH:mm')} </b></p>
       </Card.Body>
     </Card>
   );

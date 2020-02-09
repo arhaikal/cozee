@@ -5,18 +5,16 @@ import { AvailableBookingTimesContext } from '../context/AvailableBookingTimesCo
 import { BookingContext } from '../context/BookingContext';
 import { getBookingTimes, updateBooking } from '../actions/index';
 import { format, getWeek, endOfWeek, startOfWeek, addWeeks, subWeeks, eachDayOfInterval } from 'date-fns';
-import { utcToZonedTime } from 'date-fns-tz';
 
 export const Calendar = () => {
-  const estZone = 'Europe/Tallinn';
   const [availableTimesState, availableTimesDispatch] = useContext(AvailableBookingTimesContext);
   const [bookingState, bookingDispatch] = useContext(BookingContext);
   const [calendar, setCalendar] = useState(
     {
       currentWeek: getWeek(new Date()),
       selectedWeek: getWeek(new Date()),
-      weekStartDate: utcToZonedTime(startOfWeek(new Date(), { weekStartsOn: 1 }), estZone),
-      weekEndDate: utcToZonedTime(endOfWeek(new Date(), { weekStartsOn: 1 }), estZone),
+      weekStartDate: startOfWeek(new Date(), { weekStartsOn: 1 }),
+      weekEndDate: endOfWeek(new Date(), { weekStartsOn: 1 }),
     }
   )
 
@@ -37,8 +35,8 @@ export const Calendar = () => {
       {
         ...calendar,
         selectedWeek: addWeek,
-        weekStartDate: addWeeks(utcToZonedTime(new Date(calendar.weekStartDate), estZone), 1),
-        weekEndDate: addWeeks(utcToZonedTime(new Date(calendar.weekEndDate), estZone), 1),
+        weekStartDate: addWeeks(new Date(calendar.weekStartDate), 1),
+        weekEndDate: addWeeks(new Date(calendar.weekEndDate), 1),
       })
   }
 
@@ -48,15 +46,15 @@ export const Calendar = () => {
       {
         ...calendar,
         selectedWeek: subtractWeek,
-        weekStartDate: subWeeks(utcToZonedTime(new Date(calendar.weekStartDate), estZone), 1),
-        weekEndDate: subWeeks(utcToZonedTime(new Date(calendar.weekEndDate), estZone), 1),
+        weekStartDate: subWeeks(new Date(calendar.weekStartDate), 1),
+        weekEndDate: subWeeks(new Date(calendar.weekEndDate), 1),
       })
   }
 
   const getDayAvailability = (day) => {
     return availableTimesState.available_times.filter((date) => {
-      let queriedDate = format(utcToZonedTime(new Date(date["from"]), estZone), 'yyyy/MM/dd')
-      let weekDay = format(utcToZonedTime(new Date(day), estZone), 'yyyy/MM/dd')
+      let queriedDate = format(new Date(date["from"]), 'yyyy/MM/dd')
+      let weekDay = format(new Date(day), 'yyyy/MM/dd')
       return queriedDate === weekDay
     })
   }
@@ -78,19 +76,22 @@ export const Calendar = () => {
   const getRandomSlots = () => {
     if (availableTimesState.available_times.length != 0) {
       return getRandom(availableTimesState.available_times, 3).map((day) => {
+        const selected = format(new Date(bookingState.booking.starts_at), 'MMMM dd, yyyy HH:mm') == format(new Date(day["from"]), 'MMMM dd, yyyy HH:mm')
+        const border = selected ? 'solid' : 'outline'
         return (
           <>
             <Button
               mt="6"
               width="100%"
               size="lg"
-              variantColor="teal" variant='outline'
+              variantColor="teal" variant={border}
               height='80px'
               onClick={() => updateBookingTime(day)}
+              value={format(new Date(day['from']), 'HH:mm')}
             >
               <Flex justify="space-between" direction='column'>
-                <Heading as="h5" size="sm">{format(utcToZonedTime(new Date(day['from']), estZone), 'MMMM dd, yyyy')}</Heading>
-                <Text fontSize="lg">at {format(utcToZonedTime(new Date(day['from']), estZone), 'HH:mm')}</Text>
+                <Heading as="h5" size="sm">{format(new Date(day['from']), 'MMMM dd, yyyy')}</Heading>
+                <Text fontSize="lg">at {format(new Date(day['from']), 'HH:mm')}</Text>
               </Flex>
             </Button >
           </>
@@ -101,24 +102,22 @@ export const Calendar = () => {
 
 
   const weekDates = eachDayOfInterval({
-    start: utcToZonedTime(new Date(calendar.weekStartDate), estZone),
-    end: utcToZonedTime(new Date(calendar.weekEndDate), estZone)
+    start: new Date(calendar.weekStartDate),
+    end: new Date(calendar.weekEndDate)
   })
 
   const dayTimes = (weekDay) => {
     return getDayAvailability(weekDay).map(day => {
-      const selected = bookingState.booking.starts_at == day["from"]
+      const selected = format(new Date(bookingState.booking.starts_at), 'MMMM dd, yyyy HH:mm') == format(new Date(day["from"]), 'MMMM dd, yyyy HH:mm')
       const border = selected ? 'solid' : 'outline'
-      console.log(day["from"])
       return (
         <Flex direction='column' justify="space-between">
           <Button
             variantColor="teal" variant={border}
             onClick={() => updateBookingTime(day)}
-            variantColor="teal"
-            mt={3} key={day['id']} value={format(utcToZonedTime(new Date(day['from']), estZone), 'HH:mm')}
+            mt={3} key={day['id']} value={format(new Date(day['from']), 'HH:mm')}
           >
-            {format(utcToZonedTime(new Date(day['from']), estZone), 'HH:mm')}
+            {format(new Date(day['from']), 'HH:mm')}
           </Button>
         </Flex>
       );
@@ -130,10 +129,10 @@ export const Calendar = () => {
       <Flex justify="space-between" mt={8} direction="column">
         <Box key={date}>
           <Heading as="h6" size="xs">
-            {format(utcToZonedTime(new Date(date), estZone), 'EEEEEE')}
+            {format(new Date(date), 'EEEEEE')}
           </Heading>
           <Text fontSize="sm">
-            {format(utcToZonedTime(new Date(date), estZone), 'LLL dd')}
+            {format(new Date(date), 'LLL dd')}
           </Text>
         </Box>
         <Box>
@@ -160,11 +159,7 @@ export const Calendar = () => {
         </Button>
       </Flex>
 
-      <Flex justify="space-between" direction='column'>
-        {getRandomSlots()}
-      </Flex>
-
-      <Flex justify="space-between" mt={8}>
+      <Flex justify="space-between" mt={0}>
         {daysOfWeek}
       </Flex>
     </Box>
