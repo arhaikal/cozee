@@ -8,6 +8,12 @@ import { format } from 'date-fns';
 export const BookingSummary = () => {
   const [state, _] = useContext(BookingContext);
 
+  const dateParser = (rawDate) => {
+    let a = rawDate.split(/[^0-9]/);
+    let date = new Date(Date.UTC(a[0], a[1] - 1, a[2], a[3], a[4], a[5]));
+    return date
+  }
+
   return (
     <Card className={"card-big fixed-card"}>
       <Card.Body>
@@ -20,8 +26,8 @@ export const BookingSummary = () => {
         <p><b>{state.booking.email} </b></p>
         <p><b>{state.booking.phone}</b></p>
         <p>Time</p>
-        <p><b>{state.booking.starts_at && format(new Date(state.booking.starts_at), 'EEEE LLL dd HH:mm')} </b></p>
-        <p><b>{state.booking.ends_at && format(new Date(state.booking.ends_at), 'EEEE LLL dd HH:mm')} </b></p>
+        <p><b>{state.booking.starts_at && format(dateParser(state.booking.starts_at), 'MMM dd yyyy HH:mm')} </b></p>
+        <p><b>{state.booking.starts_at && format(dateParser(state.booking.ends_at), 'MMM dd yyyy HH:mm')} </b></p>
       </Card.Body>
     </Card>
   );

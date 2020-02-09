@@ -106,9 +106,15 @@ export const Calendar = () => {
     end: new Date(calendar.weekEndDate)
   })
 
+  const dateParser = (rawDate) => {
+    let a = rawDate.split(/[^0-9]/);
+    let date = new Date(Date.UTC(a[0], a[1] - 1, a[2], a[3], a[4], a[5]));
+    return date
+  }
+
   const dayTimes = (weekDay) => {
     return getDayAvailability(weekDay).map(day => {
-      const selected = format(new Date(bookingState.booking.starts_at), 'MMMM dd, yyyy HH:mm') == format(new Date(day["from"]), 'MMMM dd, yyyy HH:mm')
+      const selected = bookingState.booking.starts_at && format(dateParser(bookingState.booking.starts_at), 'MMMM dd, yyyy HH:mm') == format(new Date(day["from"]), 'MMMM dd, yyyy HH:mm')
       const border = selected ? 'solid' : 'outline'
       return (
         <Flex direction='column' justify="space-between">
