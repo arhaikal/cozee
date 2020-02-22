@@ -33,6 +33,7 @@ export const AddressInput = () => {
               onChange={(e) => setAddress(e.target.value)}
               type="text"
               placeholder="Kesklinn 1, Tallinn"
+              focusBorderColor="teal.400"
             />
           </FormControl>
           <FormControl >
@@ -41,6 +42,7 @@ export const AddressInput = () => {
               onChange={(e) => setZipcode(e.target.value)}
               type="text"
               placeholder="24141"
+              focusBorderColor="teal.400"
             />
           </FormControl>
           <Button

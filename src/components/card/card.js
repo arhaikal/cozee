@@ -15,11 +15,10 @@ import { logEvent, Result, ErrorResult } from '../util';
 const ELEMENT_OPTIONS = {
   style: {
     base: {
-      fontSize: '18px',
-      color: '#424770',
+      fontSize: '1rem',
       letterSpacing: '0.025em',
       '::placeholder': {
-        color: '#aab7c4',
+        color: '#A0AEC0',
       },
     },
     invalid: {
@@ -34,6 +33,13 @@ const Card = () => {
   const stripe = useStripe();
   const [errorMessage, setErrorMessage] = useState(null);
   const [paymentMethod, setPaymentMethod] = useState(null);
+  const [activeField, setActiveField] = useState(
+    {
+      cardNumber: false,
+      date: false,
+      csv: false,
+    });
+
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -68,50 +74,72 @@ const Card = () => {
     }
   };
 
+  const numberBorder = activeField.cardNumber ? 'teal.400' : 'grey.200'
+  const dateBorder = activeField.date ? 'teal.400' : 'grey.200'
+  const csvBorder = activeField.csv ? 'teal.400' : 'grey.200'
+
   return (
     <div>
       <Box witdh="100%" rounded="lg" className="card-big">
         <Box>
           <Heading as="h3" size="lg" mb="5">Card info</Heading>
           <form onSubmit={handleSubmit}>
-            <FormControl isRequired>
+            <FormControl>
               <FormLabel htmlFor="cardNumber">Card Number</FormLabel>
-              <Box borderWidth="1px" w="202px" p={2}>
+              <Box
+                py={2}
+                px={4}
+                rounded="md"
+                borderWidth="1px"
+                borderColor={numberBorder}
+              >
                 <CardNumberElement
                   id="cardNumber"
-                  onBlur={logEvent('blur')}
-                  onChange={logEvent('change')}
-                  onFocus={logEvent('focus')}
-                  onReady={logEvent('ready')}
                   options={ELEMENT_OPTIONS}
+                  onBlur={() => setActiveField({ cardNumber: false })}
+                  onChange={logEvent('change')}
+                  onFocus={() => setActiveField({ cardNumber: true })}
+                  onReady={logEvent('ready')}
                 />
               </Box>
             </FormControl>
 
 
             <Flex>
-              <FormControl isRequired>
+              <FormControl>
                 <FormLabel htmlFor="cardNumber">Expiry Date</FormLabel>
-                <Box borderWidth="1px" w="90px" p={2}>
+                <Box
+                  borderWidth="1px"
+                  p={2}
+                  borderColor={dateBorder}
+                  py={2}
+                  px={4}
+                  rounded="md">
                   <CardExpiryElement
                     id="expiry"
-                    onBlur={logEvent('blur')}
+                    onBlur={() => setActiveField({ date: false })}
+                    onFocus={() => setActiveField({ date: true })}
                     onChange={logEvent('change')}
-                    onFocus={logEvent('focus')}
                     onReady={logEvent('ready')}
                     options={ELEMENT_OPTIONS}
                   />
                 </Box>
               </FormControl>
 
-              <FormControl isRequired>
-                <FormLabel htmlFor="cardNumber">Expiry Date</FormLabel>
-                <Box borderWidth="1px" w="57px" p={2}>
+              <FormControl>
+                <FormLabel htmlFor="cardNumber">CSV</FormLabel>
+                <Box
+                  borderWidth="1px"
+                  p={2}
+                  borderColor={csvBorder}
+                  py={2}
+                  px={4}
+                  rounded="md">
                   <CardCvcElement
                     id="cvc"
-                    onBlur={logEvent('blur')}
+                    onBlur={() => setActiveField({ csv: false })}
+                    onFocus={() => setActiveField({ csv: true })}
                     onChange={logEvent('change')}
-                    onFocus={logEvent('focus')}
                     onReady={logEvent('ready')}
                     options={ELEMENT_OPTIONS}
                   />

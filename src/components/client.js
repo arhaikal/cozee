@@ -32,6 +32,7 @@ export const Client = () => {
             name="first_name"
             onChange={handleFirstNameChange}
             type="text" placeholder="Kersti"
+            focusBorderColor="teal.400"
           />
         </FormControl>
         <FormControl >
@@ -40,6 +41,7 @@ export const Client = () => {
             name="last_name"
             onChange={handleLastNameChange}
             type="text" placeholder="Kaljulaid"
+            focusBorderColor="teal.400"
           />
         </FormControl>
         <FormControl >
@@ -48,6 +50,7 @@ export const Client = () => {
             name="email"
             onChange={handleEmailChange}
             type="email" placeholder="Kersti@email.com"
+            focusBorderColor="teal.400"
           />
         </FormControl>
         <FormControl >
@@ -56,6 +59,7 @@ export const Client = () => {
             name="phone"
             onChange={handlePhoneChange}
             type="tel" placeholder="+372 82194129"
+            focusBorderColor="teal.400"
           />
         </FormControl>
       </SimpleGrid>
