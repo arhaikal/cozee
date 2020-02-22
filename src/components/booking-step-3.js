@@ -1,7 +1,7 @@
 import React, { useState, useContext } from 'react';
 import { BookingStepContext } from '../context/BookingStepContext';
-import { Button } from "@chakra-ui/core";
-
+import { Button, Flex } from "@chakra-ui/core";
+import Card from './card'
 
 const BookingStep3 = () => {
   const [state, updateState] = useContext(BookingStepContext);
@@ -15,8 +15,10 @@ const BookingStep3 = () => {
   }
   return (
     <div>
-      <h1>payment page</h1>
-      <Button leftIcon="arrow-back" variantColor="teal" variant="solid" onClick={handlePrevClick}>Back</Button>
+      <Card />
+      <Flex align="left" justify="space-between" mt={6} mb={6}>
+        <Button leftIcon="arrow-back" variantColor="teal" variant="solid" onClick={handlePrevClick}>Back</Button>
+      </Flex>
     </div>
   );
 };

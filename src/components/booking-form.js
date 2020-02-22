@@ -4,15 +4,20 @@ import BookingStep1 from './booking-step-1';
 import BookingStep2 from './booking-step-2';
 import BookingStep3 from './booking-step-3';
 import BookingSummary from './booking-summary'
-
+import { Elements } from '@stripe/react-stripe-js';
+import { loadStripe } from '@stripe/stripe-js';
 
 const BookingForm = () => {
+  const stripePromise = loadStripe('pk_test_6pRNASCoBOKtIshFeQd4XMUh');
+
   return (
     <div>
       <BookingStepProvider>
         <BookingStep1 />
         <BookingStep2 />
-        <BookingStep3 />
+        <Elements stripe={stripePromise}>
+          <BookingStep3 />
+        </Elements>
       </BookingStepProvider>
     </div >
   );
