@@ -2,9 +2,7 @@ import React, { useState, useContext } from 'react';
 import { BookingContext } from '../../context/BookingContext';
 import ReactDOM from 'react-dom';
 import {
-  CardNumberElement,
   CardElement,
-  CardExpiryElement,
   useStripe,
   useElements,
 } from '@stripe/react-stripe-js';
@@ -37,10 +35,7 @@ const Card = () => {
   const stripe = useStripe();
   const [errorMessage, setErrorMessage] = useState(null);
   const [paymentMethod, setPaymentMethod] = useState(null);
-  const [activeField, setActiveField] = useState(
-    {
-      cardNumber: false,
-    });
+  const [activeField, setActiveField] = useState(false)
 
 
   const handleSubmit = async (event) => {
@@ -70,7 +65,7 @@ const Card = () => {
     }
   };
 
-  const numberBorder = activeField.cardNumber ? 'teal.400' : 'grey.200'
+  const numberBorder = activeField ? 'teal.400' : 'grey.200'
 
   return (
     <div>
@@ -89,8 +84,8 @@ const Card = () => {
               >
                 <CardElement
                   options={options}
-                  onBlur={() => setActiveField({ cardNumber: false })}
-                  onFocus={() => setActiveField({ cardNumber: true })}
+                  onBlur={() => setActiveField(false)}
+                  onFocus={() => setActiveField(true)}
                   onReady={() => {
                     console.log("CardElement [ready]");
                   }}
