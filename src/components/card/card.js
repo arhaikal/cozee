@@ -3,7 +3,7 @@ import { BookingContext } from '../../context/BookingContext';
 import ReactDOM from 'react-dom';
 import {
   CardNumberElement,
-  CardCvcElement,
+  CardElement,
   CardExpiryElement,
   useStripe,
   useElements,
@@ -12,19 +12,23 @@ import { Button, Box, Heading, FormLabel, FormControl, Input, Flex } from "@chak
 import { logEvent, Result, ErrorResult } from '../util';
 
 
-const ELEMENT_OPTIONS = {
+const options = {
   style: {
     base: {
+      iconColor: 'red',
       fontSize: '1rem',
       letterSpacing: '0.025em',
+      textAlign: 'center',
       '::placeholder': {
         color: '#A0AEC0',
       },
     },
+    placeholder: 'hello',
     invalid: {
       color: '#9e2146',
     },
   },
+  hidePostalCode: true
 };
 
 const Card = () => {
@@ -36,8 +40,6 @@ const Card = () => {
   const [activeField, setActiveField] = useState(
     {
       cardNumber: false,
-      date: false,
-      csv: false,
     });
 
 
@@ -50,18 +52,12 @@ const Card = () => {
       return;
     }
 
-    const cardElement = elements.getElement(CardNumberElement);
-
     const payload = await stripe.createPaymentMethod({
-      type: 'card',
-      card: cardElement,
-      billing_details: {
-        name: state.booking.first_name,
-        address: {
-          postal_code: state.booking.zipcode,
-        },
-      },
+      type: "card",
+      card: elements.getElement(CardElement)
     });
+
+    console.log("[PaymentMethod]", payload);
 
     if (payload.error) {
       console.log('[error]', payload.error);
@@ -75,8 +71,6 @@ const Card = () => {
   };
 
   const numberBorder = activeField.cardNumber ? 'teal.400' : 'grey.200'
-  const dateBorder = activeField.date ? 'teal.400' : 'grey.200'
-  const csvBorder = activeField.csv ? 'teal.400' : 'grey.200'
 
   return (
     <div>
@@ -85,72 +79,34 @@ const Card = () => {
           <Heading as="h3" size="lg" mb="5">Card info</Heading>
           <form onSubmit={handleSubmit}>
             <FormControl>
-              <FormLabel htmlFor="cardNumber">Card Number</FormLabel>
               <Box
                 py={2}
-                px={4}
+                px={2}
                 rounded="md"
                 borderWidth="1px"
                 borderColor={numberBorder}
+                w={400}
               >
-                <CardNumberElement
-                  id="cardNumber"
-                  options={ELEMENT_OPTIONS}
+                <CardElement
+                  options={options}
                   onBlur={() => setActiveField({ cardNumber: false })}
-                  onChange={logEvent('change')}
                   onFocus={() => setActiveField({ cardNumber: true })}
-                  onReady={logEvent('ready')}
+                  onReady={() => {
+                    console.log("CardElement [ready]");
+                  }}
+                  onChange={event => {
+                    console.log("CardElement [change]", event);
+                  }}
                 />
               </Box>
+              {errorMessage && <ErrorResult>{errorMessage}</ErrorResult>}
+              {paymentMethod && <Result>Got PaymentMethod: {paymentMethod.id}</Result>}
             </FormControl>
 
 
-            <Flex>
-              <FormControl>
-                <FormLabel htmlFor="cardNumber">Expiry Date</FormLabel>
-                <Box
-                  borderWidth="1px"
-                  p={2}
-                  borderColor={dateBorder}
-                  py={2}
-                  px={4}
-                  rounded="md">
-                  <CardExpiryElement
-                    id="expiry"
-                    onBlur={() => setActiveField({ date: false })}
-                    onFocus={() => setActiveField({ date: true })}
-                    onChange={logEvent('change')}
-                    onReady={logEvent('ready')}
-                    options={ELEMENT_OPTIONS}
-                  />
-                </Box>
-              </FormControl>
-
-              <FormControl>
-                <FormLabel htmlFor="cardNumber">CSV</FormLabel>
-                <Box
-                  borderWidth="1px"
-                  p={2}
-                  borderColor={csvBorder}
-                  py={2}
-                  px={4}
-                  rounded="md">
-                  <CardCvcElement
-                    id="cvc"
-                    onBlur={() => setActiveField({ csv: false })}
-                    onFocus={() => setActiveField({ csv: true })}
-                    onChange={logEvent('change')}
-                    onReady={logEvent('ready')}
-                    options={ELEMENT_OPTIONS}
-                  />
-                </Box>
-              </FormControl>
-            </Flex>
-            {errorMessage && <ErrorResult>{errorMessage}</ErrorResult>}
-            {paymentMethod && <Result>Got PaymentMethod: {paymentMethod.id}</Result>}
             <Button type="submit" disabled={!stripe} mt={5}>
               Place order
-        </Button>
+            </Button>
           </form>
         </Box>
       </Box>
