@@ -1,9 +1,10 @@
 
 import React, { useContext } from 'react';
 import { BookingContext } from '../context/BookingContext';
-import { Card } from 'react-bootstrap';
-import 'bootstrap/dist/css/bootstrap.min.css';
 import { format } from 'date-fns';
+import { Flex, Box, Text, Icon, Stat, StatLabel, StatHelpText, StatNumber, Divider } from "@chakra-ui/core";
+import { MdLocationOn } from "react-icons/md";
+import { IoMdCalendar, IoMdPerson } from "react-icons/io";
 
 export const BookingSummary = () => {
   const [state, _] = useContext(BookingContext);
@@ -14,21 +15,59 @@ export const BookingSummary = () => {
     return date
   }
 
+  const anyUserInput = () => {
+    if (state.booking.first_name ||
+      state.booking.last_name ||
+      state.booking.email ||
+      state.booking.phone) {
+      return true
+    }
+
+    return false
+  }
+
   return (
-    <Card className={"card-big fixed-card"}>
-      <Card.Body>
-        <p>Appartment Size: <b>{state.booking.area}</b></p>
-        <p>Cleaning Hours: <b>{state.booking.duration} h</b></p>
-        <p>How often<b> {state.booking.frequency}</b></p>
-        <p>Address:<b> {state.booking.address && state.booking.address.formatted_address}</b></p>
-        <p>Your Info:</p>
-        <p><b>{state.booking.first_name} {state.booking.last_name} </b></p>
-        <p><b>{state.booking.email} </b></p>
-        <p><b>{state.booking.phone}</b></p>
-        <p>Time</p>
-        <p><b>{state.booking.starts_at && format(dateParser(state.booking.starts_at), 'MMM dd yyyy HH:mm')} </b></p>
-        <p><b>{state.booking.starts_at && format(dateParser(state.booking.ends_at), 'MMM dd yyyy HH:mm')} </b></p>
-      </Card.Body>
-    </Card>
+    <Box rounded="lg" className="card-big-side">
+      <Flex direction='column' mt={6}>
+        <Stat>
+          <StatLabel>Home Cleaning</StatLabel>
+          <StatNumber color='teal.400'>€ {state.booking.total_cost}</StatNumber>
+          <Flex direction='row' justify='space-between' width='75%'>
+            <StatHelpText>{state.booking.duration} hours</StatHelpText>
+            <StatHelpText>{state.booking.frequency}</StatHelpText>
+          </Flex>
+        </Stat>
+
+        <Divider borderColor="teal.400" mt={8} />
+
+        {state.booking.address &&
+          <Flex direction='row' mt={8}>
+            <Box as={MdLocationOn} size="24px" color="teal.400" />
+            <Text fontSize="md" ml={2}>{state.booking.address.formatted_address}</Text>
+          </Flex>
+        }
+
+        {anyUserInput() &&
+          <Flex direction='row' mt={6}>
+            <Box as={IoMdPerson} size="24px" color="teal.400" />
+            <Box ml={2}>
+              <Text fontSize="md">{state.booking.first_name} {state.booking.last_name}</Text>
+              <Text fontSize="sm">{state.booking.email}</Text>
+              <Text fontSize="sm">{state.booking.phone} </Text>
+            </Box>
+          </Flex>
+        }
+
+        {state.booking.starts_at &&
+          <Flex direction='row' mt={6}>
+            <Box as={IoMdCalendar} size="24px" color="teal.400" />
+            <Flex direcation='row' justify='space-between' ml={2} w='75%'>
+              <Text>{format(dateParser(state.booking.starts_at), 'EEE dd.MM')}</Text>
+              <Text fontSize="md" color='gray.400'>{format(dateParser(state.booking.starts_at), 'HH:mm')}-{format(dateParser(state.booking.ends_at), 'HH:mm')}</Text>
+            </Flex>
+          </Flex>
+        }
+      </Flex >
+    </Box >
   );
 }

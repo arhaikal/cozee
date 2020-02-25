@@ -1,5 +1,4 @@
 
-import 'bootstrap/dist/css/bootstrap.min.css';
 import React, { useState, useContext } from 'react';
 import { BookingContext } from '../context/BookingContext';
 import { updateBooking } from '../actions/index'

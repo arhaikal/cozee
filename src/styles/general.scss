@@ -95,6 +95,13 @@ small {
   background-color: white;
 }
 
+.card-big-side {
+  margin-top: 32px;
+  border-radius: 20px;
+  padding: 32px 47px;
+  background-color: white;
+}
+
 .card-list {
   margin-top: 10px;
   cursor: pointer;
@@ -104,10 +111,6 @@ small {
   :hover{
     background-color: rgb(232, 235, 235);
   }
-}
-
-.fixed-card {
-  position:fixed !important;
 }
 
 .border-light {

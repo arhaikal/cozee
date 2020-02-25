@@ -2,28 +2,27 @@ import React from 'react';
 import Layout from '../components/layout';
 import BookingForm from '../components/booking-form';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Row, Col } from 'react-bootstrap';
 import { BookingSummary } from '../components/booking-summary'
-import { Heading, Text } from '@chakra-ui/core';
+import { Heading, Text, Box } from '@chakra-ui/core';
 
 
 const IndexPage = () => {
   return (
     <Layout>
-      <Row>
-        <Col>
+      <Box p={4} display={{ md: "flex" }} flexDirection='column'>
+        <Box mt={{ base: 4, md: 0 }} ml={{ md: 6 }}>
           <Heading as="h3" size="lg">Cleaning made simple!</Heading>
           <Text fontSize="xl">Happy to be home</Text>
-        </Col>
-      </Row>
-      <Row>
-        <Col xs={8}>
-          <BookingForm />
-        </Col>
-        <Col>
-          <BookingSummary />
-        </Col>
-      </Row>
+        </Box>
+        <Box p={4} display={{ md: "flex" }} justifyContent='space-between'  >
+          <Box flexShrink="0" w='60%'>
+            <BookingForm />
+          </Box>
+          <Box flexShrink="0" w='37%' overflow='scroll'>
+            <BookingSummary />
+          </Box>
+        </Box>
+      </Box>
     </Layout>
   );
 };
