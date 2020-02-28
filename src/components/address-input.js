@@ -26,7 +26,7 @@ export const AddressInput = () => {
   return (
     <Box witdh="100%" rounded="lg" className="card-big">
       <form onSubmit={handleSubmit}>
-        <Grid templateColumns="2fr 1fr" gap={2} gridRowGap={6}>
+        <Grid templateColumns="2fr 1fr" gap={4}>
           <FormControl >
             <FormLabel htmlFor="name">Address</FormLabel>
             <Input
@@ -45,15 +45,17 @@ export const AddressInput = () => {
               focusBorderColor="teal.400"
             />
           </FormControl>
-          <Button
-            type="submit"
-            variantColor="teal" size="md"
-            disabled={!address || !zipcode}
-            width="150px"
-          >
-            Validate Address
-          </Button>
+
         </Grid>
+        <Button
+          type="submit"
+          variantColor="teal" size="md"
+          disabled={!address || !zipcode}
+          width="150px"
+          mt={4}
+        >
+          Validate Address
+        </Button>
       </form>
     </Box>
   );
