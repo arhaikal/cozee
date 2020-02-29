@@ -16,7 +16,7 @@ const BookingStep3 = () => {
   return (
     <div>
       <Card />
-      <Flex align="left" justify="space-between" mt={6} mb={6}>
+      <Flex align="left" justify="space-between" mb={6}>
         <Button leftIcon="arrow-back" variantColor="teal" variant="solid" onClick={handlePrevClick}>Back</Button>
       </Flex>
     </div>

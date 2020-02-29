@@ -89,17 +89,16 @@ small {
 }
 
 .card-big {
-  margin-top: 32px;
   border-radius: 20px;
   padding: 32px 47px 40px;
   background-color: white;
 }
 
 .card-big-side {
-  margin-top: 32px;
   border-radius: 20px;
   padding: 32px 47px;
   background-color: white;
+  border: 1px solid #4FD1C5;
 }
 
 .card-list {
@@ -125,4 +124,67 @@ small {
 
 button:focus {
   outline: 0 !important;
+}
+
+.navbar {
+  position: fixed;
+  z-index: 1000;
+  width: 100%;
+  margin: 0;
+  top:0;
+  background-color: var(--bg-primary);
+  transition: width 200ms ease;
+  height: 100px;
+}
+
+.summary-menu-closed {
+  display: none;
+  width: 100%;
+}
+
+.summary-menu-open {
+  display: block;
+  width: 100%;
+}
+
+.nav-link {
+  height: 5rem;
+  text-decoration: none;
+  color: white;
+  filter: grayscale(100%) opacity(0.7);
+  transition: var(--transition-speed);
+  display: flex !important;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.link-text {
+  display: none;
+  margin-left: 1rem;
+}
+
+.nav-link svg {
+  width: 2rem;
+  min-width: 2rem;
+  margin: 0 1.5rem;
+  transform: rotate(90deg);
+}
+
+.fa-primary {
+  color: #ff7eee;
+}
+
+.fa-secondary {
+  color: #df49a6;
+}
+
+.fa-primary,
+.fa-secondary {
+  transition: var(--transition-speed);
+}
+
+.menu-open svg {
+  transform: rotate(-90deg);
 }
