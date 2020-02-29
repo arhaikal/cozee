@@ -26,7 +26,7 @@ export const AddressInput = () => {
   return (
     <Box witdh="100%" rounded="lg" className="card-big">
       <form onSubmit={handleSubmit}>
-        <Grid templateColumns="2fr 1fr" gap={4}>
+        <Grid templateColumns={{ base: "1fr", md: "2fr 1fr" }} gap={4}>
           <FormControl >
             <FormLabel htmlFor="name">Address</FormLabel>
             <Input

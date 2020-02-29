@@ -21,6 +21,7 @@ const BookingStep1 = () => {
       <AreaSelector />
       <DurationSelector />
       <FrequencySelector />
+
       <Flex align="center" justify="flex-end" mb={6}>
         <Button rightIcon="arrow-forward" variantColor="teal" variant="solid" onClick={handleNextClick}>Next</Button>
       </Flex>

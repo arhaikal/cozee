@@ -2,7 +2,7 @@
 import React, { useState, useContext } from 'react';
 import { BookingContext } from '../context/BookingContext';
 import { updateBooking } from '../actions/index'
-import { Box, FormControl, Input, FormLabel, SimpleGrid } from '@chakra-ui/core'
+import { Box, FormControl, Input, FormLabel, Grid } from '@chakra-ui/core'
 
 export const Client = () => {
   const [state, dispatch] = useContext(BookingContext);
@@ -24,8 +24,7 @@ export const Client = () => {
 
   return (
     <Box witdh="100%" rounded="lg" className="card-big">
-      <SimpleGrid columns={2} spacing={10}>
-
+      <Grid templateColumns={{ base: "1fr", md: "1fr 1fr" }} gap={4}>
         <FormControl >
           <FormLabel htmlFor="name">First name</FormLabel>
           <Input
@@ -62,7 +61,7 @@ export const Client = () => {
             focusBorderColor="teal.400"
           />
         </FormControl>
-      </SimpleGrid>
+      </Grid>
     </Box>
   );
 }

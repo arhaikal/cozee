@@ -80,20 +80,20 @@ export const Calendar = () => {
         const border = selected ? 'solid' : 'outline'
         return (
           <>
-            <Button
-              mt="6"
-              width="100%"
-              size="lg"
-              variantColor="teal" variant={border}
-              height='80px'
-              onClick={() => updateBookingTime(day)}
-              value={format(new Date(day['from']), 'HH:mm')}
-            >
-              <Flex justify="space-between" direction='column'>
-                <Heading as="h5" size="sm">{format(new Date(day['from']), 'MMMM dd, yyyy')}</Heading>
-                <Text fontSize="lg">at {format(new Date(day['from']), 'HH:mm')}</Text>
-              </Flex>
-            </Button >
+          <Button
+            mt="6"
+            width="100%"
+            size="lg"
+            variantColor="teal" variant={border}
+            height='80px'
+            onClick={() => updateBookingTime(day)}
+            value={format(new Date(day['from']), 'HH:mm')}
+          >
+            <Flex justify="space-between" direction='column'>
+              <Heading as="h5" size="sm">{format(new Date(day['from']), 'MMMM dd, yyyy')}</Heading>
+              <Text fontSize="lg">at {format(new Date(day['from']), 'HH:mm')}</Text>
+            </Flex>
+          </Button >
           </>
         );
       });
@@ -117,22 +117,22 @@ export const Calendar = () => {
       const selected = bookingState.booking.starts_at && format(dateParser(bookingState.booking.starts_at), 'MMMM dd, yyyy HH:mm') == format(new Date(day["from"]), 'MMMM dd, yyyy HH:mm')
       const border = selected ? 'solid' : 'outline'
       return (
-        <Flex direction='column' justify="space-between">
-          <Button
-            variantColor="teal" variant={border}
-            onClick={() => updateBookingTime(day)}
-            mt={3} key={day['id']} value={format(new Date(day['from']), 'HH:mm')}
-          >
-            {format(new Date(day['from']), 'HH:mm')}
-          </Button>
-        </Flex>
+        <Button
+          variantColor="teal" variant={border}
+          onClick={() => updateBookingTime(day)}
+          mt={3} key={day['id']} value={format(new Date(day['from']), 'HH:mm')}
+          mr={2}
+          p={{ base: "10px 30px !important", sm: "10px 30px", md: "10px 20px" }}
+        >
+          {format(new Date(day['from']), 'HH:mm')}
+        </Button>
       );
     });
   }
 
   const daysOfWeek = weekDates.map(date => {
     return (
-      <Flex justify="space-between" mt={8} direction="column">
+      <Flex justify="space-between" mt={8} direction="column" maxWidth='100%' >
         <Box key={date}>
           <Heading as="h6" size="xs">
             {format(new Date(date), 'EEEEEE')}
@@ -142,9 +142,11 @@ export const Calendar = () => {
           </Text>
         </Box>
         <Box>
-          {dayTimes(date)}
+          <Flex direction={{ base: 'row', md: 'column' }} overflow='scroll'>
+            {dayTimes(date)}
+          </Flex>
         </Box>
-      </Flex>
+      </Flex >
     );
   });
 
@@ -165,7 +167,7 @@ export const Calendar = () => {
         </Button>
       </Flex>
 
-      <Flex justify="space-between" mt={0}>
+      <Flex direction={{ base: 'column', md: 'row' }} justify="space-between" maxWidth='100%'>
         {daysOfWeek}
       </Flex>
     </Box>

@@ -14,7 +14,7 @@ const IndexPage = () => {
 
   return (
     <>
-    <Box className="navbar" gridArea='mobile-summary' display={{ md: 'none', sm: 'block' }} position='fixed'>
+    <Box className="navbar" gridArea='mobile-summary' display={{ md: 'none', base: 'block' }} position='fixed'>
       <Link href="#" className={`${menuClass} nav-link`} onClick={() => { setMenuState(!menuState) }}>
         <Heading className="logo">€ {state.booking.total_cost}</Heading>
         <svg
@@ -46,11 +46,11 @@ const IndexPage = () => {
       </Box>
     </Box>
     <Grid
-      m={{ md: "100px 200px", sm: "80px 20px" }}
+      m={{ base: "80px 0px", md: "100px 200px", sm: "80px 20px" }}
       templateAreas={
         {
           md: "'title .' 'form summary'",
-          sm: "'mobile-summary mobile-summary' 'title .' 'form form'"
+          base: "'mobile-summary mobile-summary' 'title .' 'form form'"
         }
       }
       gap={6}
@@ -63,7 +63,7 @@ const IndexPage = () => {
       <Box gridArea='form' >
         <BookingForm />
       </Box>
-      <Box gridArea='summary' display={{ md: 'block', sm: 'none' }}>
+      <Box gridArea='summary' display={{ md: 'block', base: 'none' }}>
         <BookingSummary />
       </Box>
 

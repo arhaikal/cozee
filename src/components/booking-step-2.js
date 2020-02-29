@@ -4,7 +4,7 @@ import { AvailableBookingTimesProvider } from '../context/AvailableBookingTimesC
 import { AddressInput } from './address-input'
 import { Client } from './client'
 import { Calendar } from './calendar'
-import { Button, Flex, Grid } from "@chakra-ui/core";
+import { Button, Flex, Box } from "@chakra-ui/core";
 
 
 const BookingStep2 = () => {
@@ -22,17 +22,24 @@ const BookingStep2 = () => {
     return null
   }
   return (
-    <Grid gridRowGap={6}>
-      <AddressInput />
-      <AvailableBookingTimesProvider>
-        <Calendar />
-      </AvailableBookingTimesProvider>
-      <Client />
-      <Flex align="center" justify="space-between" mb={6}>
+    <Flex direction='column'>
+      <Box mt={6}>
+        <AddressInput />
+      </Box>
+      <Box mt={6}>
+        <AvailableBookingTimesProvider>
+          <Calendar />
+        </AvailableBookingTimesProvider>
+      </Box>
+      <Box mt={6}>
+        <Client />
+      </Box>
+
+      <Flex align="center" justify="space-between" mb={6} mt={6}>
         <Button leftIcon="arrow-back" variantColor="teal" variant="solid" onClick={handlePrevClick}>Back</Button>
         <Button rightIcon="arrow-forward" variantColor="teal" variant="solid" onClick={handleNextClick}>Next</Button>
       </Flex>
-    </Grid>
+    </Flex>
   );
 };
 
