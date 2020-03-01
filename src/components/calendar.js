@@ -122,7 +122,7 @@ export const Calendar = () => {
           onClick={() => updateBookingTime(day)}
           mt={3} key={day['id']} value={format(new Date(day['from']), 'HH:mm')}
           mr={2}
-          p={{ base: "10px 30px !important", sm: "10px 30px", md: "10px 20px" }}
+          p={{ base: "10px 25px !important", sm: "10px 30px", md: "10px 15px !important" }}
         >
           {format(new Date(day['from']), 'HH:mm')}
         </Button>

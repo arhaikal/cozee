@@ -46,7 +46,7 @@ const IndexPage = () => {
       </Box>
     </Box>
     <Grid
-      m={{ base: "80px 0px", md: "100px 200px", sm: "80px 20px" }}
+      m={{ base: "80px 0px", lg: "100px 200px", md: "80px 20px" }}
       templateAreas={
         {
           md: "'title .' 'form summary'",
