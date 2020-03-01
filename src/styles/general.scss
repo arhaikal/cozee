@@ -134,24 +134,25 @@ button:focus {
   top:0;
   background-color: var(--bg-primary);
   transition: width 200ms ease;
-  height: 100px;
+  height: 90px;
 }
 
-.summary-menu-closed {
-  display: none;
-  width: 100%;
+.mobile-summary-closed {
+  transform: scaleY(0);    
+  transform-origin: top;
+  transition: transform 0.26s ease;
 }
 
-.summary-menu-open {
-  display: block;
-  width: 100%;
+.mobile-summary-open  {
+  transform: scaleY(1);
+  transform-origin: top;
+  transition: transform 0.26s ease;
+
 }
 
 .nav-link {
-  height: 5rem;
+  height: 100%;
   text-decoration: none;
-  color: white;
-  filter: grayscale(100%) opacity(0.7);
   transition: var(--transition-speed);
   display: flex !important;
   flex-direction: row;
@@ -160,9 +161,8 @@ button:focus {
   width: 100%;
 }
 
-.link-text {
-  display: none;
-  margin-left: 1rem;
+.nav-link .logo {
+   color : #fafefd;
 }
 
 .nav-link svg {
@@ -173,11 +173,11 @@ button:focus {
 }
 
 .fa-primary {
-  color: #ff7eee;
+  color: #9de5df;
 }
 
 .fa-secondary {
-  color: #df49a6;
+  color: #fafefd;
 }
 
 .fa-primary,

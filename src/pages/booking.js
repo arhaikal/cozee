@@ -15,7 +15,7 @@ const IndexPage = () => {
   return (
     <>
     <Box className="navbar" gridArea='mobile-summary' display={{ md: 'none', base: 'block' }} position='fixed'>
-      <Link href="#" className={`${menuClass} nav-link`} onClick={() => { setMenuState(!menuState) }}>
+      <Link className={`${menuClass} nav-link`} onClick={() => { setMenuState(!menuState) }}>
         <Heading className="logo">€ {state.booking.total_cost}</Heading>
         <svg
           aria-hidden="true"
@@ -41,8 +41,8 @@ const IndexPage = () => {
           </g>
         </svg>
       </Link>
-      <Box className={`${"summary-" + menuClass} mobile-summary-box`}>
-        <BookingSummary bg='red' />
+      <Box className={`${menuState ? 'mobile-summary-open' : 'mobile-summary-closed'} `}>
+        <BookingSummary />
       </Box>
     </Box>
     <Grid
