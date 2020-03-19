@@ -1,16 +1,35 @@
 import {
   FETCH_UPDATED_BOOKING_SUCCESS,
   FETCH_UPDATED_BOOKING_FAILURE,
+  FETCH_SERVICES,
+  FETCH_SERVICES_SUCCESS,
+  FETCH_SERVICES_FAILURE,
 } from '../actions/types';
 
 export const bookingReducer = (state = initialState, action) => {
   switch (action.type) {
+    case FETCH_SERVICES:
+      return {
+        ...state,
+        isFetchingServices: true
+      };
     case FETCH_UPDATED_BOOKING_SUCCESS:
       return {
         ...state,
         booking: action.payload,
       };
     case FETCH_UPDATED_BOOKING_FAILURE:
+      return {
+        ...state,
+        error: action.payload,
+      };
+    case FETCH_SERVICES_SUCCESS:
+      return {
+        ...state,
+        services: action.payload,
+        isFetchingServices: false
+      };
+    case FETCH_SERVICES_FAILURE:
       return {
         ...state,
         error: action.payload,
@@ -24,7 +43,7 @@ export const initialState = {
   booking: {
     "additional_details": "",
     "address_query": "",
-    "area": "",
+    "area": "0-39",
     "currency": "EUR",
     "duration": "0.0",
     "ends_at": null,

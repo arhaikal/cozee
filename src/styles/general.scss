@@ -189,3 +189,9 @@ button:focus {
 .menu-open svg {
   transform: rotate(-90deg);
 }
+
+.tool-tip {
+  position: absolute;
+  top: -8px;
+  right: -20px;
+}

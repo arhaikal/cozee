@@ -3,10 +3,14 @@ import {
   FETCH_UPDATED_BOOKING_SUCCESS,
   FETCH_UPDATED_BOOKING_FAILURE,
   FETCH_BOOKING_TIMES_SUCCESS,
-  FETCH_BOOKING_TIMES_FAILURE
+  FETCH_BOOKING_TIMES_FAILURE,
+  FETCH_SERVICES,
+  FETCH_SERVICES_SUCCESS,
+  FETCH_SERVICES_FAILURE,
 } from './types';
 import { postBooking, patchBooking } from '../api/booking'
 import { getAvailableTimes } from '../api/available-times'
+import { getAllServices } from '../api/services'
 
 const fetchUpdatedBookingSuccess = (response) => {
   return {
@@ -36,6 +40,20 @@ const fetchBookingTimesFailure = (error) => {
   }
 }
 
+const fetchServicesSuccess = (response) => {
+  return {
+    type: FETCH_SERVICES_SUCCESS,
+    payload: response
+  }
+}
+
+const fetchServicesFailure = (error) => {
+  return {
+    type: FETCH_SERVICES_FAILURE,
+    payload: error
+  }
+}
+
 export const updateBooking = async (data, state, dispatch) => {
   try {
     if (state.booking.identifier) {
@@ -56,5 +74,16 @@ export const getBookingTimes = async (data, state, dispatch) => {
     dispatch(fetchBookingTimesSuccess(values));
   } catch (error) {
     dispatch(fetchBookingTimesFailure(error));
+  }
+}
+
+export const getServices = async (state, dispatch) => {
+  dispatch({ type: 'FETCH_SERVICES' });
+
+  try {
+    const values = await getAllServices();
+    dispatch(fetchServicesSuccess(values));
+  } catch (error) {
+    dispatch(fetchServicesFailure(error));
   }
 }

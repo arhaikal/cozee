@@ -2,8 +2,7 @@
 import React, { useState, useContext } from 'react';
 import { BookingContext } from '../context/BookingContext';
 import { updateBooking } from '../actions/index'
-import { TIME } from './data';
-import { Select, Heading, Box, RadioButtonGroup, SimpleGrid } from '@chakra-ui/core';
+import { Tooltip, Badge, Select, Heading, Box, RadioButtonGroup, SimpleGrid, Spinner } from '@chakra-ui/core';
 import { CustomRadio } from './custom-radio';
 
 export const DurationSelector = () => {
@@ -11,6 +10,16 @@ export const DurationSelector = () => {
   const updateDuration = (e) => {
     dispatch(updateBooking({ duration: e }, state, dispatch))
   };
+
+  if (state.isFetchingServices) return (
+    <Box rounded="lg" className="card-big">
+      <Spinner color="teal.400" size='xl' />
+    </Box>
+  );
+
+  if (!state.services) return null;
+
+  const recomendedTimes = state.services[0].service_options.filter(x => (x.area + " m2") === state.booking.area)
 
   return (
     <Box witdh="100%" rounded="lg" className="card-big">
@@ -21,13 +30,20 @@ export const DurationSelector = () => {
           onChange={updateDuration}
           name="duration"
           isInline
-          spacing='22px'
+          spacing='40px'
         >
-          {TIME.map((obj, key) =>
+          {recomendedTimes.map((obj, key) =>
             <CustomRadio
               w={100} mb={5}
-              value={obj.hours}
-              key={key}>{`${obj.hours}`}
+              value={obj.duration}
+              key={key}>
+              {`${obj.duration} h`}
+
+              <Tooltip hasArrow label="Info about this level of service which can be added in the service object" placement="top">
+                <Badge rounded="full" px="2" variantColor="teal" className="tool-tip">
+                  {obj.name}
+                </Badge>
+              </Tooltip>
             </CustomRadio>)}
         </RadioButtonGroup>
       </Box>
