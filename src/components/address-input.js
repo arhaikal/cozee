@@ -2,7 +2,18 @@
 import React, { useState, useContext } from 'react';
 import { BookingContext } from '../context/BookingContext';
 import { updateBooking } from '../actions/index'
-import { Button, Box, Input, Grid, FormControl, FormLabel } from "@chakra-ui/core";
+import {
+  AlertIcon,
+  Alert,
+  AlertDescription,
+  Button,
+  Box,
+  CloseButton,
+  Input,
+  Grid,
+  FormControl,
+  FormLabel
+} from "@chakra-ui/core";
 
 
 export const AddressInput = () => {
@@ -21,6 +32,18 @@ export const AddressInput = () => {
         , state, dispatch
       )
     )
+  }
+
+  const AddressNotFound = () => {
+
+    if (true) {
+      return (
+        <Alert status="error" mt={4}>
+          <AlertIcon />
+          <AlertDescription>We could not find your address, please make sure that you wrote it correctly</AlertDescription>
+        </Alert>
+      )
+    }
   }
 
   return (

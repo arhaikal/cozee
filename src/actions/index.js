@@ -2,6 +2,7 @@ import axios from 'axios';
 import {
   FETCH_UPDATED_BOOKING_SUCCESS,
   FETCH_UPDATED_BOOKING_FAILURE,
+  FETCH_BOOKING_TIMES,
   FETCH_BOOKING_TIMES_SUCCESS,
   FETCH_BOOKING_TIMES_FAILURE,
   FETCH_SERVICES,
@@ -69,9 +70,13 @@ export const updateBooking = async (data, state, dispatch) => {
 }
 
 export const getBookingTimes = async (data, state, dispatch) => {
+  dispatch({ type: 'FETCH_BOOKING_TIMES' });
+
   try {
     const values = await getAvailableTimes(data);
-    dispatch(fetchBookingTimesSuccess(values));
+    setTimeout(() => {
+      dispatch(fetchBookingTimesSuccess(values));
+    }, 500)
   } catch (error) {
     dispatch(fetchBookingTimesFailure(error));
   }

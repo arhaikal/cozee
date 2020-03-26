@@ -43,7 +43,7 @@ export const initialState = {
   booking: {
     "additional_details": "",
     "address_query": "",
-    "area": "0-39",
+    "area": "0-39 m2",
     "currency": "EUR",
     "duration": "0.0",
     "ends_at": null,

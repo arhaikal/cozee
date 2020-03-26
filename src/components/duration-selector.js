@@ -40,7 +40,7 @@ export const DurationSelector = () => {
               {`${obj.duration} h`}
 
               <Tooltip hasArrow label="Info about this level of service which can be added in the service object" placement="top">
-                <Badge rounded="full" px="2" variantColor="teal" className="tool-tip">
+                <Badge rounded="full" px="2" py=".5" variantColor="teal" className="tool-tip">
                   {obj.name}
                 </Badge>
               </Tooltip>

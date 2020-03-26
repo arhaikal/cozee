@@ -1,6 +1,6 @@
 
 import React, { useState, useContext, useEffect } from 'react'
-import { Box, Flex, Text, Button, Heading, RadioButtonGroup } from '@chakra-ui/core';
+import { Alert, AlertTitle, AlertIcon, AlertDescription, Box, Flex, Text, Button, Heading, RadioButtonGroup, Spinner } from '@chakra-ui/core';
 import { AvailableBookingTimesContext } from '../context/AvailableBookingTimesContext';
 import { BookingContext } from '../context/BookingContext';
 import { getBookingTimes, updateBooking } from '../actions/index';
@@ -150,26 +150,63 @@ export const Calendar = () => {
     );
   });
 
-  const currentWeek = () => {
+  const CalendarContent = () => {
+    if (!bookingState.booking.address) {
+      return (
+        <Alert
+          status="warning"
+          variant="subtle"
+          flexDirection="column"
+          justifyContent="center"
+          textAlign="center"
+          height="200px"
+          bg="gray.100"
+        >
+          <AlertIcon color="gray.500" size="40px" mr={0} />
+          <AlertTitle mt={4} mb={1} fontSize="lg">
+            Please fill in your address first!
+          </AlertTitle>
+          <AlertDescription maxWidth="sm">
+            We need to know the location of your home so we can find the most suitable time for you
+          </AlertDescription>
+        </Alert>
+      )
+    }
+
+    if (availableTimesState.isFetchingBookingTimes) return (
+      <Box rounded="lg" className="card-big">
+        <Spinner color="teal.400" size='xl' />
+      </Box>
+    );
+
+    if (!calendar) return null;
+
+    return (
+      <Box>
+        <Flex justify="space-between">
+          <Button leftIcon="arrow-back" variantColor="teal" variant="ghost" onClick={prevWeek} disabled={calendar.selectedWeek <= calendar.currentWeek}>
+            Week {calendar.selectedWeek - 1}
+          </Button>
+          <Text textAlign="center" fontSize="lg">
+            Week {calendar.selectedWeek}
+          </Text>
+          <Button rightIcon="arrow-forward" variantColor="teal" variant="ghost" onClick={nextWeek} disabled={calendar.selectedWeek > calendar.currentWeek + 6}>
+            Week {calendar.selectedWeek + 1}
+          </Button>
+        </Flex>
+
+        <Flex direction={{ base: 'column', md: 'row' }} justify="space-between" maxWidth='100%'>
+          {daysOfWeek}
+        </Flex>
+      </Box>
+    )
   }
+
+
   return (
     <Box witdh="100%" rounded="lg" className="card-big" alignItems="center" >
       <Heading as="h3" size="lg" mb="5" alignItems="center">When can we clean?</Heading>
-      <Flex justify="space-between">
-        <Button leftIcon="arrow-back" variantColor="teal" variant="ghost" onClick={prevWeek} disabled={calendar.selectedWeek <= calendar.currentWeek}>
-          Week {calendar.selectedWeek - 1}
-        </Button>
-        <Text textAlign="center" fontSize="lg">
-          Week {calendar.selectedWeek}
-        </Text>
-        <Button rightIcon="arrow-forward" variantColor="teal" variant="ghost" onClick={nextWeek} disabled={calendar.selectedWeek > calendar.currentWeek + 6}>
-          Week {calendar.selectedWeek + 1}
-        </Button>
-      </Flex>
-
-      <Flex direction={{ base: 'column', md: 'row' }} justify="space-between" maxWidth='100%'>
-        {daysOfWeek}
-      </Flex>
+      <CalendarContent />
     </Box>
   );
 }
