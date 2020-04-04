@@ -3,7 +3,7 @@ import { BookingStepContext } from '../context/BookingStepContext';
 import FrequencySelector from './frequency-selector'
 import { DurationSelector } from './duration-selector'
 import { AreaSelector } from './area-selector'
-import { Button, Flex, Grid } from "@chakra-ui/core";
+import { Button, Flex, Grid, Box, Heading } from "@chakra-ui/core";
 
 
 const BookingStep1 = () => {
@@ -18,7 +18,13 @@ const BookingStep1 = () => {
   }
   return (
     <Grid gridRowGap={6}>
-      <AreaSelector />
+      <Box rounded="lg" className="card-big">
+        <Box>
+          <Heading as="h3" size="lg" mb="5">How big is your Home?</Heading>
+            <AreaSelector />
+        </Box>
+      </Box>
+
       <DurationSelector />
       <FrequencySelector />
 
