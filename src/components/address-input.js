@@ -1,7 +1,7 @@
 
 import React, { useState, useContext } from 'react';
 import { BookingContext } from '../context/BookingContext';
-import { updateBooking } from '../actions/index'
+import { getAddress } from '../actions/index'
 import {
   AlertIcon,
   Alert,
@@ -24,7 +24,7 @@ export const AddressInput = () => {
     e.preventDefault();
 
     dispatch(
-      updateBooking(
+      getAddress(
         {
           address_query: `${address}, ${zipcode}`,
           zip_code: zipcode
@@ -34,9 +34,10 @@ export const AddressInput = () => {
     )
   }
 
+
   const AddressNotFound = () => {
 
-    if (true) {
+    if (state.addressError) {
       return (
         <Alert status="error" mt={4}>
           <AlertIcon />
@@ -44,6 +45,7 @@ export const AddressInput = () => {
         </Alert>
       )
     }
+    return null
   }
 
   return (
@@ -80,6 +82,7 @@ export const AddressInput = () => {
           Validate Address
         </Button>
       </form>
+      <AddressNotFound />
     </Box>
   );
 }

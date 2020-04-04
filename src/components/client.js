@@ -32,6 +32,7 @@ export const Client = () => {
             onChange={handleFirstNameChange}
             type="text" placeholder="Kersti"
             focusBorderColor="teal.400"
+            defaultValue={state.booking.first_name}
           />
         </FormControl>
         <FormControl >
@@ -41,6 +42,7 @@ export const Client = () => {
             onChange={handleLastNameChange}
             type="text" placeholder="Kaljulaid"
             focusBorderColor="teal.400"
+            defaultValue={state.booking.last_name}
           />
         </FormControl>
         <FormControl >
@@ -50,6 +52,7 @@ export const Client = () => {
             onChange={handleEmailChange}
             type="email" placeholder="Kersti@email.com"
             focusBorderColor="teal.400"
+            defaultValue={state.booking.email}
           />
         </FormControl>
         <FormControl >
@@ -59,6 +62,7 @@ export const Client = () => {
             onChange={handlePhoneChange}
             type="tel" placeholder="+372 82194129"
             focusBorderColor="teal.400"
+            defaultValue={state.booking.phone}
           />
         </FormControl>
       </Grid>

@@ -4,15 +4,32 @@ import {
   FETCH_SERVICES,
   FETCH_SERVICES_SUCCESS,
   FETCH_SERVICES_FAILURE,
+  FETCH_ADDRESS,
+  FETCH_ADDRESS_FAILURE,
+  FETCH_UPDATED_BOOKING_ADDRESS_SUCCESS
 } from '../actions/types';
 
 export const bookingReducer = (state = initialState, action) => {
   switch (action.type) {
-    case FETCH_SERVICES:
+    case FETCH_ADDRESS:
       return {
         ...state,
-        isFetchingServices: true
+        isFetchingAddress: true
       };
+    case FETCH_UPDATED_BOOKING_ADDRESS_SUCCESS:
+      return {
+        ...state,
+        booking: action.payload,
+        addressError: null,
+        isFetchingAddress: false
+      };
+    case FETCH_ADDRESS_FAILURE:
+      return {
+        ...state,
+        addressError: action.payload,
+        isFetchingAddress: false
+      };
+
     case FETCH_UPDATED_BOOKING_SUCCESS:
       return {
         ...state,
@@ -22,6 +39,12 @@ export const bookingReducer = (state = initialState, action) => {
       return {
         ...state,
         error: action.payload,
+      };
+
+    case FETCH_SERVICES:
+      return {
+        ...state,
+        isFetchingServices: true
       };
     case FETCH_SERVICES_SUCCESS:
       return {
