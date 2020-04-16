@@ -1,25 +1,25 @@
 
 import React, { useState, useContext } from 'react';
 import { BookingContext } from '../context/BookingContext';
-import { updateUser } from '../actions/index'
+import { updateClient } from '../store/client/actions'
 import { Box, FormControl, Input, FormLabel, Grid } from '@chakra-ui/core'
 
 export const Client = () => {
   const [state, dispatch] = useContext(BookingContext);
   const handleFirstNameChange = (e) => {
-    dispatch(updateUser({ first_name: e.target.value }, state, dispatch))
+    dispatch(updateClient({ first_name: e.target.value }, state, dispatch))
   };
 
   const handleLastNameChange = (e) => {
-    dispatch(updateUser({ last_name: e.target.value }, state, dispatch))
+    dispatch(updateClient({ last_name: e.target.value }, state, dispatch))
   };
 
   const handleEmailChange = (e) => {
-    dispatch(updateUser({ email: e.target.value }, state, dispatch))
+    dispatch(updateClient({ email: e.target.value }, state, dispatch))
   };
 
   const handlePhoneChange = (e) => {
-    dispatch(updateUser({ phone: e.target.value }, state, dispatch))
+    dispatch(updateClient({ phone: e.target.value }, state, dispatch))
   };
 
   return (

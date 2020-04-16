@@ -1,7 +1,7 @@
 
 import React, { useContext, useEffect } from 'react';
 import { BookingContext } from '../context/BookingContext';
-import { updateBooking, getServices } from '../actions/index'
+import { updateBooking, getServices } from '../store/booking/actions'
 import { Box, Select, Spinner } from '@chakra-ui/core'
 
 export const AreaSelector = () => {

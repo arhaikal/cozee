@@ -1,7 +1,7 @@
 
 import React, { useState, useContext } from 'react';
 import { BookingContext } from '../context/BookingContext';
-import { getAddress } from '../actions/index'
+import { getAddress } from '../store/booking/actions'
 import {
   AlertIcon,
   Alert,

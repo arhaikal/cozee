@@ -1,21 +1,17 @@
-import axios from 'axios';
-import {
-  FETCH_UPDATED_BOOKING_SUCCESS,
-  FETCH_UPDATED_BOOKING_FAILURE,
-  FETCH_BOOKING_TIMES,
-  FETCH_BOOKING_TIMES_SUCCESS,
-  FETCH_BOOKING_TIMES_FAILURE,
-  FETCH_SERVICES,
-  FETCH_SERVICES_SUCCESS,
-  FETCH_SERVICES_FAILURE,
-  FETCH_ADDRESS,
-  FETCH_ADDRESS_FAILURE,
-  FETCH_UPDATED_BOOKING_ADDRESS_SUCCESS,
-  FETCH_UPDATED_USER_SUCCESS
-} from './types';
-import { postBooking, patchBooking } from '../api/booking'
-import { getAvailableTimes } from '../api/available-times'
-import { getAllServices } from '../api/services'
+
+import { postBooking, patchBooking } from '../../api/booking'
+import { getAllServices } from '../../api/services'
+
+export const FETCH_SERVICES = 'FETCH_SERVICES';
+export const FETCH_SERVICES_SUCCESS = 'FETCH_SERVICES_SUCCESS';
+export const FETCH_SERVICES_FAILURE = 'FETCH_SERVICES_FAILURE';
+
+export const FETCH_ADDRESS = 'FETCH_ADDRESS';
+export const FETCH_ADDRESS_FAILURE = 'FETCH_ADDRESS_FAILURE';
+export const FETCH_UPDATED_BOOKING_ADDRESS_SUCCESS = 'FETCH_UPDATED_BOOKING_ADDRESS_SUCCESS';
+
+export const FETCH_UPDATED_BOOKING_SUCCESS = 'FETCH_UPDATED_BOOKING_SUCCESS';
+export const FETCH_UPDATED_BOOKING_FAILURE = 'FETCH_UPDATED_BOOKING_FAILURE';
 
 const fetchAddressFailure = (response) => {
   return {
@@ -31,6 +27,7 @@ const fetchUpdatedBookingAddressSuccess = (response) => {
   }
 }
 
+
 const fetchUpdatedBookingSuccess = (response) => {
   return {
     type: FETCH_UPDATED_BOOKING_SUCCESS,
@@ -45,19 +42,6 @@ const fetchUpdatedBookingFailure = (error) => {
   }
 }
 
-const fetchBookingTimesSuccess = (response) => {
-  return {
-    type: FETCH_BOOKING_TIMES_SUCCESS,
-    payload: response
-  }
-}
-
-const fetchBookingTimesFailure = (error) => {
-  return {
-    type: FETCH_BOOKING_TIMES_FAILURE,
-    payload: error
-  }
-}
 
 const fetchServicesSuccess = (response) => {
   return {
@@ -70,13 +54,6 @@ const fetchServicesFailure = (error) => {
   return {
     type: FETCH_SERVICES_FAILURE,
     payload: error
-  }
-}
-
-const fetchUpdatedUserSuccess = (response) => {
-  return {
-    type: FETCH_UPDATED_USER_SUCCESS,
-    payload: response
   }
 }
 
@@ -94,11 +71,6 @@ export const updateBooking = async (data, state, dispatch) => {
   }
 }
 
-export const updateUser = async (data, state, dispatch) => {
-    const values = await patchBooking(state.booking.data.identifier, data);
-    dispatch(fetchUpdatedUserSuccess(values))
-}
-
 export const getAddress = async (data, state, dispatch) => {
   dispatch({ type: 'FETCH_ADDRESS' });
 
@@ -107,20 +79,6 @@ export const getAddress = async (data, state, dispatch) => {
     dispatch(fetchUpdatedBookingAddressSuccess(values));
   } catch (error) {
     dispatch(fetchAddressFailure(error));
-  }
-}
-
-
-export const getBookingTimes = async (data, state, dispatch) => {
-  dispatch({ type: 'FETCH_BOOKING_TIMES' });
-
-  try {
-    const values = await getAvailableTimes(data);
-    setTimeout(() => {
-      dispatch(fetchBookingTimesSuccess(values));
-    }, 500)
-  } catch (error) {
-    dispatch(fetchBookingTimesFailure(error));
   }
 }
 

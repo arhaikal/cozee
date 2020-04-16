@@ -1,7 +1,7 @@
 
 import React, { useState, useContext } from 'react';
 import { BookingContext } from '../context/BookingContext';
-import { updateBooking } from '../actions/index'
+import { updateBooking } from '../store/booking/actions'
 import { Tooltip, Badge, Select, Heading, Box, RadioButtonGroup, SimpleGrid, Spinner } from '@chakra-ui/core';
 import { CustomRadio } from './custom-radio';
 

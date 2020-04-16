@@ -1,6 +1,5 @@
 import React, { useContext, useState } from 'react';
 import { BookingContext } from '../context/BookingContext';
-import { updateBooking } from '../actions/index'
 import { navigate } from "gatsby"
 import { AreaSelector } from './area-selector'
 

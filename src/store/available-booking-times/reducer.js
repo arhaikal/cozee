@@ -2,7 +2,7 @@ import {
   FETCH_BOOKING_TIMES_SUCCESS,
   FETCH_BOOKING_TIMES_FAILURE,
   FETCH_BOOKING_TIMES,
-} from '../actions/types';
+} from './actions';
 
 export const availableTimesReducer = (state = initialState, action) => {
   switch (action.type) {

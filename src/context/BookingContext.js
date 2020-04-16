@@ -1,6 +1,6 @@
 import React, { useReducer, createContext } from 'react';
-import { initialState, bookingReducer } from '../reducers/booking'
-import { clientState, clientReducer } from '../reducers/client'
+import { initialState, bookingReducer } from '../store/booking/reducer'
+import { clientState, clientReducer } from '../store/client/reducer'
 import combineReducers from 'react-combine-reducers';
 
 export const BookingContext = createContext();

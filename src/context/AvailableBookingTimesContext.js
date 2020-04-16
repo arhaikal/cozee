@@ -1,5 +1,5 @@
 import React, { useReducer, createContext } from 'react';
-import { initialState, availableTimesReducer } from '../reducers/available-booking-times'
+import { initialState, availableTimesReducer } from '../store/available-booking-times/reducer'
 
 export const AvailableBookingTimesContext = createContext();
 

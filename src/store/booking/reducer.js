@@ -7,7 +7,7 @@ import {
   FETCH_ADDRESS,
   FETCH_ADDRESS_FAILURE,
   FETCH_UPDATED_BOOKING_ADDRESS_SUCCESS
-} from '../actions/types';
+} from './actions';
 
 export const bookingReducer = (state = initialState, action) => {
   switch (action.type) {

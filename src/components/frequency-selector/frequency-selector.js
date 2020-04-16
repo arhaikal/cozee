@@ -1,9 +1,8 @@
 
-import React, { useState, useContext } from 'react';
+import React, { useContext } from 'react';
 import { BookingContext } from '../../context/BookingContext';
-import { updateBooking } from '../../actions/index'
+import { updateBooking } from '../../store/booking/actions'
 import { Box, Text, Button, Heading } from '@chakra-ui/core'
-import styles from './frequency-selector.module.scss';
 
 const FrequencySelector = () => {
   const [state, dispatch] = useContext(BookingContext);
