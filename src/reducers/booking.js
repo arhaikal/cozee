@@ -19,7 +19,7 @@ export const bookingReducer = (state = initialState, action) => {
     case FETCH_UPDATED_BOOKING_ADDRESS_SUCCESS:
       return {
         ...state,
-        booking: action.payload,
+        data: action.payload,
         addressError: null,
         isFetchingAddress: false
       };
@@ -33,7 +33,7 @@ export const bookingReducer = (state = initialState, action) => {
     case FETCH_UPDATED_BOOKING_SUCCESS:
       return {
         ...state,
-        booking: action.payload,
+        data: action.payload,
       };
     case FETCH_UPDATED_BOOKING_FAILURE:
       return {
@@ -63,7 +63,7 @@ export const bookingReducer = (state = initialState, action) => {
 }
 
 export const initialState = {
-  booking: {
+    data: {
     "additional_details": "",
     "address_query": "",
     "area": "0-39 m2",

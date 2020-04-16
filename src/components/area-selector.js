@@ -1,12 +1,13 @@
 
-import React, { useState, useContext, useEffect } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { BookingContext } from '../context/BookingContext';
 import { updateBooking, getServices } from '../actions/index'
-import { Box, Text, Select, Heading, Spinner } from '@chakra-ui/core'
+import { Box, Select, Spinner } from '@chakra-ui/core'
 
 export const AreaSelector = () => {
   const [state, dispatch] = useContext(BookingContext);
   const updateArea = (e) => {
+    console.log(state)
     dispatch(updateBooking({ area: e.target.value }, state, dispatch))
   };
 
@@ -14,14 +15,13 @@ export const AreaSelector = () => {
     dispatch(getServices(state, dispatch))
   }, [])
 
-
-  if (state.isFetchingServices) return (
+  if (state.booking.isFetchingServices) return (
     <Box rounded="lg" className="card-big">
       <Spinner color="teal.400" size='xl' />
     </Box>
   );
 
-  if (!state.services) return null;
+  if (!state.booking.services) return null;
 
   return (
     <Select
@@ -29,7 +29,7 @@ export const AreaSelector = () => {
       name="area"
       onChange={updateArea}
       value={state.booking.area}>
-      {state.services[0].service_options.filter(obj => obj.name === "normal").map((obj, key) => <option value={obj.size} disabled="" key={key}>{obj.area} m2</option>)}
+      {state.booking.services[0].service_options.filter(obj => obj.name === "normal").map((obj, key) => <option value={obj.size} disabled="" key={key}>{obj.area} m2</option>)}
       >
     </Select>
   );

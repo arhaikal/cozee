@@ -10,7 +10,8 @@ import {
   FETCH_SERVICES_FAILURE,
   FETCH_ADDRESS,
   FETCH_ADDRESS_FAILURE,
-  FETCH_UPDATED_BOOKING_ADDRESS_SUCCESS
+  FETCH_UPDATED_BOOKING_ADDRESS_SUCCESS,
+  FETCH_UPDATED_USER_SUCCESS
 } from './types';
 import { postBooking, patchBooking } from '../api/booking'
 import { getAvailableTimes } from '../api/available-times'
@@ -72,6 +73,13 @@ const fetchServicesFailure = (error) => {
   }
 }
 
+const fetchUpdatedUserSuccess = (response) => {
+  return {
+    type: FETCH_UPDATED_USER_SUCCESS,
+    payload: response
+  }
+}
+
 export const updateBooking = async (data, state, dispatch) => {
   try {
     if (state.booking.identifier) {
@@ -84,6 +92,11 @@ export const updateBooking = async (data, state, dispatch) => {
   } catch (error) {
     dispatch(fetchUpdatedBookingFailure(error));
   }
+}
+
+export const updateUser = async (data, state, dispatch) => {
+    const values = await patchBooking(state.booking.data.identifier, data);
+    dispatch(fetchUpdatedUserSuccess(values))
 }
 
 export const getAddress = async (data, state, dispatch) => {
