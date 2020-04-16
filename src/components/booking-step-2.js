@@ -1,10 +1,9 @@
-import React, { useState, useContext } from 'react';
+import React, { useContext } from 'react';
 import { BookingStepContext } from '../context/BookingStepContext';
-import { AvailableBookingTimesProvider } from '../context/AvailableBookingTimesContext';
 import { AddressInput } from './address-input'
 import { Client } from './client'
 import { Calendar } from './calendar'
-import { Button, Grid, Flex, Box } from "@chakra-ui/core";
+import { Button, Grid, Flex } from "@chakra-ui/core";
 
 
 const BookingStep2 = () => {
@@ -24,9 +23,7 @@ const BookingStep2 = () => {
   return (
     <Grid gridRowGap={6}>
       <AddressInput />
-      <AvailableBookingTimesProvider>
-        <Calendar />
-      </AvailableBookingTimesProvider>
+      <Calendar />
       <Client />
 
       <Flex align="center" justify="space-between" mb={6}>

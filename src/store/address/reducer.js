@@ -3,7 +3,6 @@ import {
   FETCH_ADDRESS_FAILURE,
   FETCH_ADDRESS_SUCCESS
 } from './actions';
-import { NavLink } from 'react-router-dom';
 
 export const addressState = {
   data: null,

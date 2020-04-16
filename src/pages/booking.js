@@ -1,5 +1,4 @@
 import React, { useState, useContext } from 'react';
-import Layout from '../components/layout';
 import BookingForm from '../components/booking-form';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { BookingSummary } from '../components/booking-summary'
@@ -10,7 +9,7 @@ const IndexPage = () => {
 
   const [menuState, setMenuState] = useState(false);
   const menuClass = menuState ? 'menu-open' : 'menu-closed';
-  const [state, _] = useContext(BookingContext);
+  const [state] = useContext(BookingContext);
 
   return (
     <>

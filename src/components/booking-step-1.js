@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useContext } from 'react';
 import { BookingStepContext } from '../context/BookingStepContext';
 import FrequencySelector from './frequency-selector'
 import { DurationSelector } from './duration-selector'

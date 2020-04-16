@@ -4,30 +4,33 @@ import {
   FETCH_BOOKING_TIMES,
 } from './actions';
 
-export const availableTimesReducer = (state = initialState, action) => {
+export const availableTimesState = {
+  data: [],
+  isLoading: false,
+  error: null
+}
+
+export const availableTimes = (state = availableTimesState, action) => {
   switch (action.type) {
     case FETCH_BOOKING_TIMES:
       return {
         ...state,
-        isFetchingBookingTimes: true
+        isLoading: true
       };
     case FETCH_BOOKING_TIMES_SUCCESS:
       return {
         ...state,
-        available_times: action.payload,
-        isFetchingBookingTimes: false,
+        data: action.payload,
+        isLoading: false,
       };
     case FETCH_BOOKING_TIMES_FAILURE:
       return {
         ...state,
         error: action.payload,
-        isFetchingBookingTimes: false
+        isLoading: false
       };
     default:
       return state;
   }
 }
 
-export const initialState = {
-  available_times: []
-}

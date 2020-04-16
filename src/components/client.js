@@ -1,5 +1,5 @@
 
-import React, { useState, useContext } from 'react';
+import React, { useContext } from 'react';
 import { BookingContext } from '../context/BookingContext';
 import { updateClient } from '../store/client/actions'
 import { Box, FormControl, Input, FormLabel, Grid } from '@chakra-ui/core'

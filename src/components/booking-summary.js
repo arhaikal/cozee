@@ -8,7 +8,7 @@ import { IoMdCalendar, IoMdPerson } from "react-icons/io";
 import { getClient } from "../store/client/selectors";
 
 export const BookingSummary = () => {
-  const [state, _] = useContext(BookingContext);
+  const [state] = useContext(BookingContext);
 
   const dateParser = (rawDate) => {
     let a = rawDate.split(/[^0-9]/);
@@ -34,10 +34,10 @@ export const BookingSummary = () => {
       <Flex direction='column' mt={6}>
         <Stat>
           <StatLabel>Home Cleaning</StatLabel>
-          <StatNumber color='teal.400'>€ {state.booking.total_cost}</StatNumber>
+          <StatNumber color='teal.400'>€ {state.booking.data.total_cost}</StatNumber>
           <Flex direction='row' justify='space-between' width='75%'>
-            <StatHelpText>{state.booking.duration} hours</StatHelpText>
-            <StatHelpText>{state.booking.frequency}</StatHelpText>
+            <StatHelpText>{state.booking.data.duration} hours</StatHelpText>
+            <StatHelpText>{state.booking.data.frequency}</StatHelpText>
           </Flex>
         </Stat>
 
@@ -61,12 +61,12 @@ export const BookingSummary = () => {
           </Flex>
         }
 
-        {state.booking.starts_at &&
+        {state.booking.data.starts_at &&
           <Flex direction='row' mt={6}>
             <Box as={IoMdCalendar} size="24px" color="teal.400" />
             <Flex direcation='row' justify='space-between' ml={2} w='75%'>
-              <Text>{format(dateParser(state.booking.starts_at), 'EEE dd.MM')}</Text>
-              <Text fontSize="md" color='gray.400'>{format(dateParser(state.booking.starts_at), 'HH:mm')}-{format(dateParser(state.booking.ends_at), 'HH:mm')}</Text>
+              <Text>{format(dateParser(state.booking.data.starts_at), 'EEE dd.MM')}</Text>
+              <Text fontSize="md" color='gray.400'>{format(dateParser(state.booking.data.starts_at), 'HH:mm')}-{format(dateParser(state.booking.data.ends_at), 'HH:mm')}</Text>
             </Flex>
           </Flex>
         }

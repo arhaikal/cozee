@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useContext } from 'react';
 import { BookingStepContext } from '../context/BookingStepContext';
 import { Button, Flex } from "@chakra-ui/core";
 import Card from './card'

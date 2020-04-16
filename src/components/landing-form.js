@@ -1,11 +1,8 @@
-import React, { useContext, useState } from 'react';
-import { BookingContext } from '../context/BookingContext';
+import React from 'react';
 import { navigate } from "gatsby"
 import { AreaSelector } from './area-selector'
 
 const LandingForm = () => {
-  const [state, dispatch] = useContext(BookingContext);
-  const [area, setArea] = useState('');
 
   const handleSubmit = (e) => {
     e.preventDefault();

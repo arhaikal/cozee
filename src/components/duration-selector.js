@@ -1,8 +1,8 @@
 
-import React, { useState, useContext } from 'react';
+import React, { useContext } from 'react';
 import { BookingContext } from '../context/BookingContext';
 import { updateBooking } from '../store/booking/actions'
-import { Tooltip, Badge, Select, Heading, Box, RadioButtonGroup, SimpleGrid, Spinner } from '@chakra-ui/core';
+import { Tooltip, Badge, Heading, Box, RadioButtonGroup, Spinner } from '@chakra-ui/core';
 import { CustomRadio } from './custom-radio';
 
 export const DurationSelector = () => {

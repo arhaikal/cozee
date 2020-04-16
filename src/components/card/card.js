@@ -1,13 +1,11 @@
-import React, { useState, useContext } from 'react';
-import { BookingContext } from '../../context/BookingContext';
-import ReactDOM from 'react-dom';
+import React, { useState } from 'react';
 import {
   CardElement,
   useStripe,
   useElements,
 } from '@stripe/react-stripe-js';
-import { Button, Box, Heading, FormLabel, FormControl, Input, Flex } from "@chakra-ui/core";
-import { logEvent, Result, ErrorResult } from '../util';
+import { Button, Box, Heading, FormControl } from "@chakra-ui/core";
+import { Result, ErrorResult } from '../util';
 
 
 const options = {
@@ -30,7 +28,6 @@ const options = {
 };
 
 const Card = () => {
-  const [state, dispatch] = useContext(BookingContext);
   const elements = useElements();
   const stripe = useStripe();
   const [errorMessage, setErrorMessage] = useState(null);

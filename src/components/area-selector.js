@@ -1,4 +1,3 @@
-
 import React, { useContext, useEffect } from 'react';
 import { BookingContext } from '../context/BookingContext';
 import { updateBooking } from '../store/booking/actions'
@@ -14,6 +13,7 @@ export const AreaSelector = () => {
 
   useEffect(() => {
     dispatch(getServices(state, dispatch))
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   if (state.services.isLoading) return (
@@ -29,7 +29,7 @@ export const AreaSelector = () => {
       as="select"
       name="area"
       onChange={updateArea}
-      value={state.booking.area}>
+      value={state.booking.data.area}>
       {state.services.data[0].service_options.filter(obj => obj.name === "normal").map((obj, key) => <option value={obj.size} disabled="" key={key}>{obj.area} m2</option>)}
       >
     </Select>
