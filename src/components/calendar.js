@@ -1,9 +1,10 @@
 
 import React, { useState, useContext, useEffect } from 'react'
-import { Alert, AlertTitle, AlertIcon, AlertDescription, Box, Flex, Text, Button, Heading, RadioButtonGroup, Spinner } from '@chakra-ui/core';
+import { Alert, AlertTitle, AlertIcon, AlertDescription, Box, Flex, Text, Button, Heading, Spinner } from '@chakra-ui/core';
 import { AvailableBookingTimesContext } from '../context/AvailableBookingTimesContext';
 import { BookingContext } from '../context/BookingContext';
-import { getBookingTimes, updateBooking } from '../store/booking/actions';
+import { updateBooking } from '../store/booking/actions';
+import { getBookingTimes } from '../store/available-booking-times/actions';
 import { format, getWeek, endOfWeek, startOfWeek, addWeeks, subWeeks, eachDayOfInterval } from 'date-fns';
 
 export const Calendar = () => {
