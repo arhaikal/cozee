@@ -3,7 +3,25 @@ import {
   FETCH_UPDATED_BOOKING_FAILURE
 } from './actions';
 
-export const booking = (state = initialState, action) => {
+export const bookingState = {
+  data: {
+    area: "0-39 m2",
+    currency: "EUR",
+    duration: "0.0",
+    ends_at: null,
+    frequency: "once",
+    hourly_rates: {
+      weekly: "17.0",
+      biweekly: "18.0",
+      monthly: "19.0",
+      once: "20.0"
+    },
+    starts_at: null,
+    total_cost: "0.0",
+  }
+}
+
+export const booking = (state = bookingState, action) => {
   switch (action.type) {
     case FETCH_UPDATED_BOOKING_SUCCESS:
       return {
@@ -20,25 +38,4 @@ export const booking = (state = initialState, action) => {
   }
 }
 
-export const initialState = {
-    data: {
-    "additional_details": "",
-    "address_query": "",
-    "area": "0-39 m2",
-    "currency": "EUR",
-    "duration": "0.0",
-    "ends_at": null,
-    "frequency": "once",
-    "hourly_rates": {
-      "weekly": "17.0",
-      "biweekly": "18.0",
-      "monthly": "19.0",
-      "once": "20.0"
-    },
-    "starts_at": null,
-    "total_cost": "0.0",
-    "zip_code": "",
-  }
-}
 
-export default booking

@@ -21,12 +21,14 @@ export const DurationSelector = () => {
 
   const recomendedTimes = state.services.data[0].service_options.filter(x => (x.area + " m2") === state.booking.data.area)
 
+  console.log(state.services.data[0].service_options.filter(x => (x.area + " m2")))
+  console.log(state.booking.data.area)
   return (
     <Box witdh="100%" rounded="lg" className="card-big">
       <Box>
         <Heading as="h3" size="lg" mb="5">How many hours should we clean?</Heading>
         <RadioButtonGroup
-          defaultValue={state.booking.duration}
+          defaultValue={state.booking.data.duration}
           onChange={updateDuration}
           name="duration"
           isInline

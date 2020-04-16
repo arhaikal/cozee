@@ -36,7 +36,7 @@ export const AddressInput = () => {
 
   const AddressNotFound = () => {
 
-    if (state.addressError) {
+    if (state.address.error) {
       return (
         <Alert status="error" mt={4}>
           <AlertIcon />

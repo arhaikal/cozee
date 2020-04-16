@@ -22,7 +22,7 @@ export const Calendar = () => {
   };
 
   const getTimes = () => {
-    dispatch(getBookingTimes({ from: calendar.weekStartDate, to: calendar.weekEndDate, duration: state.booking.duration }, state.availableTimes, dispatch))
+    dispatch(getBookingTimes({ from: calendar.weekStartDate, to: calendar.weekEndDate, duration: state.booking.data.duration }, state.availableTimes, dispatch))
   };
 
   useEffect(() => {
@@ -73,7 +73,7 @@ export const Calendar = () => {
 
   const dayTimes = (weekDay) => {
     return getDayAvailability(weekDay).map(day => {
-      const selected = state.booking.starts_at && format(dateParser(state.booking.starts_at), 'MMMM dd, yyyy HH:mm') === format(new Date(day["from"]), 'MMMM dd, yyyy HH:mm')
+      const selected = state.booking.data.starts_at && format(dateParser(state.booking.data.starts_at), 'MMMM dd, yyyy HH:mm') === format(new Date(day["from"]), 'MMMM dd, yyyy HH:mm')
       const border = selected ? 'solid' : 'outline'
       return (
         <Button

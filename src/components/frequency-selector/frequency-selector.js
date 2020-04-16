@@ -21,7 +21,7 @@ const FrequencySelector = () => {
       <Box>
         <Heading as="h3" size="lg" mb="5">How often do you want us to clean?</Heading>
         {Object.keys(hourlyRates).map((key, index) => {
-          const selected = state.booking.frequency === key
+          const selected = state.booking.data.frequency === key
           const border = selected ? 'solid' : 'outline'
           return (
             <Button

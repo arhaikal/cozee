@@ -20,8 +20,8 @@ const fetchUpdatedBookingFailure = (error) => {
 
 export const updateBooking = async (data, state, dispatch) => {
   try {
-    if (state.booking.identifier) {
-      const values = await patchBooking(state.booking.identifier, data);
+    if (state.booking.data.identifier) {
+      const values = await patchBooking(state.booking.data.identifier, data);
       dispatch(fetchUpdatedBookingSuccess(values));
     } else {
       const values = await postBooking(data);
