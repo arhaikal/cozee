@@ -1,4 +1,3 @@
-
 import { patchBooking } from '../../api/booking'
 
 export const FETCH_CLIENT = 'FETCH_CLIENT';
@@ -12,7 +11,20 @@ const fetchClientSuccess = (response) => {
   }
 }
 
+const fetchClientFailure = (error) => {
+  return {
+    type: FETCH_CLIENT_SUCCESS,
+    payload: error
+  }
+}
+
 export const updateClient = async (data, state, dispatch) => {
+  dispatch({ type: 'FETCH_CLIENT' });
+
+  try {
     const values = await patchBooking(state.booking.data.identifier, data);
     dispatch(fetchClientSuccess(values))
+  } catch (error) {
+    dispatch(fetchClientFailure(error));
+  }
 }

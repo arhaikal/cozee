@@ -1,14 +1,13 @@
 
 import React, { useState, useContext } from 'react';
 import { BookingContext } from '../context/BookingContext';
-import { getAddress } from '../store/booking/actions'
+import { getAddress } from '../store/address/actions'
 import {
   AlertIcon,
   Alert,
   AlertDescription,
   Button,
   Box,
-  CloseButton,
   Input,
   Grid,
   FormControl,

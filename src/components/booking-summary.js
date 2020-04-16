@@ -2,9 +2,10 @@
 import React, { useContext } from 'react';
 import { BookingContext } from '../context/BookingContext';
 import { format } from 'date-fns';
-import { Flex, Box, Text, Icon, Stat, StatLabel, StatHelpText, StatNumber, Divider } from "@chakra-ui/core";
+import { Flex, Box, Text, Stat, StatLabel, StatHelpText, StatNumber, Divider } from "@chakra-ui/core";
 import { MdLocationOn } from "react-icons/md";
 import { IoMdCalendar, IoMdPerson } from "react-icons/io";
+import { getClient } from "../store/client/selectors";
 
 export const BookingSummary = () => {
   const [state, _] = useContext(BookingContext);
@@ -15,11 +16,13 @@ export const BookingSummary = () => {
     return date
   }
 
+  const client = getClient(state)
+
   const anyUserInput = () => {
-    if (state.booking.first_name ||
-      state.booking.last_name ||
-      state.booking.email ||
-      state.booking.phone) {
+    if (client.firstName ||
+      client.lastName ||
+      client.email ||
+      client.phone) {
       return true
     }
 
@@ -40,10 +43,10 @@ export const BookingSummary = () => {
 
         <Divider borderColor="teal.400" mt={8} />
 
-        {state.booking.address &&
+        {state.address.data &&
           <Flex direction='row' mt={8}>
             <Box as={MdLocationOn} size="24px" color="teal.400" />
-            <Text fontSize="md" ml={2}>{state.booking.address.formatted_address}</Text>
+            <Text fontSize="md" ml={2}>{state.address.data.formatted_address}</Text>
           </Flex>
         }
 
@@ -51,9 +54,9 @@ export const BookingSummary = () => {
           <Flex direction='row' mt={6}>
             <Box as={IoMdPerson} size="24px" color="teal.400" />
             <Box ml={2}>
-              <Text fontSize="md">{state.booking.first_name} {state.booking.last_name}</Text>
-              <Text fontSize="sm">{state.booking.email}</Text>
-              <Text fontSize="sm">{state.booking.phone} </Text>
+              <Text fontSize="md">{client.firstName} {client.lastName}</Text>
+              <Text fontSize="sm">{client.email}</Text>
+              <Text fontSize="sm">{client.phone} </Text>
             </Box>
           </Flex>
         }

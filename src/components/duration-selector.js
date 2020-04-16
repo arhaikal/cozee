@@ -11,15 +11,15 @@ export const DurationSelector = () => {
     dispatch(updateBooking({ duration: e }, state, dispatch))
   };
 
-  if (state.isFetchingServices) return (
+  if (state.services.isLoading) return (
     <Box rounded="lg" className="card-big">
       <Spinner color="teal.400" size='xl' />
     </Box>
   );
 
-  if (!state.services) return null;
+  if (!state.services.data) return null;
 
-  const recomendedTimes = state.services[0].service_options.filter(x => (x.area + " m2") === state.booking.area)
+  const recomendedTimes = state.services.data[0].service_options.filter(x => (x.area + " m2") === state.booking.data.area)
 
   return (
     <Box witdh="100%" rounded="lg" className="card-big">
