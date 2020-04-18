@@ -29,7 +29,11 @@ const BookingStep1 = () => {
         </Box>
       </Box>
 
-      <DurationSelector label="duration" ref={register({ required: true })} />
+      <DurationSelector
+        label="duration"
+        ref={register({ required: true })}
+        error={errors.duration ? true : false}
+      />
       {errors.duration && "Your input is required"}
 
       <FrequencySelector label="frequency" ref={register({ required: true })} />
