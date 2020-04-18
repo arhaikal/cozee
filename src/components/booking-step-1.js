@@ -5,12 +5,14 @@ import { DurationSelector } from "./duration-selector"
 import { AreaSelector } from "./area-selector"
 import { Button, Flex, Grid, Box, Heading } from "@chakra-ui/core"
 import { useForm } from "react-hook-form"
+import { setLocalStorage } from "../utils/persistState"
 
 const BookingStep1 = () => {
   const [state, updateState] = useContext(BookingStepContext)
   const { register, handleSubmit, errors } = useForm()
   const onSubmit = data => {
     updateState({ step: 2 })
+    setLocalStorage("step", 2)
   }
 
   if (state.step !== 1) {

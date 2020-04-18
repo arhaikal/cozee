@@ -4,15 +4,18 @@ import { AddressInput } from "./address-input"
 import { Client } from "./client"
 import { Calendar } from "./calendar"
 import { Button, Grid, Flex } from "@chakra-ui/core"
+import { setLocalStorage } from "../utils/persistState"
 
 const BookingStep2 = () => {
   const [state, updateState] = useContext(BookingStepContext)
 
   const handleNextClick = () => {
     updateState({ step: 3 })
+    setLocalStorage("step", 3)
   }
 
   const handlePrevClick = () => {
+    setLocalStorage("step", 1)
     updateState({ step: 1 })
   }
 

@@ -32,7 +32,7 @@ export const Client = () => {
             type="text"
             placeholder="Kersti"
             focusBorderColor="teal.400"
-            defaultValue={state.booking.first_name}
+            defaultValue={state.client.data.firstName}
           />
         </FormControl>
         <FormControl>
@@ -43,7 +43,7 @@ export const Client = () => {
             type="text"
             placeholder="Kaljulaid"
             focusBorderColor="teal.400"
-            defaultValue={state.booking.last_name}
+            defaultValue={state.client.data.lastName}
           />
         </FormControl>
         <FormControl>
@@ -54,7 +54,7 @@ export const Client = () => {
             type="email"
             placeholder="Kersti@email.com"
             focusBorderColor="teal.400"
-            defaultValue={state.booking.email}
+            defaultValue={state.client.data.email}
           />
         </FormControl>
         <FormControl>
@@ -65,7 +65,7 @@ export const Client = () => {
             type="tel"
             placeholder="+372 82194129"
             focusBorderColor="teal.400"
-            defaultValue={state.booking.phone}
+            defaultValue={state.client.data.phone}
           />
         </FormControl>
       </Grid>

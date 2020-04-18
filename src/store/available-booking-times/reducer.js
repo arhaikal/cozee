@@ -3,9 +3,10 @@ import {
   FETCH_BOOKING_TIMES_FAILURE,
   FETCH_BOOKING_TIMES,
 } from "./actions"
+import { getLocalStorage, setLocalStorage } from "../../utils/persistState"
 
 export const availableTimesState = {
-  data: [],
+  data: getLocalStorage("availableTimes") || [],
   isLoading: false,
   error: null,
 }
@@ -18,6 +19,7 @@ export const availableTimes = (state = availableTimesState, action) => {
         isLoading: true,
       }
     case FETCH_BOOKING_TIMES_SUCCESS:
+      setLocalStorage("availableTimes", action.payload)
       return {
         ...state,
         data: action.payload,

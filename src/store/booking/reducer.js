@@ -2,9 +2,10 @@ import {
   FETCH_UPDATED_BOOKING_SUCCESS,
   FETCH_UPDATED_BOOKING_FAILURE,
 } from "./actions"
+import { getLocalStorage, setLocalStorage } from "../../utils/persistState"
 
 export const bookingState = {
-  data: {
+  data: getLocalStorage("booking") || {
     area: "0-39 m2",
     currency: "EUR",
     ends_at: null,
@@ -23,6 +24,7 @@ export const bookingState = {
 export const booking = (state = bookingState, action) => {
   switch (action.type) {
     case FETCH_UPDATED_BOOKING_SUCCESS:
+      setLocalStorage("booking", action.payload)
       return {
         ...state,
         data: action.payload,

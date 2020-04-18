@@ -2,12 +2,14 @@ import React, { useContext } from "react"
 import { BookingStepContext } from "../context/BookingStepContext"
 import { Button, Flex, Grid } from "@chakra-ui/core"
 import Card from "./card"
+import { setLocalStorage } from "../utils/persistState"
 
 const BookingStep3 = () => {
   const [state, updateState] = useContext(BookingStepContext)
 
   const handlePrevClick = () => {
     updateState({ step: 2 })
+    setLocalStorage("step", 2)
   }
 
   if (state.step !== 3) {

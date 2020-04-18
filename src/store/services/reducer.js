@@ -3,9 +3,10 @@ import {
   FETCH_SERVICES_SUCCESS,
   FETCH_SERVICES_FAILURE,
 } from "./actions"
+import { getLocalStorage, setLocalStorage } from "../../utils/persistState"
 
 export const servicesState = {
-  data: null,
+  data: getLocalStorage("services") || null,
   isLoading: false,
   error: null,
 }
@@ -17,6 +18,7 @@ export const services = (state = servicesState, action) => {
         isLoading: true,
       }
     case FETCH_SERVICES_SUCCESS:
+      setLocalStorage("services", action.payload)
       return {
         ...state,
         data: action.payload,
