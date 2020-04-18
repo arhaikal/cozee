@@ -51,7 +51,6 @@ export const DurationSelector = React.forwardRef(
                   ref={ref}
                   name={label}
                   variantColor="teal"
-                  type="radio"
                   value={state.booking.data.duration}
                   variant={border}
                   onClick={() => handleClick(obj.duration)}
