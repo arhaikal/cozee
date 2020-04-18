@@ -58,7 +58,9 @@ export const AddressInput = () => {
               type="text"
               placeholder="Kesklinn 1, Tallinn"
               focusBorderColor="teal.400"
-              defaultValue={state.address.data.formatted_address}
+              defaultValue={
+                state.address && state.address.data.formatted_address
+              }
             />
           </FormControl>
           <FormControl>
