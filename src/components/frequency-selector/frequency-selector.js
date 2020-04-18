@@ -1,44 +1,48 @@
-
-import React, { useContext } from 'react';
-import { BookingContext } from '../../context/BookingContext';
-import { updateBooking } from '../../store/booking/actions'
-import { Box, Text, Button, Heading } from '@chakra-ui/core'
+import React, { useContext } from "react"
+import { BookingContext } from "../../context/BookingContext"
+import { updateBooking } from "../../store/booking/actions"
+import { Box, Text, Button, Heading } from "@chakra-ui/core"
 
 const FrequencySelector = () => {
-  const [state, dispatch] = useContext(BookingContext);
-  const handleClick = (key) => {
+  const [state, dispatch] = useContext(BookingContext)
+  const handleClick = key => {
     dispatch(updateBooking({ frequency: key }, state, dispatch))
   }
   const hourlyRates = {
-    "weekly": "17.0",
-    "biweekly": "18.0",
-    "monthly": "19.0",
-    "once": "20.0"
+    weekly: "17.0",
+    biweekly: "18.0",
+    monthly: "19.0",
+    once: "20.0",
   }
 
   return (
     <Box witdh="100%" rounded="lg" className="card-big">
       <Box>
-        <Heading as="h3" size="lg" mb="5">How often do you want us to clean?</Heading>
+        <Heading as="h3" size="lg" mb="5">
+          How often do you want us to clean?
+        </Heading>
         {Object.keys(hourlyRates).map((key, index) => {
           const selected = state.booking.data.frequency === key
-          const border = selected ? 'solid' : 'outline'
+          const border = selected ? "solid" : "outline"
           return (
             <Button
               mt="6"
               width="100%"
               size="lg"
-              variantColor="teal" variant={border}
+              variantColor="teal"
+              variant={border}
               key={index}
               onClick={() => handleClick(key)}
             >
-              <Text width="100%" textAlign={'center'} fontSize="lg">{key}</Text>
+              <Text width="100%" textAlign={"center"} fontSize="lg">
+                {key}
+              </Text>
             </Button>
-          );
+          )
         })}
       </Box>
-    </Box >
-  );
+    </Box>
+  )
 }
 
-export default FrequencySelector;
+export default FrequencySelector

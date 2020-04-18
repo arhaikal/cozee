@@ -2,12 +2,12 @@ import {
   FETCH_BOOKING_TIMES_SUCCESS,
   FETCH_BOOKING_TIMES_FAILURE,
   FETCH_BOOKING_TIMES,
-} from './actions';
+} from "./actions"
 
 export const availableTimesState = {
   data: [],
   isLoading: false,
-  error: null
+  error: null,
 }
 
 export const availableTimes = (state = availableTimesState, action) => {
@@ -15,22 +15,21 @@ export const availableTimes = (state = availableTimesState, action) => {
     case FETCH_BOOKING_TIMES:
       return {
         ...state,
-        isLoading: true
-      };
+        isLoading: true,
+      }
     case FETCH_BOOKING_TIMES_SUCCESS:
       return {
         ...state,
         data: action.payload,
         isLoading: false,
-      };
+      }
     case FETCH_BOOKING_TIMES_FAILURE:
       return {
         ...state,
         error: action.payload,
-        isLoading: false
-      };
+        isLoading: false,
+      }
     default:
-      return state;
+      return state
   }
 }
-

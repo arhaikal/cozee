@@ -1,8 +1,8 @@
 import {
   FETCH_ADDRESS,
   FETCH_ADDRESS_FAILURE,
-  FETCH_ADDRESS_SUCCESS
-} from './actions';
+  FETCH_ADDRESS_SUCCESS,
+} from "./actions"
 
 export const addressState = {
   data: null,
@@ -15,23 +15,23 @@ export const address = (state = addressState, action) => {
     case FETCH_ADDRESS:
       return {
         ...state,
-        isLoading: true
-      };
+        isLoading: true,
+      }
     case FETCH_ADDRESS_SUCCESS:
       return {
         ...state,
         data: action.payload.address,
         error: null,
-        isLoading: false
-      };
+        isLoading: false,
+      }
     case FETCH_ADDRESS_FAILURE:
       return {
         ...state,
         error: action.payload,
         data: null,
         isLoading: false,
-      };
+      }
     default:
-      return state;
+      return state
   }
 }

@@ -1,71 +1,74 @@
-
-import React, { useContext } from 'react';
-import { BookingContext } from '../context/BookingContext';
-import { updateClient } from '../store/client/actions'
-import { Box, FormControl, Input, FormLabel, Grid } from '@chakra-ui/core'
+import React, { useContext } from "react"
+import { BookingContext } from "../context/BookingContext"
+import { updateClient } from "../store/client/actions"
+import { Box, FormControl, Input, FormLabel, Grid } from "@chakra-ui/core"
 
 export const Client = () => {
-  const [state, dispatch] = useContext(BookingContext);
-  const handleFirstNameChange = (e) => {
+  const [state, dispatch] = useContext(BookingContext)
+  const handleFirstNameChange = e => {
     dispatch(updateClient({ first_name: e.target.value }, state, dispatch))
-  };
+  }
 
-  const handleLastNameChange = (e) => {
+  const handleLastNameChange = e => {
     dispatch(updateClient({ last_name: e.target.value }, state, dispatch))
-  };
+  }
 
-  const handleEmailChange = (e) => {
+  const handleEmailChange = e => {
     dispatch(updateClient({ email: e.target.value }, state, dispatch))
-  };
+  }
 
-  const handlePhoneChange = (e) => {
+  const handlePhoneChange = e => {
     dispatch(updateClient({ phone: e.target.value }, state, dispatch))
-  };
+  }
 
   return (
     <Box witdh="100%" rounded="lg" className="card-big">
       <Grid templateColumns={{ base: "1fr", md: "1fr 1fr" }} gap={4}>
-        <FormControl >
+        <FormControl>
           <FormLabel htmlFor="name">First name</FormLabel>
           <Input
             name="first_name"
             onChange={handleFirstNameChange}
-            type="text" placeholder="Kersti"
+            type="text"
+            placeholder="Kersti"
             focusBorderColor="teal.400"
             defaultValue={state.booking.first_name}
           />
         </FormControl>
-        <FormControl >
+        <FormControl>
           <FormLabel htmlFor="name">Last name</FormLabel>
           <Input
             name="last_name"
             onChange={handleLastNameChange}
-            type="text" placeholder="Kaljulaid"
+            type="text"
+            placeholder="Kaljulaid"
             focusBorderColor="teal.400"
             defaultValue={state.booking.last_name}
           />
         </FormControl>
-        <FormControl >
+        <FormControl>
           <FormLabel htmlFor="email">Email</FormLabel>
           <Input
             name="email"
             onChange={handleEmailChange}
-            type="email" placeholder="Kersti@email.com"
+            type="email"
+            placeholder="Kersti@email.com"
             focusBorderColor="teal.400"
             defaultValue={state.booking.email}
           />
         </FormControl>
-        <FormControl >
+        <FormControl>
           <FormLabel htmlFor="tel">Phone Number</FormLabel>
           <Input
             name="phone"
             onChange={handlePhoneChange}
-            type="tel" placeholder="+372 82194129"
+            type="tel"
+            placeholder="+372 82194129"
             focusBorderColor="teal.400"
             defaultValue={state.booking.phone}
           />
         </FormControl>
       </Grid>
     </Box>
-  );
+  )
 }

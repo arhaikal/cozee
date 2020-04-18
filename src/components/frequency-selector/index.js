@@ -1,1 +1,1 @@
-export { default } from './frequency-selector';
+export { default } from "./frequency-selector"

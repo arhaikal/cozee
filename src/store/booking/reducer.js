@@ -1,7 +1,7 @@
 import {
   FETCH_UPDATED_BOOKING_SUCCESS,
-  FETCH_UPDATED_BOOKING_FAILURE
-} from './actions';
+  FETCH_UPDATED_BOOKING_FAILURE,
+} from "./actions"
 
 export const bookingState = {
   data: {
@@ -14,11 +14,11 @@ export const bookingState = {
       weekly: "17.0",
       biweekly: "18.0",
       monthly: "19.0",
-      once: "20.0"
+      once: "20.0",
     },
     starts_at: null,
     total_cost: "0.0",
-  }
+  },
 }
 
 export const booking = (state = bookingState, action) => {
@@ -27,15 +27,13 @@ export const booking = (state = bookingState, action) => {
       return {
         ...state,
         data: action.payload,
-      };
+      }
     case FETCH_UPDATED_BOOKING_FAILURE:
       return {
         ...state,
         error: action.payload,
-      };
+      }
     default:
-      return state;
+      return state
   }
 }
-
-

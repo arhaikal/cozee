@@ -1,32 +1,32 @@
-import { getAvailableTimes } from '../../api/available-times';
+import { getAvailableTimes } from "../../api/available-times"
 
-export const FETCH_BOOKING_TIMES = 'FETCH_BOOKING_TIMES';
-export const FETCH_BOOKING_TIMES_SUCCESS = 'FETCH_BOOKING_TIMES_SUCCESS';
-export const FETCH_BOOKING_TIMES_FAILURE = 'FETCH_BOOKING_TIMES_FAILURE';
+export const FETCH_BOOKING_TIMES = "FETCH_BOOKING_TIMES"
+export const FETCH_BOOKING_TIMES_SUCCESS = "FETCH_BOOKING_TIMES_SUCCESS"
+export const FETCH_BOOKING_TIMES_FAILURE = "FETCH_BOOKING_TIMES_FAILURE"
 
-const fetchBookingTimesSuccess = (response) => {
+const fetchBookingTimesSuccess = response => {
   return {
     type: FETCH_BOOKING_TIMES_SUCCESS,
-    payload: response
+    payload: response,
   }
 }
 
-const fetchBookingTimesFailure = (error) => {
+const fetchBookingTimesFailure = error => {
   return {
     type: FETCH_BOOKING_TIMES_FAILURE,
-    payload: error
+    payload: error,
   }
 }
 
 export const getBookingTimes = async (data, state, dispatch) => {
-  dispatch({ type: 'FETCH_BOOKING_TIMES' });
+  dispatch({ type: "FETCH_BOOKING_TIMES" })
 
   try {
-    const values = await getAvailableTimes(data);
+    const values = await getAvailableTimes(data)
     setTimeout(() => {
-      dispatch(fetchBookingTimesSuccess(values));
+      dispatch(fetchBookingTimesSuccess(values))
     }, 500)
   } catch (error) {
-    dispatch(fetchBookingTimesFailure(error));
+    dispatch(fetchBookingTimesFailure(error))
   }
 }

@@ -1,4 +1,4 @@
-@import './variables.scss';
+@import "./variables.scss";
 
 *,
 *::before,
@@ -10,8 +10,7 @@
 
 body {
   font-size: var(--font-size-body);
-  background-color: #EBF8FF !important;
-
+  background-color: #ebf8ff !important;
 }
 
 h1 {
@@ -98,7 +97,7 @@ small {
   border-radius: 20px;
   padding: 32px 47px;
   background-color: white;
-  border: 1px solid #4FD1C5;
+  border: 1px solid #4fd1c5;
 }
 
 .card-list {
@@ -107,7 +106,7 @@ small {
   :active {
     background-color: rgb(232, 235, 235);
   }
-  :hover{
+  :hover {
     background-color: rgb(232, 235, 235);
   }
 }
@@ -131,24 +130,27 @@ button:focus {
   z-index: 1000;
   width: 100%;
   margin: 0;
-  top:0;
-  background: rgb(79,209,197);
-  background: linear-gradient(180deg, rgba(79, 209, 197, 0.971026) 93%, rgba(235, 248, 255, 0.884191) 100%);
+  top: 0;
+  background: rgb(79, 209, 197);
+  background: linear-gradient(
+    180deg,
+    rgba(79, 209, 197, 0.971026) 93%,
+    rgba(235, 248, 255, 0.884191) 100%
+  );
   transition: width 200ms ease;
   height: 90px;
 }
 
 .mobile-summary-closed {
-  transform: scaleY(0);    
+  transform: scaleY(0);
   transform-origin: top;
   transition: transform 0.26s ease;
 }
 
-.mobile-summary-open  {
+.mobile-summary-open {
   transform: scaleY(1);
   transform-origin: top;
   transition: transform 0.26s ease;
-
 }
 
 .nav-link {
@@ -163,7 +165,7 @@ button:focus {
 }
 
 .nav-link .logo {
-   color : #fafefd;
+  color: #fafefd;
 }
 
 .nav-link svg {

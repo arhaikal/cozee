@@ -2,7 +2,7 @@ import {
   FETCH_CLIENT,
   FETCH_CLIENT_SUCCESS,
   FETCH_CLIENT_FAILURE,
-} from './actions';
+} from "./actions"
 
 export const clientState = {
   data: {},
@@ -15,8 +15,8 @@ export const client = (state = clientState, action) => {
     case FETCH_CLIENT:
       return {
         ...state,
-        isLoading: true
-      };
+        isLoading: true,
+      }
     case FETCH_CLIENT_SUCCESS:
       return {
         ...state,
@@ -24,17 +24,17 @@ export const client = (state = clientState, action) => {
           firstName: action.payload.first_name,
           lastName: action.payload.last_name,
           phone: action.payload.phone,
-          email: action.payload.email
+          email: action.payload.email,
         },
-        isLoading: false
-      };
+        isLoading: false,
+      }
     case FETCH_CLIENT_FAILURE:
       return {
         ...state,
         error: action.payload,
-        isLoading: false
-    };
+        isLoading: false,
+      }
     default:
-      return state;
+      return state
   }
 }

@@ -1,12 +1,12 @@
-import { baseApi } from './base';
+import { baseApi } from "./base"
 
 export async function getAvailableTimes(data) {
-  const response = await baseApi.get('available_times/', {
+  const response = await baseApi.get("available_times/", {
     params: {
       from: data.from,
       to: data.to,
-      duration: data.duration
-    }
-  });
+      duration: data.duration,
+    },
+  })
   return response.data
 }

@@ -1,11 +1,11 @@
-import { baseApi } from './base';
+import { baseApi } from "./base"
 
 export async function postBooking(data) {
-  const response = await baseApi.post('bookings/', data);
+  const response = await baseApi.post("bookings/", data)
   return response.data
 }
 
 export async function patchBooking(id, data) {
-  const response = await baseApi.patch(`bookings/${id}`, data);
+  const response = await baseApi.patch(`bookings/${id}`, data)
   return response.data
 }
