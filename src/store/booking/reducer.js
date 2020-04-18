@@ -7,7 +7,6 @@ export const bookingState = {
   data: {
     area: "0-39 m2",
     currency: "EUR",
-    duration: "0.0",
     ends_at: null,
     frequency: "once",
     hourly_rates: {

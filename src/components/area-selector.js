@@ -4,10 +4,9 @@ import { updateBooking } from "../store/booking/actions"
 import { getServices } from "../store/services/actions"
 import { Box, Select, Spinner } from "@chakra-ui/core"
 
-export const AreaSelector = () => {
+export const AreaSelector = React.forwardRef(({ label, register }, ref) => {
   const [state, dispatch] = useContext(BookingContext)
   const updateArea = e => {
-    console.log(state)
     dispatch(updateBooking({ area: e.target.value }, state, dispatch))
   }
 
@@ -29,6 +28,8 @@ export const AreaSelector = () => {
     <Select
       as="select"
       name="area"
+      name={label}
+      ref={ref}
       onChange={updateArea}
       value={state.booking.data.area}
     >
@@ -42,4 +43,4 @@ export const AreaSelector = () => {
       >
     </Select>
   )
-}
+})

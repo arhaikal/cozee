@@ -6,14 +6,15 @@ import {
   Badge,
   Heading,
   Box,
-  RadioButtonGroup,
+  Button,
   Spinner,
+  Grid,
 } from "@chakra-ui/core"
-import { CustomRadio } from "./custom-radio"
 
-export const DurationSelector = () => {
+export const DurationSelector = React.forwardRef(({ label }, ref) => {
   const [state, dispatch] = useContext(BookingContext)
-  const updateDuration = e => {
+
+  const handleClick = e => {
     dispatch(updateBooking({ duration: e }, state, dispatch))
   }
 
@@ -29,47 +30,51 @@ export const DurationSelector = () => {
   const recomendedTimes = state.services.data[0].service_options.filter(
     x => x.area + " m2" === state.booking.data.area
   )
-
-  console.log(
-    state.services.data[0].service_options.filter(x => x.area + " m2")
-  )
-  console.log(state.booking.data.area)
   return (
     <Box witdh="100%" rounded="lg" className="card-big">
       <Box>
         <Heading as="h3" size="lg" mb="5">
           How many hours should we clean?
         </Heading>
-        <RadioButtonGroup
-          defaultValue={state.booking.data.duration}
-          onChange={updateDuration}
-          name="duration"
-          isInline
-          spacing="40px"
-        >
-          {recomendedTimes.map((obj, key) => (
-            <CustomRadio w={100} mb={5} value={obj.duration} key={key}>
-              {`${obj.duration} h`}
-
-              <Tooltip
-                hasArrow
-                label="Info about this level of service which can be added in the service object"
-                placement="top"
+        <Grid templateColumns="repeat(5, 1fr)" gap={10}>
+          {recomendedTimes.map((obj, key) => {
+            const selected = state.booking.data.duration === obj.duration
+            const border = selected ? "solid" : "outline"
+            return (
+              <Button
+                ref={ref}
+                name={label}
+                variantColor="teal"
+                type="radio"
+                value={state.booking.data.duration}
+                variant={border}
+                onClick={() => handleClick(obj.duration)}
+                defaultChecked={state.booking.data.duration === obj.duration}
+                key={key}
+                w={100}
               >
-                <Badge
-                  rounded="full"
-                  px="2"
-                  py=".5"
-                  variantColor="teal"
-                  className="tool-tip"
+                {`${obj.duration} h`}
+
+                <Tooltip
+                  hasArrow
+                  label="Info about this level of service which can be added in the service object"
+                  placement="top"
                 >
-                  {obj.name}
-                </Badge>
-              </Tooltip>
-            </CustomRadio>
-          ))}
-        </RadioButtonGroup>
+                  <Badge
+                    rounded="full"
+                    px="2"
+                    py=".5"
+                    variantColor="teal"
+                    className="tool-tip"
+                  >
+                    {obj.name}
+                  </Badge>
+                </Tooltip>
+              </Button>
+            )
+          })}
+        </Grid>
       </Box>
     </Box>
   )
-}
+})

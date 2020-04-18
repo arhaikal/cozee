@@ -3,7 +3,7 @@ import { BookingContext } from "../../context/BookingContext"
 import { updateBooking } from "../../store/booking/actions"
 import { Box, Text, Button, Heading } from "@chakra-ui/core"
 
-const FrequencySelector = () => {
+const FrequencySelector = React.forwardRef(({ label }, ref) => {
   const [state, dispatch] = useContext(BookingContext)
   const handleClick = key => {
     dispatch(updateBooking({ frequency: key }, state, dispatch))
@@ -26,6 +26,9 @@ const FrequencySelector = () => {
           const border = selected ? "solid" : "outline"
           return (
             <Button
+              ref={ref}
+              name={label}
+              value={state.booking.data.frequency}
               mt="6"
               width="100%"
               size="lg"
@@ -43,6 +46,6 @@ const FrequencySelector = () => {
       </Box>
     </Box>
   )
-}
+})
 
 export default FrequencySelector
