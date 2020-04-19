@@ -30,19 +30,41 @@ const BookingStep1 = () => {
             {errors.area && "Your input is required"}
           </Box>
         </Box>
+        <Box
+          witdh="100%"
+          rounded="lg"
+          className="card-big"
+          border={errors.duration ? "3px solid tomato" : ""}
+        >
+          <Box>
+            <Heading
+              as="h3"
+              size="lg"
+              mb="5"
+              color={errors.duration ? "tomato" : ""}
+            >
+              How many hours should we clean?
+            </Heading>
+            <DurationSelector
+              label="duration"
+              ref={register({ required: true })}
+            />
+            {errors.duration && "Your input is required"}
+          </Box>
+        </Box>
 
-        <DurationSelector
-          label="duration"
-          ref={register({ required: true })}
-          error={errors.duration ? true : false}
-        />
-        {errors.duration && "Your input is required"}
-
-        <FrequencySelector
-          label="frequency"
-          ref={register({ required: true })}
-        />
-        {errors.frequency && "Your input is required"}
+        <Box witdh="100%" rounded="lg" className="card-big">
+          <Box>
+            <Heading as="h3" size="lg" mb="5">
+              How often do you want us to clean?
+            </Heading>
+            <FrequencySelector
+              label="frequency"
+              ref={register({ required: true })}
+            />
+            {errors.frequency && "Your input is required"}
+          </Box>
+        </Box>
 
         <Flex align="center" justify="flex-end" mb={6}>
           <Button
