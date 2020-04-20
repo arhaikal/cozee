@@ -13,9 +13,8 @@ import {
   FormLabel,
 } from "@chakra-ui/core"
 
-export const AddressInput = () => {
+export const AddressInput = React.forwardRef(({ label }, ref) => {
   const [address, setAddress] = useState("")
-  const [zipcode, setZipcode] = useState("")
   const [state, dispatch] = useContext(BookingContext)
   const handleSubmit = e => {
     e.preventDefault()
@@ -48,14 +47,15 @@ export const AddressInput = () => {
   }
 
   return (
-    <Box witdh="100%" rounded="lg" className="card-big">
+    <>
       <form onSubmit={handleSubmit}>
-        <Grid templateColumns={{ base: "1fr", md: "2fr 1fr" }} gap={4}>
+        <Grid templateColumns={{ base: "1fr", md: "4fr 1fr" }} gap={4}>
           <FormControl>
-            <FormLabel htmlFor="name">Address</FormLabel>
             <Input
               onChange={e => setAddress(e.target.value)}
               type="text"
+              name={label}
+              ref={ref}
               placeholder="Kesklinn 1, Tallinn"
               focusBorderColor="teal.400"
               defaultValue={
@@ -63,28 +63,20 @@ export const AddressInput = () => {
               }
             />
           </FormControl>
-          <FormControl>
-            <FormLabel htmlFor="name">Zip Code</FormLabel>
-            <Input
-              onChange={e => setZipcode(e.target.value)}
-              type="text"
-              placeholder="24141"
-              focusBorderColor="teal.400"
-            />
-          </FormControl>
         </Grid>
         <Button
           type="submit"
           variantColor="teal"
           size="md"
-          disabled={!address || !zipcode}
+          disabled={!address}
           width="150px"
           mt={4}
         >
           Validate Address
         </Button>
       </form>
+
       <AddressNotFound />
-    </Box>
+    </>
   )
-}
+})

@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react"
+import React, { useContext } from "react"
 import { BookingContext } from "../context/BookingContext"
 import { Tooltip, Badge, Box, Button, Spinner, Grid } from "@chakra-ui/core"
 import { addServices } from "../store/services/actions"
@@ -35,23 +35,23 @@ export const DurationSelector = React.forwardRef(({ label }, ref) => {
         const selected = homeServiceDuration(state) === obj.duration
         const border = selected ? "solid" : "outline"
         return (
-          <Button
-            ref={ref}
-            name={label}
-            variantColor="teal"
-            value={homeServiceDuration(state)}
-            variant={border}
-            onClick={() => handleClick(obj)}
-            key={key}
-            w={100}
+          <Tooltip
+            hasArrow
+            label="Info about this level of service which can be added in the service object"
+            placement="top"
           >
-            {`${obj.duration} h`}
-
-            <Tooltip
-              hasArrow
-              label="Info about this level of service which can be added in the service object"
-              placement="top"
+            <Button
+              ref={ref}
+              name={label}
+              variantColor="teal"
+              value={homeServiceDuration(state)}
+              variant={border}
+              onClick={() => handleClick(obj)}
+              key={key}
+              w={100}
             >
+              {`${obj.duration} h`}
+
               <Badge
                 rounded="full"
                 px="2"
@@ -61,8 +61,8 @@ export const DurationSelector = React.forwardRef(({ label }, ref) => {
               >
                 {obj.name}
               </Badge>
-            </Tooltip>
-          </Button>
+            </Button>
+          </Tooltip>
         )
       })}
     </Grid>
