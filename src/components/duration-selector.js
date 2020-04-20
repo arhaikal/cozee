@@ -1,13 +1,20 @@
 import React, { useContext } from "react"
 import { BookingContext } from "../context/BookingContext"
-import { updateBooking } from "../store/booking/actions"
 import { Tooltip, Badge, Box, Button, Spinner, Grid } from "@chakra-ui/core"
+import { addServices } from "../store/services/actions"
+import { selectedHomeServiceDuration } from "../store/services/selectors"
 
 export const DurationSelector = React.forwardRef(({ label }, ref) => {
   const [state, dispatch] = useContext(BookingContext)
 
   const handleClick = e => {
-    dispatch(updateBooking({ duration: e }, state, dispatch))
+    dispatch(
+      addServices(
+        [{ service_id: "home_cleaning", service_option_id: e.id }],
+        state,
+        dispatch
+      )
+    )
   }
 
   if (state.services.isLoading)
@@ -25,16 +32,16 @@ export const DurationSelector = React.forwardRef(({ label }, ref) => {
   return (
     <Grid templateColumns="repeat(5, 1fr)" gap={10}>
       {recomendedTimes.map((obj, key) => {
-        const selected = state.booking.data.duration === obj.duration
+        const selected = selectedHomeServiceDuration(state) === obj.duration
         const border = selected ? "solid" : "outline"
         return (
           <Button
             ref={ref}
             name={label}
             variantColor="teal"
-            value={state.booking.data.duration}
+            value={selectedHomeServiceDuration(state)}
             variant={border}
-            onClick={() => handleClick(obj.duration)}
+            onClick={() => handleClick(obj)}
             defaultChecked={state.booking.data.duration === obj.duration}
             key={key}
             w={100}

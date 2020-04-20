@@ -8,15 +8,9 @@ export const bookingState = {
   data: getLocalStorage("booking") || {
     area: "0-39 m2",
     currency: "EUR",
-    ends_at: null,
     frequency: "once",
-    hourly_rates: {
-      weekly: "17.0",
-      biweekly: "18.0",
-      monthly: "19.0",
-      once: "20.0",
-    },
     starts_at: null,
+    ends_at: null,
     total_cost: "0.0",
   },
 }
@@ -27,7 +21,14 @@ export const booking = (state = bookingState, action) => {
       setLocalStorage("booking", action.payload)
       return {
         ...state,
-        data: action.payload,
+        data: {
+          identifier: action.payload.identifier,
+          area: action.payload.area,
+          frequency: action.payload.frequency,
+          starts_at: action.payload.starts_at,
+          ends_at: action.payload.ends_at,
+          total_cost: action.payload.total_cost,
+        },
       }
     case FETCH_UPDATED_BOOKING_FAILURE:
       return {

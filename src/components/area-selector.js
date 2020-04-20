@@ -1,7 +1,7 @@
 import React, { useContext, useEffect } from "react"
 import { BookingContext } from "../context/BookingContext"
 import { updateBooking } from "../store/booking/actions"
-import { getServices } from "../store/services/actions"
+import { getServices, addServices } from "../store/services/actions"
 import { Box, Select, Spinner } from "@chakra-ui/core"
 
 export const AreaSelector = React.forwardRef(({ label, register }, ref) => {

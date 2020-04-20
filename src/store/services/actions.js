@@ -1,8 +1,11 @@
-import { getAllServices } from "../../api/services"
+import { getAllServices, postServices } from "../../api/services"
+import { bookingId } from "../booking/selectors"
 
 export const FETCH_SERVICES = "FETCH_SERVICES"
 export const FETCH_SERVICES_SUCCESS = "FETCH_SERVICES_SUCCESS"
 export const FETCH_SERVICES_FAILURE = "FETCH_SERVICES_FAILURE"
+export const POST_SERVICES_SUCCESS = "POST_SERVICES_SUCCESS"
+export const POST_SERVICES_FAILURE = "POST_SERVICES_FAILURE"
 
 const fetchServicesSuccess = response => {
   return {
@@ -18,6 +21,20 @@ const fetchServicesFailure = error => {
   }
 }
 
+const postServicesSuccess = response => {
+  return {
+    type: POST_SERVICES_SUCCESS,
+    payload: response,
+  }
+}
+
+const postServicesFailure = error => {
+  return {
+    type: POST_SERVICES_FAILURE,
+    payload: error,
+  }
+}
+
 export const getServices = async (state, dispatch) => {
   dispatch({ type: "FETCH_SERVICES" })
 
@@ -26,5 +43,16 @@ export const getServices = async (state, dispatch) => {
     dispatch(fetchServicesSuccess(values))
   } catch (error) {
     dispatch(fetchServicesFailure(error))
+  }
+}
+
+export const addServices = async (data, state, dispatch) => {
+  if (bookingId(state)) {
+    try {
+      const values = await postServices(bookingId(state), data)
+      dispatch(postServicesSuccess(values))
+    } catch (error) {
+      dispatch(postServicesFailure(error))
+    }
   }
 }
