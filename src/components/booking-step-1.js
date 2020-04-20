@@ -1,19 +1,40 @@
-import React, { useContext } from "react"
+import React, { useContext, useEffect } from "react"
 import { BookingStepContext } from "../context/BookingStepContext"
+import { BookingContext } from "../context/BookingContext"
 import FrequencySelector from "./frequency-selector"
 import { DurationSelector } from "./duration-selector"
 import { AreaSelector } from "./area-selector"
 import { Button, Flex, Grid, Box, Heading } from "@chakra-ui/core"
 import { useForm } from "react-hook-form"
 import { setLocalStorage } from "../utils/persistState"
+import { addServices } from "../store/services/actions"
 
 const BookingStep1 = () => {
   const [state, updateState] = useContext(BookingStepContext)
+  const [appState, dispatch] = useContext(BookingContext)
   const { register, handleSubmit, errors } = useForm()
   const onSubmit = data => {
     updateState({ step: 2 })
     setLocalStorage("step", 2)
   }
+
+  const defaultDuration =
+    appState.services &&
+    appState.services.data[0].service_options.filter(
+      option => option.area === appState.booking.data.area.split(" ")[0]
+    )[1].id
+
+  useEffect(() => {
+    console.log(defaultDuration)
+    dispatch(
+      addServices(
+        [{ service_id: "home_cleaning", service_option_id: defaultDuration }],
+        appState,
+        dispatch
+      )
+    )
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [appState.booking.data.area])
 
   if (state.step !== 1) {
     return null

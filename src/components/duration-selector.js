@@ -1,8 +1,8 @@
-import React, { useContext } from "react"
+import React, { useContext, useEffect } from "react"
 import { BookingContext } from "../context/BookingContext"
 import { Tooltip, Badge, Box, Button, Spinner, Grid } from "@chakra-ui/core"
 import { addServices } from "../store/services/actions"
-import { selectedHomeServiceDuration } from "../store/services/selectors"
+import { homeServiceDuration } from "../store/services/selectors"
 
 export const DurationSelector = React.forwardRef(({ label }, ref) => {
   const [state, dispatch] = useContext(BookingContext)
@@ -32,17 +32,16 @@ export const DurationSelector = React.forwardRef(({ label }, ref) => {
   return (
     <Grid templateColumns="repeat(5, 1fr)" gap={10}>
       {recomendedTimes.map((obj, key) => {
-        const selected = selectedHomeServiceDuration(state) === obj.duration
+        const selected = homeServiceDuration(state) === obj.duration
         const border = selected ? "solid" : "outline"
         return (
           <Button
             ref={ref}
             name={label}
             variantColor="teal"
-            value={selectedHomeServiceDuration(state)}
+            value={homeServiceDuration(state)}
             variant={border}
             onClick={() => handleClick(obj)}
-            defaultChecked={state.booking.data.duration === obj.duration}
             key={key}
             w={100}
           >

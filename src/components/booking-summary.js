@@ -14,7 +14,7 @@ import {
 import { MdLocationOn } from "react-icons/md"
 import { IoMdCalendar, IoMdPerson } from "react-icons/io"
 import { getClient } from "../store/client/selectors"
-import { selectedHomeServiceDuration } from "../store/services/selectors"
+import { homeServiceDuration } from "../store/services/selectors"
 
 export const BookingSummary = () => {
   const [state] = useContext(BookingContext)
@@ -44,9 +44,7 @@ export const BookingSummary = () => {
             € {state.booking.data.total_cost}
           </StatNumber>
           <Flex direction="row" justify="space-between" width="75%">
-            <StatHelpText>
-              {selectedHomeServiceDuration(state)} hours
-            </StatHelpText>
+            <StatHelpText>{homeServiceDuration(state)} hours</StatHelpText>
             <StatHelpText>{state.booking.data.frequency}</StatHelpText>
           </Flex>
         </Stat>

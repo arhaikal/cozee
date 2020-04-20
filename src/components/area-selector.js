@@ -1,14 +1,26 @@
 import React, { useContext, useEffect } from "react"
 import { BookingContext } from "../context/BookingContext"
 import { updateBooking } from "../store/booking/actions"
-import { getServices, addServices } from "../store/services/actions"
+import { getServices } from "../store/services/actions"
 import { Box, Select, Spinner } from "@chakra-ui/core"
 
 export const AreaSelector = React.forwardRef(({ label, register }, ref) => {
   const [state, dispatch] = useContext(BookingContext)
   const updateArea = e => {
-    dispatch(updateBooking({ area: e.target.value }, state, dispatch))
+    dispatch(
+      updateBooking(
+        { area: e.target.value, duration: defaultDuration },
+        state,
+        dispatch
+      )
+    )
   }
+
+  const defaultDuration =
+    state.services.data &&
+    state.services.data[0].service_options.filter(
+      option => option.area === state.booking.data.area.split(" ")[0]
+    )[1].duration
 
   useEffect(() => {
     dispatch(getServices(state, dispatch))
