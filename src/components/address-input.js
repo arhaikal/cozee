@@ -6,11 +6,9 @@ import {
   Alert,
   AlertDescription,
   Button,
-  Box,
   Input,
   Grid,
   FormControl,
-  FormLabel,
 } from "@chakra-ui/core"
 
 export const AddressInput = React.forwardRef(({ label }, ref) => {
@@ -22,8 +20,7 @@ export const AddressInput = React.forwardRef(({ label }, ref) => {
     dispatch(
       getAddress(
         {
-          address_query: `${address}, ${zipcode}`,
-          zip_code: zipcode,
+          address_query: `${address}`,
         },
         state,
         dispatch
@@ -48,33 +45,32 @@ export const AddressInput = React.forwardRef(({ label }, ref) => {
 
   return (
     <>
-      <form onSubmit={handleSubmit}>
-        <Grid templateColumns={{ base: "1fr", md: "4fr 1fr" }} gap={4}>
-          <FormControl>
-            <Input
-              onChange={e => setAddress(e.target.value)}
-              type="text"
-              name={label}
-              ref={ref}
-              placeholder="Kesklinn 1, Tallinn"
-              focusBorderColor="teal.400"
-              defaultValue={
-                state.address.data && state.address.data.formatted_address
-              }
-            />
-          </FormControl>
-        </Grid>
-        <Button
-          type="submit"
-          variantColor="teal"
-          size="md"
-          disabled={!address}
-          width="150px"
-          mt={4}
-        >
-          Validate Address
-        </Button>
-      </form>
+      <Grid templateColumns={{ base: "1fr", md: "4fr 1fr" }} gap={4}>
+        <FormControl>
+          <Input
+            onChange={e => setAddress(e.target.value)}
+            type="text"
+            name={label}
+            ref={ref}
+            placeholder="Kesklinn 1, Tallinn"
+            focusBorderColor="teal.400"
+            defaultValue={
+              state.address.data && state.address.data.formatted_address
+            }
+          />
+        </FormControl>
+      </Grid>
+      <Button
+        type="submit"
+        variantColor="teal"
+        size="md"
+        disabled={!address}
+        width="150px"
+        onClick={handleSubmit}
+        mt={4}
+      >
+        Validate Address
+      </Button>
 
       <AddressNotFound />
     </>
