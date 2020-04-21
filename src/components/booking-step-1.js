@@ -19,7 +19,7 @@ const BookingStep1 = () => {
   }
 
   const defaultDuration =
-    appState.services &&
+    appState.services.data &&
     appState.services.data[0].service_options.filter(
       option => option.area === appState.booking.data.area.split(" ")[0]
     )[1].id
