@@ -4,7 +4,7 @@ import { updateBooking } from "../store/booking/actions"
 import { getServices } from "../store/services/actions"
 import { Box, Select, Spinner } from "@chakra-ui/core"
 
-export const AreaSelector = React.forwardRef(({ label, register }, ref) => {
+export const AreaSelector = React.forwardRef(({ label }, ref) => {
   const [state, dispatch] = useContext(BookingContext)
   const updateArea = e => {
     dispatch(

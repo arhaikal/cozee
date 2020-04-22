@@ -25,7 +25,6 @@ const BookingStep1 = () => {
     )[1].id
 
   useEffect(() => {
-    console.log(defaultDuration)
     dispatch(
       addServices(
         [{ service_id: "home_cleaning", service_option_id: defaultDuration }],

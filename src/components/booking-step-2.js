@@ -44,8 +44,29 @@ const BookingStep2 = () => {
           <AddressInput label="address" ref={register({ required: true })} />
           {errors.address && "Your input is required"}
         </Box>
-        <Calendar />
+
+        <Box
+          witdh="100%"
+          rounded="lg"
+          className="card-big"
+          alignItems="center"
+          border={errors.calendar ? "3px solid tomato" : ""}
+        >
+          <Heading
+            as="h3"
+            size="lg"
+            mb="5"
+            alignItems="center"
+            color={errors.calendar ? "tomato" : ""}
+          >
+            When can we clean?
+          </Heading>
+          <Calendar label="calendar" ref={register({ required: true })} />
+          {errors.calendar && "Your input is required"}
+        </Box>
+
         <Client />
+
         <Flex align="center" justify="space-between" mb={6}>
           <Button
             leftIcon="arrow-back"

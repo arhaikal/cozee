@@ -24,7 +24,7 @@ import {
   eachDayOfInterval,
 } from "date-fns"
 
-export const Calendar = () => {
+export const Calendar = React.forwardRef(({ label }, ref) => {
   const [state, dispatch] = useContext(BookingContext)
   const [calendar, setCalendar] = useState({
     currentWeek: getWeek(new Date()),
@@ -114,6 +114,8 @@ export const Calendar = () => {
           mt={3}
           key={day["id"]}
           value={format(new Date(day["from"]), "HH:mm")}
+          name={label}
+          ref={ref}
           mr={2}
           p={{
             base: "10px 25px !important",
@@ -215,12 +217,5 @@ export const Calendar = () => {
     )
   }
 
-  return (
-    <Box witdh="100%" rounded="lg" className="card-big" alignItems="center">
-      <Heading as="h3" size="lg" mb="5" alignItems="center">
-        When can we clean?
-      </Heading>
-      <CalendarContent />
-    </Box>
-  )
-}
+  return <CalendarContent />
+})

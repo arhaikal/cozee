@@ -4,7 +4,6 @@ import { AreaSelector } from "./area-selector"
 
 const LandingForm = () => {
   const handleSubmit = e => {
-    console.log(e)
     e.preventDefault()
     navigate("/booking/")
   }
