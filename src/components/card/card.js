@@ -1,7 +1,16 @@
-import React, { useState } from "react"
+import React, { useState, useContext } from "react"
 import { CardElement, useStripe, useElements } from "@stripe/react-stripe-js"
-import { Button, Box, Heading, FormControl } from "@chakra-ui/core"
-import { Result, ErrorResult } from "../util"
+import {
+  Button,
+  Box,
+  Heading,
+  FormControl,
+  Alert,
+  AlertIcon,
+  AlertDescription,
+} from "@chakra-ui/core"
+import { BookingContext } from "../../context/BookingContext"
+import { getClientFullName, getClientEmail } from "../../store/client/selectors"
 
 const options = {
   style: {
@@ -22,38 +31,73 @@ const options = {
   hidePostalCode: true,
 }
 
-const Card = () => {
+const Card = ({ onSuccessfulCheckout }) => {
+  const [isProcessing, setProcessingTo] = useState(false)
+  const [checkoutError, setCheckoutError] = useState()
+  const [activeField, setActiveField] = useState(false)
+  const [state] = useContext(BookingContext)
   const elements = useElements()
   const stripe = useStripe()
-  const [errorMessage, setErrorMessage] = useState(null)
-  const [paymentMethod, setPaymentMethod] = useState(null)
-  const [activeField, setActiveField] = useState(false)
 
-  const handleSubmit = async event => {
-    event.preventDefault()
+  const handleCardDetailsChange = ev => {
+    ev.error ? setCheckoutError(ev.error.message) : setCheckoutError()
+  }
+
+  const clientFullName = getClientFullName(state)
+  const clientEmail = getClientEmail(state)
+
+  const handleSubmit = async ev => {
+    ev.preventDefault()
 
     if (!stripe || !elements) {
-      // Stripe.js has not loaded yet. Make sure to disable
-      // form submission until Stripe.js has loaded.
       return
     }
-
-    const payload = await stripe.createPaymentMethod({
-      type: "card",
-      card: elements.getElement(CardElement),
-    })
-
-    console.log("[PaymentMethod]", payload)
-
-    if (payload.error) {
-      console.log("[error]", payload.error)
-      setErrorMessage(payload.error.message)
-      setPaymentMethod(null)
-    } else {
-      console.log("[PaymentMethod]", payload.paymentMethod)
-      setPaymentMethod(payload.paymentMethod)
-      setErrorMessage(null)
+    const billingDetails = {
+      name: clientFullName,
+      email: clientEmail,
+      address: state.address.data.formatted_address,
     }
+
+    setProcessingTo(true)
+
+    try {
+      //add call to payment intent to get clientSecret back
+
+      const paymentMethodReq = await stripe.createPaymentMethod({
+        type: "card",
+        card: elements.getElement(CardElement),
+        billing_details: billingDetails,
+      })
+
+      if (paymentMethodReq.error) {
+        setCheckoutError(paymentMethodReq.error.message)
+        setProcessingTo(false)
+        return
+      }
+
+      const { error } = await stripe.confirmCardPayment(clientSecret, {
+        payment_method: paymentMethodReq.paymentMethod.id,
+      })
+
+      if (error) {
+        setCheckoutError(error.message)
+        setProcessingTo(false)
+        return
+      }
+
+      onSuccessfulCheckout()
+    } catch (err) {
+      setCheckoutError(err)
+    }
+  }
+
+  const CheckoutError = () => {
+    return (
+      <Alert status="error" mt={4}>
+        <AlertIcon />
+        <AlertDescription>{checkoutError}</AlertDescription>
+      </Alert>
+    )
   }
 
   const numberBorder = activeField ? "teal.400" : "grey.200"
@@ -77,24 +121,16 @@ const Card = () => {
               >
                 <CardElement
                   options={options}
+                  onChange={handleCardDetailsChange}
                   onBlur={() => setActiveField(false)}
                   onFocus={() => setActiveField(true)}
-                  onReady={() => {
-                    console.log("CardElement [ready]")
-                  }}
-                  onChange={event => {
-                    console.log("CardElement [change]", event)
-                  }}
                 />
               </Box>
-              {errorMessage && <ErrorResult>{errorMessage}</ErrorResult>}
-              {paymentMethod && (
-                <Result>Got PaymentMethod: {paymentMethod.id}</Result>
-              )}
+              {checkoutError && <CheckoutError />}
             </FormControl>
 
-            <Button type="submit" disabled={!stripe} mt={5}>
-              Place order
+            <Button type="submit" disabled={isProcessing || !stripe} mt={5}>
+              {isProcessing ? "Processing..." : "Place order"}
             </Button>
           </form>
         </Box>

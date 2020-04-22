@@ -3,6 +3,7 @@ import { BookingStepContext } from "../context/BookingStepContext"
 import { Button, Flex, Grid } from "@chakra-ui/core"
 import Card from "./card"
 import { setLocalStorage } from "../utils/persistState"
+import { navigate } from "gatsby"
 
 const BookingStep3 = () => {
   const [state, updateState] = useContext(BookingStepContext)
@@ -17,7 +18,7 @@ const BookingStep3 = () => {
   }
   return (
     <Grid gridRowGap={6}>
-      <Card />
+      <Card onSuccessfulCheckout={() => navigate("/booking/")} />
       <Flex align="left" justify="space-between" mb={6}>
         <Button
           leftIcon="arrow-back"
