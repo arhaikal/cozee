@@ -1,6 +1,6 @@
 import React, { useState, useContext, useEffect } from "react"
 import { CardElement, useStripe, useElements } from "@stripe/react-stripe-js"
-import { postPaymentIntent } from "../../api/booking"
+import { postPaymentIntent } from "../../api/payment-intent"
 import {
   Button,
   Box,
@@ -11,7 +11,7 @@ import {
   AlertDescription,
 } from "@chakra-ui/core"
 import { BookingContext } from "../../context/BookingContext"
-import { getClientFullName, getClientEmail } from "../../store/client/selectors"
+import { getClientFullName } from "../../store/client/selectors"
 import { getBookingId } from "../../store/booking/selectors"
 
 const options = {
@@ -76,6 +76,7 @@ const Card = ({ onSuccessfulCheckout }) => {
     } else {
       setCheckoutError(null)
       setProcessingTo(false)
+      console.log("success with payment")
       onSuccessfulCheckout()
     }
   }
