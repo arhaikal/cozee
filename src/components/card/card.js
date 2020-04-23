@@ -1,5 +1,6 @@
-import React, { useState, useContext } from "react"
+import React, { useState, useContext, useEffect } from "react"
 import { CardElement, useStripe, useElements } from "@stripe/react-stripe-js"
+import { postPaymentIntent } from "../../api/booking"
 import {
   Button,
   Box,
@@ -11,6 +12,7 @@ import {
 } from "@chakra-ui/core"
 import { BookingContext } from "../../context/BookingContext"
 import { getClientFullName, getClientEmail } from "../../store/client/selectors"
+import { getBookingId } from "../../store/booking/selectors"
 
 const options = {
   style: {
@@ -35,6 +37,7 @@ const Card = ({ onSuccessfulCheckout }) => {
   const [isProcessing, setProcessingTo] = useState(false)
   const [checkoutError, setCheckoutError] = useState()
   const [activeField, setActiveField] = useState(false)
+  const [clientSecret, setClientSecret] = useState("")
   const [state] = useContext(BookingContext)
   const elements = useElements()
   const stripe = useStripe()
@@ -44,50 +47,36 @@ const Card = ({ onSuccessfulCheckout }) => {
   }
 
   const clientFullName = getClientFullName(state)
-  const clientEmail = getClientEmail(state)
+  const bookingId = getBookingId(state)
+
+  const fetchClientSecret = async state => {
+    const data = await postPaymentIntent(bookingId)
+    setClientSecret(data.client_secret)
+  }
+
+  useEffect(() => {
+    fetchClientSecret(state)
+    console.log(clientSecret)
+  }, [])
 
   const handleSubmit = async ev => {
     ev.preventDefault()
-
-    if (!stripe || !elements) {
-      return
-    }
-    const billingDetails = {
-      name: clientFullName,
-      email: clientEmail,
-      address: state.address.data.formatted_address,
-    }
-
     setProcessingTo(true)
-
-    try {
-      //add call to payment intent to get clientSecret back
-
-      const paymentMethodReq = await stripe.createPaymentMethod({
-        type: "card",
+    const payload = await stripe.confirmCardPayment(clientSecret, {
+      payment_method: {
         card: elements.getElement(CardElement),
-        billing_details: billingDetails,
-      })
-
-      if (paymentMethodReq.error) {
-        setCheckoutError(paymentMethodReq.error.message)
-        setProcessingTo(false)
-        return
-      }
-
-      const { error } = await stripe.confirmCardPayment(clientSecret, {
-        payment_method: paymentMethodReq.paymentMethod.id,
-      })
-
-      if (error) {
-        setCheckoutError(error.message)
-        setProcessingTo(false)
-        return
-      }
-
+        billing_details: {
+          name: clientFullName,
+        },
+      },
+    })
+    if (payload.error) {
+      setCheckoutError(`Payment failed ${payload.error.message}`)
+      setProcessingTo(false)
+    } else {
+      setCheckoutError(null)
+      setProcessingTo(false)
       onSuccessfulCheckout()
-    } catch (err) {
-      setCheckoutError(err)
     }
   }
 

@@ -1,1 +1,1 @@
-export const bookingId = state => state.booking.data.identifier
+export const getBookingId = state => state.booking.data.identifier

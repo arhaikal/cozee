@@ -1,5 +1,5 @@
 import { getAllServices, postServices } from "../../api/services"
-import { bookingId } from "../booking/selectors"
+import { getBookingId } from "../booking/selectors"
 
 export const FETCH_SERVICES = "FETCH_SERVICES"
 export const FETCH_SERVICES_SUCCESS = "FETCH_SERVICES_SUCCESS"
@@ -47,9 +47,9 @@ export const getServices = async (state, dispatch) => {
 }
 
 export const addServices = async (data, state, dispatch) => {
-  if (bookingId(state)) {
+  if (getBookingId(state)) {
     try {
-      const values = await postServices(bookingId(state), data)
+      const values = await postServices(getBookingId(state), data)
       dispatch(postServicesSuccess(values))
     } catch (error) {
       dispatch(postServicesFailure(error))
