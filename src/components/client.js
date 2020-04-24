@@ -28,7 +28,7 @@ export const Client = () => {
           <FormLabel htmlFor="name">First name</FormLabel>
           <Input
             name="first_name"
-            onChange={handleFirstNameChange}
+            onBlur={handleFirstNameChange}
             type="text"
             placeholder="Kersti"
             focusBorderColor="teal.400"
@@ -39,7 +39,7 @@ export const Client = () => {
           <FormLabel htmlFor="name">Last name</FormLabel>
           <Input
             name="last_name"
-            onChange={handleLastNameChange}
+            onBlur={handleLastNameChange}
             type="text"
             placeholder="Kaljulaid"
             focusBorderColor="teal.400"
@@ -50,7 +50,7 @@ export const Client = () => {
           <FormLabel htmlFor="email">Email</FormLabel>
           <Input
             name="email"
-            onChange={handleEmailChange}
+            onBlur={handleEmailChange}
             type="email"
             placeholder="Kersti@email.com"
             focusBorderColor="teal.400"
@@ -61,7 +61,7 @@ export const Client = () => {
           <FormLabel htmlFor="tel">Phone Number</FormLabel>
           <Input
             name="phone"
-            onChange={handlePhoneChange}
+            onBlur={handlePhoneChange}
             type="tel"
             placeholder="+372 82194129"
             focusBorderColor="teal.400"
