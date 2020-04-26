@@ -65,7 +65,7 @@ export const BookingSummary = () => {
             <Box as={IoMdPerson} size="24px" color="teal.400" />
             <Box ml={2}>
               <Text fontSize="md">
-                {client.firstName} {client.lastName}
+                {client.first_name} {client.last_name}
               </Text>
               <Text fontSize="sm">{client.email}</Text>
               <Text fontSize="sm">{client.phone} </Text>

@@ -1,4 +1,6 @@
-import { patchBooking } from "../../api/booking"
+import { postClient, patchClient } from "../../api/client"
+import { getBookingId } from "../booking/selectors"
+import { getClientId } from "../client/selectors"
 
 export const FETCH_CLIENT = "FETCH_CLIENT"
 export const FETCH_CLIENT_SUCCESS = "FETCH_CLIENT_SUCCESS"
@@ -21,9 +23,17 @@ const fetchClientFailure = error => {
 export const updateClient = async (data, state, dispatch) => {
   dispatch({ type: "FETCH_CLIENT" })
 
+  const bookingId = getBookingId(state)
+  const clientId = getClientId(state)
+
   try {
-    const values = await patchBooking(state.booking.data.identifier, data)
-    dispatch(fetchClientSuccess(values))
+    if (clientId) {
+      const values = await patchClient(clientId, data)
+      dispatch(fetchClientSuccess(values))
+    } else {
+      const values = await postClient(bookingId, data)
+      dispatch(fetchClientSuccess(values))
+    }
   } catch (error) {
     dispatch(fetchClientFailure(error))
   }

@@ -3,10 +3,9 @@ import {
   FETCH_CLIENT_SUCCESS,
   FETCH_CLIENT_FAILURE,
 } from "./actions"
-import { getLocalStorage, setLocalStorage } from "../../utils/persistState"
 
 export const clientState = {
-  data: getLocalStorage("client") || {},
+  data: {},
   isLoading: false,
   error: null,
 }
@@ -19,20 +18,9 @@ export const client = (state = clientState, action) => {
         isLoading: true,
       }
     case FETCH_CLIENT_SUCCESS:
-      setLocalStorage("client", {
-        firstName: action.payload.first_name,
-        lastName: action.payload.last_name,
-        phone: action.payload.phone,
-        email: action.payload.email,
-      })
       return {
         ...state,
-        data: {
-          firstName: action.payload.first_name,
-          lastName: action.payload.last_name,
-          phone: action.payload.phone,
-          email: action.payload.email,
-        },
+        data: action.payload,
         isLoading: false,
       }
     case FETCH_CLIENT_FAILURE:
