@@ -1,5 +1,6 @@
 import { getAllServices, postServices } from "../../api/services"
 import { getBookingId } from "../booking/selectors"
+import { fetchBooking } from "../booking/actions"
 
 export const FETCH_SERVICES = "FETCH_SERVICES"
 export const FETCH_SERVICES_SUCCESS = "FETCH_SERVICES_SUCCESS"
@@ -54,5 +55,6 @@ export const addServices = async (data, state, dispatch) => {
     } catch (error) {
       dispatch(postServicesFailure(error))
     }
+    fetchBooking(state, dispatch)
   }
 }

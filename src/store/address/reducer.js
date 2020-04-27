@@ -3,10 +3,9 @@ import {
   FETCH_ADDRESS_FAILURE,
   FETCH_ADDRESS_SUCCESS,
 } from "./actions"
-import { getLocalStorage, setLocalStorage } from "../../utils/persistState"
 
 export const addressState = {
-  data: getLocalStorage("address") || null,
+  data: null,
   isLoading: false,
   error: null,
 }
@@ -19,7 +18,6 @@ export const address = (state = addressState, action) => {
         isLoading: true,
       }
     case FETCH_ADDRESS_SUCCESS:
-      setLocalStorage("address", action.payload.address)
       return {
         ...state,
         data: action.payload.address,

@@ -10,7 +10,7 @@ export async function patchBooking(id, data) {
   return response.data
 }
 
-export async function postPaymentIntent(id) {
-  const response = await baseApi.post(`bookings/${id}/payment_intents`)
+export async function getBooking(id) {
+  const response = await baseApi.get(`bookings/${id}`)
   return response.data
 }

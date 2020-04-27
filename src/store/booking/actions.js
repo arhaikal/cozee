@@ -1,4 +1,4 @@
-import { postBooking, patchBooking } from "../../api/booking"
+import { postBooking, patchBooking, getBooking } from "../../api/booking"
 
 export const FETCH_UPDATED_BOOKING_SUCCESS = "FETCH_UPDATED_BOOKING_SUCCESS"
 export const FETCH_UPDATED_BOOKING_FAILURE = "FETCH_UPDATED_BOOKING_FAILURE"
@@ -26,6 +26,16 @@ export const updateBooking = async (data, state, dispatch) => {
       const values = await postBooking(data)
       dispatch(fetchUpdatedBookingSuccess(values))
     }
+  } catch (error) {
+    dispatch(fetchUpdatedBookingFailure(error))
+  }
+}
+
+export const fetchBooking = async (state, dispatch) => {
+  try {
+    const values = await getBooking(state.booking.data.identifier)
+    console.log(values)
+    dispatch(fetchUpdatedBookingSuccess(values))
   } catch (error) {
     dispatch(fetchUpdatedBookingFailure(error))
   }
