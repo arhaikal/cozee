@@ -14,6 +14,7 @@ import {
 import { BookingContext } from "../context/BookingContext"
 import { updateBooking } from "../store/booking/actions"
 import { getBookingTimes } from "../store/available-booking-times/actions"
+import { homeServiceDuration } from "../store/services/selectors"
 import {
   format,
   getWeek,
@@ -45,7 +46,7 @@ export const Calendar = React.forwardRef(({ label }, ref) => {
         {
           from: calendar.weekStartDate,
           to: calendar.weekEndDate,
-          duration: state.booking.data.duration,
+          duration: homeServiceDuration(state),
         },
         state.availableTimes,
         dispatch
