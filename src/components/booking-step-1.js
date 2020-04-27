@@ -8,6 +8,7 @@ import { Button, Flex, Grid, Box, Heading } from "@chakra-ui/core"
 import { useForm } from "react-hook-form"
 import { setLocalStorage } from "../utils/persistState"
 import { addServices } from "../store/services/actions"
+import { updateBooking } from "../store/booking/actions"
 
 const BookingStep1 = () => {
   const [state, updateState] = useContext(BookingStepContext)
@@ -34,6 +35,13 @@ const BookingStep1 = () => {
     )
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [appState.booking.data.area])
+
+  useEffect(() => {
+    dispatch(
+      updateBooking({ area: appState.booking.data.area }, appState, dispatch)
+    )
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
   if (state.step !== 1) {
     return null

@@ -34,7 +34,6 @@ export const updateBooking = async (data, state, dispatch) => {
 export const fetchBooking = async (state, dispatch) => {
   try {
     const values = await getBooking(state.booking.data.identifier)
-    console.log(values)
     dispatch(fetchUpdatedBookingSuccess(values))
   } catch (error) {
     dispatch(fetchUpdatedBookingFailure(error))

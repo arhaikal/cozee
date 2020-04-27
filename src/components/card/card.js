@@ -56,7 +56,6 @@ const Card = ({ onSuccessfulCheckout }) => {
 
   useEffect(() => {
     fetchClientSecret(state)
-    console.log(clientSecret)
   }, [])
 
   const handleSubmit = async ev => {
