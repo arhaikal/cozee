@@ -1,4 +1,4 @@
-import React, { useContext } from "react"
+import React, { useContext, useEffect } from "react"
 import { BookingStepContext } from "../context/BookingStepContext"
 import { AddressInput } from "./address-input"
 import { Client } from "./client"
@@ -13,11 +13,13 @@ const BookingStep2 = () => {
 
   const onSubmit = () => {
     updateState({ step: 3 })
+    window.scrollTo(0, 0)
     setLocalStorage("step", 3)
   }
 
   const handlePrevClick = () => {
     setLocalStorage("step", 1)
+    window.scrollTo(0, 0)
     updateState({ step: 1 })
   }
 

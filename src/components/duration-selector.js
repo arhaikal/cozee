@@ -7,7 +7,7 @@ import { homeServiceDuration } from "../store/services/selectors"
 export const DurationSelector = React.forwardRef(({ label }, ref) => {
   const [state, dispatch] = useContext(BookingContext)
 
-  const handleClick = e => {
+  const handleDurationUpdate = e => {
     dispatch(
       addServices(
         [{ service_id: "home_cleaning", service_option_id: e.id }],
@@ -35,34 +35,28 @@ export const DurationSelector = React.forwardRef(({ label }, ref) => {
         const selected = homeServiceDuration(state) === obj.duration
         const border = selected ? "solid" : "outline"
         return (
-          <Tooltip
-            hasArrow
-            label="Info about this level of service which can be added in the service object"
-            placement="top"
+          <Button
+            variantColor="teal"
+            value={homeServiceDuration(state)}
+            variant={border}
+            onClick={() => handleDurationUpdate(obj)}
+            key={key}
+            w={100}
+            ref={ref}
+            name={label}
           >
-            <Button
-              ref={ref}
-              name={label}
-              variantColor="teal"
-              value={homeServiceDuration(state)}
-              variant={border}
-              onClick={() => handleClick(obj)}
-              key={key}
-              w={100}
-            >
-              {`${obj.duration} h`}
+            {`${obj.duration} h`}
 
-              <Badge
-                rounded="full"
-                px="2"
-                py=".5"
-                variantColor="teal"
-                className="tool-tip"
-              >
-                {obj.name}
-              </Badge>
-            </Button>
-          </Tooltip>
+            <Badge
+              rounded="full"
+              px="2"
+              py=".5"
+              variantColor="teal"
+              className="tool-tip"
+            >
+              {obj.name}
+            </Badge>
+          </Button>
         )
       })}
     </Grid>

@@ -16,6 +16,7 @@ const BookingStep1 = () => {
   const { register, handleSubmit, errors } = useForm()
   const onSubmit = data => {
     updateState({ step: 2 })
+    window.scrollTo(0, 0)
     setLocalStorage("step", 2)
   }
 
@@ -75,7 +76,11 @@ const BookingStep1 = () => {
             </Heading>
             <DurationSelector
               label="duration"
-              ref={register({ required: true })}
+              ref={register({
+                required: true,
+                validate: value => value !== "0",
+                min: 1,
+              })}
             />
             {errors.duration && "Your input is required"}
           </Box>

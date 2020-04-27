@@ -14,6 +14,7 @@ const BookingStep3 = () => {
 
   const handlePrevClick = () => {
     updateState({ step: 2 })
+    window.scrollTo(0, 0)
     setLocalStorage("step", 2)
   }
 
