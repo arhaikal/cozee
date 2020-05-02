@@ -27,11 +27,16 @@ import {
 
 export const Calendar = React.forwardRef(({ label }, ref) => {
   const [state, dispatch] = useContext(BookingContext)
+
+  const dateToUse = state.booking.data.starts_at
+    ? new Date(state.booking.data.starts_at)
+    : new Date()
+
   const [calendar, setCalendar] = useState({
     currentWeek: getWeek(new Date()),
-    selectedWeek: getWeek(new Date()),
-    weekStartDate: startOfWeek(new Date(), { weekStartsOn: 1 }),
-    weekEndDate: endOfWeek(new Date(), { weekStartsOn: 1 }),
+    selectedWeek: getWeek(dateToUse),
+    weekStartDate: startOfWeek(dateToUse, { weekStartsOn: 1 }),
+    weekEndDate: endOfWeek(dateToUse, { weekStartsOn: 1 }),
   })
 
   const updateBookingTime = e => {
@@ -148,6 +153,26 @@ export const Calendar = React.forwardRef(({ label }, ref) => {
     )
   })
 
+  const NoAvailableTimes = () => {
+    return (
+      <Alert
+        status="warning"
+        variant="subtle"
+        flexDirection="column"
+        justifyContent="center"
+        textAlign="center"
+        height="200px"
+        bg="white.100"
+        ml={10}
+      >
+        <AlertIcon color="gray.500" size="40px" mr={8} />
+        <AlertTitle mt={4} mb={1} fontSize="lg">
+          Uh-oh! Looks like there are no available times this week!
+        </AlertTitle>
+      </Alert>
+    )
+  }
+
   const CalendarContent = () => {
     if (!state.address.data) {
       return (
@@ -212,7 +237,11 @@ export const Calendar = React.forwardRef(({ label }, ref) => {
           justify="space-between"
           maxWidth="100%"
         >
-          {daysOfWeek}
+          {state.availableTimes.data.length == 0 ? (
+            <NoAvailableTimes />
+          ) : (
+            daysOfWeek
+          )}
         </Flex>
       </Box>
     )
