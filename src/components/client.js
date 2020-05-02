@@ -9,7 +9,7 @@ import {
   getClientEmail,
 } from "../store/client/selectors"
 
-export const Client = () => {
+export const Client = React.forwardRef(({ label }, ref) => {
   const [state, dispatch] = useContext(BookingContext)
 
   const handleChange = e => {
@@ -23,47 +23,55 @@ export const Client = () => {
           <FormLabel htmlFor="name">First name</FormLabel>
           <Input
             name="first_name"
+            label="first_name"
             onBlur={handleChange}
             type="text"
             placeholder="Kersti"
             focusBorderColor="teal.400"
             defaultValue={getClientFirstName(state)}
+            ref={ref}
           />
         </FormControl>
         <FormControl>
           <FormLabel htmlFor="name">Last name</FormLabel>
           <Input
             name="last_name"
+            name="last_name"
             onBlur={handleChange}
             type="text"
             placeholder="Kaljulaid"
             focusBorderColor="teal.400"
             defaultValue={getClientLastName(state)}
+            ref={ref}
           />
         </FormControl>
         <FormControl>
           <FormLabel htmlFor="email">Email</FormLabel>
           <Input
             name="email"
+            name="email"
             onBlur={handleChange}
             type="email"
             placeholder="Kersti@email.com"
             focusBorderColor="teal.400"
             defaultValue={getClientEmail(state)}
+            ref={ref}
           />
         </FormControl>
         <FormControl>
           <FormLabel htmlFor="tel">Phone Number</FormLabel>
           <Input
             name="phone"
+            name="phone"
             onBlur={handleChange}
             type="tel"
             placeholder="+372 82194129"
             focusBorderColor="teal.400"
             defaultValue={getClientPhone(state)}
+            ref={ref}
           />
         </FormControl>
       </Grid>
     </Box>
   )
-}
+})

@@ -65,7 +65,8 @@ const BookingStep2 = () => {
           {errors.calendar && "Your input is required"}
         </Box>
 
-        <Client />
+        <Client ref={register({ required: true })} />
+        {errors.first_name && "Your input is required"}
 
         <Flex align="center" justify="space-between" mb={6}>
           <Button
