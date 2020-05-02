@@ -4,7 +4,6 @@ import { AddressInput } from "./address-input"
 import { Client } from "./client"
 import { Calendar } from "./calendar"
 import { Button, Grid, Flex, Box, Heading } from "@chakra-ui/core"
-import { setLocalStorage } from "../utils/persistState"
 import { useForm } from "react-hook-form"
 
 const BookingStep2 = () => {

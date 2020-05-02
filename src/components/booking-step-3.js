@@ -2,7 +2,6 @@ import React, { useContext } from "react"
 import { BookingStepContext } from "../context/BookingStepContext"
 import { Button, Flex, Grid } from "@chakra-ui/core"
 import Card from "./card"
-import { setLocalStorage } from "../utils/persistState"
 import { navigate } from "gatsby"
 import { Elements } from "@stripe/react-stripe-js"
 import { loadStripe } from "@stripe/stripe-js"
@@ -15,7 +14,6 @@ const BookingStep3 = () => {
   const handlePrevClick = () => {
     updateState({ step: 2 })
     window.scrollTo(0, 0)
-    setLocalStorage("step", 2)
   }
 
   if (state.step !== 3) {
