@@ -11,14 +11,12 @@ const BookingStep2 = () => {
   const [state, updateState] = useContext(BookingStepContext)
   const { register, handleSubmit, errors } = useForm()
 
-  const onSubmit = () => {
+  const onStepTwoSubmit = () => {
     updateState({ step: 3 })
     window.scrollTo(0, 0)
-    setLocalStorage("step", 3)
   }
 
   const handlePrevClick = () => {
-    setLocalStorage("step", 1)
     window.scrollTo(0, 0)
     updateState({ step: 1 })
   }
@@ -27,7 +25,7 @@ const BookingStep2 = () => {
     return null
   }
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
+    <form onSubmit={handleSubmit(onStepTwoSubmit)}>
       <Grid gridRowGap={6}>
         <Box
           witdh="100%"

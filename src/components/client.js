@@ -1,24 +1,19 @@
-import React, { useContext } from "react"
+import React, { useContext, useState } from "react"
 import { BookingContext } from "../context/BookingContext"
 import { updateClient } from "../store/client/actions"
 import { Box, FormControl, Input, FormLabel, Grid } from "@chakra-ui/core"
+import {
+  getClientLastName,
+  getClientFirstName,
+  getClientPhone,
+  getClientEmail,
+} from "../store/client/selectors"
 
 export const Client = () => {
   const [state, dispatch] = useContext(BookingContext)
-  const handleFirstNameChange = e => {
-    dispatch(updateClient({ first_name: e.target.value }, state, dispatch))
-  }
 
-  const handleLastNameChange = e => {
-    dispatch(updateClient({ last_name: e.target.value }, state, dispatch))
-  }
-
-  const handleEmailChange = e => {
-    dispatch(updateClient({ email: e.target.value }, state, dispatch))
-  }
-
-  const handlePhoneChange = e => {
-    dispatch(updateClient({ phone: e.target.value }, state, dispatch))
+  const handleChange = e => {
+    dispatch(updateClient({ [e.target.name]: e.target.value }, state, dispatch))
   }
 
   return (
@@ -28,44 +23,44 @@ export const Client = () => {
           <FormLabel htmlFor="name">First name</FormLabel>
           <Input
             name="first_name"
-            onBlur={handleFirstNameChange}
+            onBlur={handleChange}
             type="text"
             placeholder="Kersti"
             focusBorderColor="teal.400"
-            defaultValue={state.client.data.firstName}
+            defaultValue={getClientFirstName(state)}
           />
         </FormControl>
         <FormControl>
           <FormLabel htmlFor="name">Last name</FormLabel>
           <Input
             name="last_name"
-            onBlur={handleLastNameChange}
+            onBlur={handleChange}
             type="text"
             placeholder="Kaljulaid"
             focusBorderColor="teal.400"
-            defaultValue={state.client.data.lastName}
+            defaultValue={getClientLastName(state)}
           />
         </FormControl>
         <FormControl>
           <FormLabel htmlFor="email">Email</FormLabel>
           <Input
             name="email"
-            onBlur={handleEmailChange}
+            onBlur={handleChange}
             type="email"
             placeholder="Kersti@email.com"
             focusBorderColor="teal.400"
-            defaultValue={state.client.data.email}
+            defaultValue={getClientEmail(state)}
           />
         </FormControl>
         <FormControl>
           <FormLabel htmlFor="tel">Phone Number</FormLabel>
           <Input
             name="phone"
-            onBlur={handlePhoneChange}
+            onBlur={handleChange}
             type="tel"
             placeholder="+372 82194129"
             focusBorderColor="teal.400"
-            defaultValue={state.client.data.phone}
+            defaultValue={getClientPhone(state)}
           />
         </FormControl>
       </Grid>

@@ -28,7 +28,7 @@ export const BookingSummary = () => {
   const client = getClient(state)
 
   const anyUserInput = () => {
-    if (client.firstName || client.lastName || client.email || client.phone) {
+    if (client.first_name || client.last_name || client.email || client.phone) {
       return true
     }
 

@@ -6,7 +6,6 @@ import { DurationSelector } from "./duration-selector"
 import { AreaSelector } from "./area-selector"
 import { Button, Flex, Grid, Box, Heading } from "@chakra-ui/core"
 import { useForm } from "react-hook-form"
-import { setLocalStorage } from "../utils/persistState"
 import { addServices } from "../store/services/actions"
 import { updateBooking } from "../store/booking/actions"
 
@@ -14,10 +13,10 @@ const BookingStep1 = () => {
   const [state, updateState] = useContext(BookingStepContext)
   const [appState, dispatch] = useContext(BookingContext)
   const { register, handleSubmit, errors } = useForm()
-  const onSubmit = data => {
+
+  const onStepOneSubmit = () => {
     updateState({ step: 2 })
     window.scrollTo(0, 0)
-    setLocalStorage("step", 2)
   }
 
   const defaultDuration =
@@ -48,7 +47,7 @@ const BookingStep1 = () => {
     return null
   }
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
+    <form onSubmit={handleSubmit(onStepOneSubmit)}>
       <Grid gridRowGap={6}>
         <Box rounded="lg" className="card-big">
           <Box>
