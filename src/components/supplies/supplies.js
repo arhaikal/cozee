@@ -35,15 +35,12 @@ const Supplies = React.forwardRef(({ label }, ref) => {
   if (!state.services.data) return null
 
   const cleaningSupplies = state.services.data[1]
-  const selected = key => selectedButton === key
 
-  const border = selected ? "solid" : "outline"
   return (
     <>
       <PseudoBox
         variantColor="teal"
         variant="outline"
-        key="no_supplies"
         as="button"
         fontWeight="semibold"
         display="flex"
@@ -54,10 +51,14 @@ const Supplies = React.forwardRef(({ label }, ref) => {
         mb={3}
         borderWidth="1px"
         borderColor="teal.500"
-        color="teal.500"
         rounded="md"
-        _hover={{ bg: "teal.50" }}
-        _focus={{ boxShadow: "outline" }}
+        color={selectedButton === "no_supplies" ? "white" : "teal.500"}
+        bg={selectedButton === "no_supplies" ? "teal.500" : "white"}
+        _hover={
+          selectedButton === "no_supplies"
+            ? { bg: "teal.600" }
+            : { bg: "teal.50" }
+        }
         onClick={removeCleaningSupplies}
       >
         I provide the cleaning supplies
@@ -65,20 +66,19 @@ const Supplies = React.forwardRef(({ label }, ref) => {
 
       <PseudoBox
         variantColor="teal"
-        variant={border}
-        key="supplies"
         as="button"
-        color="teal.200"
         fontWeight="semibold"
         borderWidth="1px"
         borderColor="teal.500"
-        color="teal.500"
         rounded="md"
         w="100%"
         px={12}
         py={4}
-        _hover={{ bg: "teal.50" }}
-        _focus={{ boxShadow: "outline" }}
+        color={selectedButton === "supplies" ? "white" : "teal.500"}
+        bg={selectedButton === "supplies" ? "teal.500" : "white"}
+        _hover={
+          selectedButton === "supplies" ? { bg: "teal.600" } : { bg: "teal.50" }
+        }
         onClick={addCleaningSupplies}
       >
         <Box mt="1" variantColor="teal.500" as="h5" lineHeight="tight">
