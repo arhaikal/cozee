@@ -1,4 +1,4 @@
-import { getAllServices, postServices } from "../../api/services"
+import { getAllServices, postService, deleteService } from "../../api/services"
 import { getBookingId } from "../booking/selectors"
 import { fetchBooking } from "../booking/actions"
 
@@ -47,10 +47,22 @@ export const getServices = async (state, dispatch) => {
   }
 }
 
-export const addServices = async (data, state, dispatch) => {
+export const addService = async (data, state, dispatch) => {
   if (getBookingId(state)) {
     try {
-      const values = await postServices(getBookingId(state), data)
+      const values = await postService(getBookingId(state), data)
+      dispatch(postServicesSuccess(values))
+    } catch (error) {
+      dispatch(postServicesFailure(error))
+    }
+    fetchBooking(state, dispatch)
+  }
+}
+
+export const removeService = async (service_id, state, dispatch) => {
+  if (getBookingId(state)) {
+    try {
+      const values = await deleteService(getBookingId(state), service_id)
       dispatch(postServicesSuccess(values))
     } catch (error) {
       dispatch(postServicesFailure(error))

@@ -1,7 +1,7 @@
 import React, { useContext } from "react"
 import { BookingContext } from "../context/BookingContext"
 import { Tooltip, Badge, Box, Button, Spinner, Grid } from "@chakra-ui/core"
-import { addServices } from "../store/services/actions"
+import { addService } from "../store/services/actions"
 import { homeServiceDuration } from "../store/services/selectors"
 
 export const DurationSelector = React.forwardRef(({ label }, ref) => {
@@ -9,8 +9,8 @@ export const DurationSelector = React.forwardRef(({ label }, ref) => {
 
   const handleDurationUpdate = e => {
     dispatch(
-      addServices(
-        [{ service_id: "home_cleaning", service_option_id: e.id }],
+      addService(
+        { service: { service_id: "home_cleaning", service_option_id: e.id } },
         state,
         dispatch
       )

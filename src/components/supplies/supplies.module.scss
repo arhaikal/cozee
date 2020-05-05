@@ -1,0 +1,10 @@
+.cardList {
+  margin-top: 10px;
+  cursor: pointer;
+  :active {
+    background-color: rgb(232, 235, 235);
+  }
+  :hover {
+    background-color: rgb(232, 235, 235);
+  }
+}
