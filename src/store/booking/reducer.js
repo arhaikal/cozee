@@ -11,6 +11,7 @@ export const bookingState = {
     starts_at: null,
     ends_at: null,
     total_cost: "0.0",
+    summary: true
   },
 }
 
@@ -18,8 +19,8 @@ export const booking = (state = bookingState, action) => {
   switch (action.type) {
     case FETCH_UPDATED_BOOKING_SUCCESS:
       return {
-        ...state,
         data: {
+          ...state.data,
           identifier: action.payload.identifier,
           area: action.payload.area,
           frequency: action.payload.frequency,

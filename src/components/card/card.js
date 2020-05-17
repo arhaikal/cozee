@@ -11,6 +11,7 @@ import {
   AlertDescription,
 } from "@chakra-ui/core"
 import { BookingContext } from "../../context/BookingContext"
+import { BookingStepContext } from "../../context/BookingStepContext"
 import { getClientFullName } from "../../store/client/selectors"
 import { getBookingId } from "../../store/booking/selectors"
 
@@ -33,7 +34,8 @@ const options = {
   hidePostalCode: true,
 }
 
-const Card = ({ onSuccessfulCheckout }) => {
+const Card = () => {
+  const [stepState, updateStepState] = useContext(BookingStepContext)
   const [isProcessing, setProcessingTo] = useState(false)
   const [checkoutError, setCheckoutError] = useState()
   const [activeField, setActiveField] = useState(false)
@@ -75,8 +77,7 @@ const Card = ({ onSuccessfulCheckout }) => {
     } else {
       setCheckoutError(null)
       setProcessingTo(false)
-      console.log("success with payment")
-      onSuccessfulCheckout()
+      updateStepState({ step: 'success' })
     }
   }
 
