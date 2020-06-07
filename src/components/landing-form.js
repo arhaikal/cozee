@@ -1,6 +1,7 @@
 import React from "react"
 import { navigate } from "gatsby"
 import { AreaSelector } from "./area-selector"
+import { Flex } from "@chakra-ui/core";
 
 const LandingForm = () => {
   const handleSubmit = e => {
@@ -10,21 +11,23 @@ const LandingForm = () => {
 
   return (
     <form onSubmit={handleSubmit}>
-      <div className="row">
-        <AreaSelector />
+      <Flex align="center" justify="center">
+        <Flex align="center" justify="center" w={200}>
+          <AreaSelector />
+        </Flex>
 
-        <button
-          type="submit"
-          className="btn btn-primary btn-block"
-          style={{
-            marginTop: "20px",
-            backgroundColor: "#B06AB3",
-            borderColor: "#B06AB3",
-          }}
-        >
-          Check Availability
+        <Flex align="center" justify="center">
+          <button
+            type="submit"
+            className="btn btn-primary btn-block bg-teal-500 border-teal-500 hover:bg-teal-400 hover:border-teal-400 "
+            style={{
+              marginLeft: '20px'
+            }}
+          >
+            Check Availability
         </button>
-      </div>
+        </Flex>
+      </Flex>
     </form>
   )
 }
