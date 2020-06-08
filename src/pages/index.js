@@ -3,6 +3,7 @@ import Layout from '../components/layout';
 import LandingForm from '../components/landing-form';
 import SEO from '../components/seo';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import Image from '../components/image';
 
 
 const IndexPage = () => {
@@ -172,7 +173,9 @@ const IndexPage = () => {
           </div>
         </div>
         <div className="lg:max-w-lg lg:w-full md:w-1/2 w-5/6">
-          <img className="object-cover object-center rounded" alt="hero" src="https://dummyimage.com/720x600" />
+          <Image
+            className="object-cover object-center rounded" alt="hero"
+          />
         </div>
       </div>
     </section>
