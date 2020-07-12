@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="129px" height="166px" viewBox="0 0 129 166" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
+    <!-- Generator: Sketch 3.4.2 (15855) - http://www.bohemiancoding.com/sketch -->
+    <title>cozee</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage">
+        <g id="cozee" sketch:type="MSLayerGroup" transform="translate(0.734339, -0.811133)" fill="#34A49F">
+            <path d="M128.139349,33.2966813 L72.0689647,0.924429922 L0.25493158,42.3862813 L0.25493158,125.309984 L72.0689647,166.771835 L128.139349,134.399584 L128.139349,116.487264 L72.0689647,148.859515 L15.767456,116.353824 L15.767456,51.3424415 L72.0689647,18.8367503 L128.139349,51.2090016 L128.139349,33.2966813 Z" id="Outer" sketch:type="MSShapeGroup"></path>
+            <path d="M87.0120785,45.9314085 L72.0689647,37.3039977 L31.7605615,60.5760652 L31.7605615,107.1202 L46.7036753,115.747611 L87.0120785,45.9314085 Z M98.7634682,52.7160765 L112.377368,60.5760652 L112.377368,107.1202 L72.0689647,130.392268 L58.4550649,122.532279 L98.7634682,52.7160765 Z" id="Inner" sketch:type="MSShapeGroup"></path>
+        </g>
+    </g>
+</svg>

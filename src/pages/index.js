@@ -4,6 +4,7 @@ import LandingForm from '../components/landing-form';
 import SEO from '../components/seo';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Image from '../components/image';
+import logo from "../images/cozee-horizontal.svg"
 
 
 const IndexPage = () => {
@@ -14,7 +15,7 @@ const IndexPage = () => {
         <div className="flex justify-between items-center border-b-2 border-gray-100 py-6 md:justify-start md:space-x-10">
           <div className="lg:w-0 lg:flex-1">
             <a href="#" className="flex">
-              <img className="h-8 w-auto sm:h-10" src="/img/logos/workflow-mark-on-white.svg" alt="Workflow" />
+              <img className="h-8 w-auto sm:h-10" src={logo} alt="Workflow" />
             </a>
           </div>
           <div className="-mr-2 -my-2 md:hidden">
@@ -181,8 +182,6 @@ const IndexPage = () => {
     </section>
     <section class="text-gray-700 body-font bg-white">
       <div class="container px-5 py-24 mx-auto">
-        <h1 class="sm:text-3xl text-2xl font-medium title-font text-center text-gray-900 mb-20">Raw Denim Heirloom Man Braid
-        </h1>
         <div class="flex flex-wrap sm:-m-4 -mx-4 -mb-10 -mt-4">
           <div class="p-4 md:w-1/3 md:mb-0 mb-6 flex">
             <div class="w-12 h-12 inline-flex items-center justify-center rounded-full bg-green-100 text-green-500 mb-4 flex-shrink-0">
@@ -252,8 +251,7 @@ const IndexPage = () => {
               </svg>
             </div>
             <div class="flex-grow sm:pl-6 mt-6 sm:mt-0">
-              <h2 class="font-medium title-font text-gray-900 mb-1 text-xl">Shooting Stars</h2>
-              <p class="leading-relaxed">VHS cornhole pop-up, try-hard 8-bit iceland helvetica. Kinfolk bespoke try-hard cliche palo santo offal.</p>
+              <h2 class="font-medium title-font text-gray-900 mb-1 text-xl">Tell us about your home</h2>
             </div>
           </div>
         </div>
@@ -269,8 +267,7 @@ const IndexPage = () => {
               </svg>
             </div>
             <div class="flex-grow sm:pl-6 mt-6 sm:mt-0">
-              <h2 class="font-medium title-font text-gray-900 mb-1 text-xl">The Catalyzer</h2>
-              <p class="leading-relaxed">VHS cornhole pop-up, try-hard 8-bit iceland helvetica. Kinfolk bespoke try-hard cliche palo santo offal.</p>
+              <h2 class="font-medium title-font text-gray-900 mb-1 text-xl">Choose a date and time</h2>
             </div>
           </div>
         </div>
@@ -287,8 +284,7 @@ const IndexPage = () => {
               </svg>
             </div>
             <div class="flex-grow sm:pl-6 mt-6 sm:mt-0">
-              <h2 class="font-medium title-font text-gray-900 mb-1 text-xl">The 400 Blows</h2>
-              <p class="leading-relaxed">VHS cornhole pop-up, try-hard 8-bit iceland helvetica. Kinfolk bespoke try-hard cliche palo santo offal.</p>
+              <h2 class="font-medium title-font text-gray-900 mb-1 text-xl">Payment and confirmation</h2>
             </div>
           </div>
         </div>

@@ -8,19 +8,23 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+@import url('https://fonts.googleapis.com/css2?family=Poiret+One&family=Roboto:wght@300;400&display=swap');
+
 body {
   font-size: var(--font-size-body);
   background-color: #ebf8ff !important;
+  font-family: 'Roboto', cursive;
 }
 
 h1 {
-  font-size: var(--font-size-h1);
+  font-size: 3em !important;
   font-weight: 500;
   font-style: normal;
   font-stretch: normal;
   line-height: 1.2;
   letter-spacing: normal;
   color: var(--base-500);
+  font-family: 'Poiret One', cursive;
 }
 
 h2 {
